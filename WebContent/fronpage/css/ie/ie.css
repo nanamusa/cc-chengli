@@ -1,0 +1,24 @@
+.big{
+	padding: 10px;
+}
+.right_content{
+    width: 40%;
+}
+.home .box {
+    padding-top: 28px;
+    padding-bottom: 28px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.row-fluid .photo {
+    padding: 0;
+}
+nav{
+    margin-top: 0;
+}
+.nav{
+    height: 234px;
+}
+.nav .menu_item{
+    font-size: 13px;
+}
