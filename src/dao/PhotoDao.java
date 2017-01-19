@@ -126,7 +126,7 @@ public class PhotoDao {
 	public static ArrayList<Photo> getAll(int id) throws Exception {
 		System.out.println("dao.Photo: getAll...");
 
-		ArrayList<Photo> arrList = new ArrayList<Photo>();
+		ArrayList<Photo> photos = new ArrayList<Photo>();
 
 		DBConnectionManager manager;
 
@@ -138,10 +138,13 @@ public class PhotoDao {
 			ResultSet rs = null;
 
 			StringBuilder sqlCmd = new StringBuilder();
+			
 			sqlCmd.append("SELECT * FROM photo");
-			if (id > 0) {
+			
+			if (id > 0) {//specific photo by id
 				sqlCmd.append(" WHERE id = " + id);
 			}
+			
 			sqlCmd.append(" ORDER BY id DESC");
 
 			String qSQL = sqlCmd.toString();
@@ -151,27 +154,28 @@ public class PhotoDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				arrList.add(processRow(rs));
+				photos.add(processRow(rs));
 			} // rs.next()
 
 			rs.close();
 			pstmt.close();
-
 			conn.close();
 
-			return arrList;
+			return photos;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return arrList;
+		return photos;
+		
 	}// end getAll()
 
 	public static ArrayList<Photo> getByAlbum(int albumId) throws Exception {
-		System.out.println("dao.Photo: getAllByAlbum : " + albumId);
+		System.out.println("dao.Photo: getPhotoSetByAlbum = " + albumId);
 
-		ArrayList<Photo> arrList = new ArrayList<Photo>();
+		ArrayList<Photo> photoSet = new ArrayList<Photo>();
 
 		DBConnectionManager manager;
 
@@ -183,8 +187,9 @@ public class PhotoDao {
 			ResultSet rs = null;
 
 			StringBuilder sqlCmd = new StringBuilder();
-			sqlCmd.append("SELECT * FROM photo").append(" WHERE album_Id = ")
-					.append(albumId);
+			
+			sqlCmd.append("SELECT * FROM photo")
+				  .append(" WHERE album_Id = " + albumId);
 			sqlCmd.append(" ORDER BY id DESC");
 
 			String qSQL = sqlCmd.toString();
@@ -194,22 +199,23 @@ public class PhotoDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				arrList.add(processRow(rs));
+				photoSet.add(processRow(rs));
 			} // rs.next()
 
 			rs.close();
 			pstmt.close();
-
 			conn.close();
 
-			return arrList;
+			return photoSet;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return arrList;
-	}// end getAll()
+		return photoSet;
+		
+	}// end getByAlbum()
 
 	public static ArrayList<Photo> getBlogPhoto(int BlogId) throws Exception {
 		System.out.println("dao.Photo: getBlogPhoto : " + BlogId);
@@ -226,10 +232,13 @@ public class PhotoDao {
 			ResultSet rs = null;
 
 			StringBuilder sqlCmd = new StringBuilder();
+			
 			sqlCmd.append("SELECT * FROM photo");
 			sqlCmd.append(" WHERE path LIKE 'Blog%'");
+			
 			if (BlogId > 0)
 				sqlCmd.append(" AND album_id like '%" + BlogId + "%'");
+			
 			sqlCmd.append(" ORDER BY id DESC");
 
 			String qSQL = sqlCmd.toString();
@@ -254,96 +263,8 @@ public class PhotoDao {
 		}
 
 		return arrList;
-	}// end getAll()
+	}// end getBlogPhoto()
 
-	/*
-	 * public static ArrayList<CLNews> getById(int id) throws Exception {
-	 * System.out.println("dao.CLNews: getById...");
-	 * 
-	 * ArrayList<CLNews> ret = new ArrayList<CLNews>();
-	 * 
-	 * DBConnectionManager manager;
-	 * 
-	 * try { manager = new DBConnectionManager(); Connection conn =
-	 * manager.getConnection();
-	 * 
-	 * PreparedStatement pstmt = null; ResultSet rs = null;
-	 * 
-	 * StringBuilder sqlCmd = new StringBuilder();
-	 * sqlCmd.append("SELECT * FROM news");
-	 * sqlCmd.append(" WHERE news_id=").append(id);
-	 * sqlCmd.append(" ORDER BY news_date DESC");
-	 * 
-	 * String qSQL = sqlCmd.toString();
-	 * 
-	 * pstmt = conn.prepareStatement(qSQL); rs = pstmt.executeQuery();
-	 * 
-	 * while (rs.next()) { ret.add(processRow(rs)); } // rs.next()
-	 * 
-	 * rs.close(); pstmt.close();
-	 * 
-	 * conn.close();
-	 * 
-	 * return ret; } catch (SQLException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); }
-	 * 
-	 * return ret; }
-	 * 
-	 * public static ArrayList<CLNews> getCLNews() throws Exception {
-	 * 
-	 * DBConnectionManager manager;
-	 * 
-	 * try { manager = new DBConnectionManager(); Connection conn =
-	 * manager.getConnection();
-	 * 
-	 * PreparedStatement pstmt = null; ResultSet rs = null; StringBuilder sqlCmd
-	 * = new StringBuilder(); sqlCmd.append("SELECT * FROM news");
-	 * sqlCmd.append(" ORDER BY news_date DESC, news_id DESC");
-	 * 
-	 * String qSQL = sqlCmd.toString(); pstmt = conn.prepareStatement(qSQL); rs
-	 * = pstmt.executeQuery();
-	 * 
-	 * ArrayList<CLNews> newsList = new ArrayList<CLNews>();
-	 * 
-	 * while (rs.next()) {
-	 * 
-	 * CLNews tmp = processRow(rs);
-	 * 
-	 * newsList.add(tmp); } // rs.next()
-	 * 
-	 * rs.close(); pstmt.close();
-	 * 
-	 * conn.close(); return newsList; } catch (SQLException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); } return null;
-	 * 
-	 * }
-	 * 
-	 * public static CLNews getCLNewsById(String id) throws Exception {
-	 * 
-	 * DBConnectionManager manager;
-	 * 
-	 * try { manager = new DBConnectionManager(); Connection conn =
-	 * manager.getConnection();
-	 * 
-	 * PreparedStatement pstmt = null; ResultSet rs = null; StringBuilder sqlCmd
-	 * = new StringBuilder();
-	 * sqlCmd.append("SELECT * FROM news").append(" WHERE news_id = ")
-	 * .append(id);
-	 * 
-	 * String qSQL = sqlCmd.toString(); pstmt = conn.prepareStatement(qSQL); rs
-	 * = pstmt.executeQuery();
-	 * 
-	 * CLNews news = new CLNews();
-	 * 
-	 * while (rs.next()) { news = processRow(rs); } // rs.next()
-	 * 
-	 * rs.close(); pstmt.close();
-	 * 
-	 * conn.close(); return news; } catch (SQLException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); } return null;
-	 * 
-	 * }
-	 */
 
 	protected static Photo processRow(ResultSet rs) throws SQLException {
 		Photo item = new Photo();
@@ -363,75 +284,5 @@ public class PhotoDao {
 
 		return item;
 	}
-
-	// public static boolean[] SC_emptyCheck(SearchCond sc) {
-	// boolean[] flagCheck = new boolean[7];
-	//
-	// for (int index = 0; index < flagCheck.length; index++)
-	// flagCheck[index] = true;
-	//
-	// // 0:name, 1:iktBranch, 2:organization, 3:amount, 4:id, 5,6:date
-	// flagCheck[0] = sc.getSdate().isEmpty();
-	// flagCheck[1] = sc.getEdate().isEmpty();
-	// flagCheck[2] = sc.getId().isEmpty();
-	// flagCheck[3] = sc.getName().isEmpty();
-	// flagCheck[4] = sc.getI_ikt().isEmpty();
-	// flagCheck[5] = sc.getI_org().isEmpty();
-	// flagCheck[6] = sc.get_amount().isEmpty();
-	//
-	// return flagCheck;
-	// }
-
-	// /* useless */
-	// public static ArrayList<String> getContent(String sql, String data) {
-	//
-	// DBConnectionManager manager;
-	//
-	// try {
-	// manager = new DBConnectionManager();
-	// Connection conn = manager.getConnection();
-	//
-	// PreparedStatement pstmt = null;
-	// ResultSet rs = null;
-	//
-	// pstmt = conn.prepareStatement(sql);
-	// rs = pstmt.executeQuery();
-	//
-	// ArrayList<String> list = new ArrayList<String>();
-	//
-	// while (rs.next()) {
-	// list.add(rs.getString(data));
-	// } // rs.next()
-	//
-	// rs.close();
-	// pstmt.close();
-	//
-	// conn.close();
-	// return list;
-	// } catch (ClassNotFoundException | SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return null;
-	//
-	// }
-
-	/*
-	 * public static void main(String args[]) {
-	 * 
-	 * String cond_name="Ｏ", cond_iktBranch="", cond_organization="",
-	 * cond_amount="", cond_id="", sDate="", eDate="20170101";
-	 * ArrayList<DonationObject> tmp; //tmp = GetDonationList(cond_name,
-	 * cond_iktBranch, cond_organization, cond_amount, cond_id, sDate, eDate);
-	 * String qSearch =
-	 * "SELECT dnt_donor_name, ib_name, dnt_organization, dnt_amount, LPAD(dnt_id, 6, '0') AS dnt_id, dnt_date FROM dnt "
-	 * ; String qJoin = "INNER JOIN ikt ON dnt_ikt_branch_id = ib_id  "; String
-	 * qOrder = "ORDER BY dnt_date DESC "; System.out.println(qSearch+ qJoin+
-	 * qOrder); tmp = searchDnts(qSearch, qJoin, qOrder); if (tmp.isEmpty()) {
-	 * System.out.println("no result!"); } else {
-	 * System.out.println(tmp.size()); }
-	 * 
-	 * }
-	 */
 
 }
