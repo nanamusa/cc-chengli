@@ -20,7 +20,9 @@ import dao.PhotoDao;
 
 @Path("/photo")
 public class PhotoService {
-
+	
+	/* * To Get specific photo set by type * */
+	/* * Default: type = 0; // get all photos * */
 	@GET
 	@Path("/{typeId}")
 	@Produces("application/json")
@@ -28,15 +30,15 @@ public class PhotoService {
 			@DefaultValue("0") @PathParam("typeId") int typeId)
 			throws Exception {
 		Gson gson = new Gson();
-		String str = "";
+		String str = ""; //result string
 
-		if (typeId > 0) {
+		if (photoId > 0) { //specific photo set
 			System.out.println("1. get Photo Set : " + typeId);
 			str = gson.toJson(PhotoDao.getByAlbum(typeId));
 			System.out.println(str);
 
-		} else {// ALL
-			System.out.println("1-0. get Album ALL : " + typeId);
+		} else { //All photos
+			System.out.println("1. get Album ALL : " + typeId);
 			str = gson.toJson(PhotoDao.getAll(0));
 			System.out.println(str);
 		}
@@ -44,21 +46,23 @@ public class PhotoService {
 		return Response.status(200).entity(str).build();
 	}
 
+	/* * To Get specific photo by photo id * */
+	/* * Default: type = 0; // get all photos * */
 	@GET
-	@Path("/id:{sid}")
+	@Path("/id:{photoId}")
 	@Produces("application/json")
-	public Response getDontationBySid(
-			@DefaultValue("0") @PathParam("sid") int sid) throws Exception {
+	public Response getPhotoById(
+			@DefaultValue("0") @PathParam("photoId") int photoId) throws Exception {
 		Gson gson = new Gson();
 		String str = "";
 
-		if (sid > 0) {
-			System.out.println("get Photo By sid : " + sid);
-			str = gson.toJson(PhotoDao.getAll(sid));
+		if (sid > 0) { //specific photo
+			System.out.println("1. get Photo By : " + photoId);
+			str = gson.toJson(PhotoDao.getAll(photoId));
 			System.out.println(str);
-		} else {
-			System.out.println("get Photo ALL : " + sid);
-			str = gson.toJson(PhotoDao.getAll(sid));
+		} else { //All photos
+			System.out.println("1. get Photo ALL : " + photoId);
+			str = gson.toJson(PhotoDao.getAll(0));
 			System.out.println(str);
 		}
 
