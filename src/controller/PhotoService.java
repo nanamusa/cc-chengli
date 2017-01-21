@@ -32,7 +32,7 @@ public class PhotoService {
 		Gson gson = new Gson();
 		String str = ""; //result string
 
-		if (photoId > 0) { //specific photo set
+		if (typeId > 0) { //specific photo set
 			System.out.println("1. get Photo Set : " + typeId);
 			str = gson.toJson(PhotoDao.getByAlbum(typeId));
 			System.out.println(str);
@@ -56,7 +56,7 @@ public class PhotoService {
 		Gson gson = new Gson();
 		String str = "";
 
-		if (sid > 0) { //specific photo
+		if (photoId > 0) { //specific photo
 			System.out.println("1. get Photo By : " + photoId);
 			str = gson.toJson(PhotoDao.getAll(photoId));
 			System.out.println(str);

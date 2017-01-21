@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta charset="utf-8" />
-<title>承利保險經紀人 後台管理 - 活動櫥窗</title>
+<title>承利保險經紀人 後台管理 - 菁英薈萃</title>
 
 <meta name="description" content="overview &amp; stats" />
 <meta name="viewport"
@@ -138,11 +138,11 @@
 							最新消息管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class=""><a href="page03.jsp"> <span
+				<li class="active"><a href="page03.jsp"> <span
 						class="menu-text"> 菁英薈萃管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class="active"><a href="page04.jsp"> <span class="menu-text">
+				<li class=""><a href="page04.jsp"> <span class="menu-text">
 							活動櫥窗管理 </span>
 				</a> <b class="arrow"></b></li>
 			</ul>
@@ -179,7 +179,7 @@
 					<ul class="breadcrumb">
 						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">首頁</a>
 						</li>
-						<li class="active">活動櫥窗</li>
+						<li class="active">菁英薈萃</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>
@@ -188,7 +188,7 @@
 				<div class="page-content">
 
 					<div class="page-header">
-						<h1>活動櫥窗管理</h1>
+						<h1>菁英薈萃管理</h1>
 					</div>
 					<!-- /.page-header -->
 
@@ -212,7 +212,7 @@
 							</thead>
 
 							<tbody id="table-album-list">
-								<tr>
+								<tr class="hide[[[[]]]]">
 									<td width="7%" style="vertical-align: middle;" class="center">(index
 										+ 1)</td>
 									<td width="20%" style="vertical-align: middle;">ALBUM NAME</td>
@@ -225,7 +225,7 @@
 												<i class="ace-icon fa fa-pencil bigger-110">&nbsp;編輯</i>
 											</button>
 											<button class="btn btn-xs btn-warning" id="btn-upload">
-												<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;上傳</i>
+												<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;相片集</i>
 											</button>
 											<button class="btn btn-xs btn-danger" id="btn-delete">
 												<i class="ace-icon fa fa-trash-o bigger-110">&nbsp;刪除</i>
@@ -240,9 +240,9 @@
 						<!-- ALBUM INFO -->
 						<!-- //相片內容 -->
 
-						<form class="form-horizontal" id="validation-form" method="get"
+						<form class="form-horizontal" id="validation-form" method="post"
 							action="./">
-							<input type="text" id="album-id" value="ForTest" class="">
+							<!-- <input type="text" id="album-id" value="ForTest" class="hide"> -->
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"
 									for="title"> 活動標題 </label>
@@ -282,7 +282,7 @@
 								</div>
 							</div>
 
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"
 									for="form-field-1"> 活動封面 </label>
 								<div class="col-sm-9">
@@ -292,7 +292,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"
@@ -399,7 +399,7 @@
 															<input type="file" name="filename" multiple="" />
 														</div>
 														<input type="text" id="passAlbumId" name="passAlbumId"
-															value="1234" class="">
+															value="1234" class="hide">
 
 													</form>
 												</div>
@@ -407,18 +407,18 @@
 										</div>
 
 										<div class="step-pane" data-step="2">
-											<div class="center hide">
-												<h3 class="green">Congrats!</h3>
-												Your product is ready to ship! Click finish to continue!
+											<div class="center ">
+												<h3 class="red">注意：圖片敘述限制字數17字內！</h3>
+												<br> <br>
 											</div>
 											<div class="row">
 												<div class="col-xs-12">
 													<ul class="ace-thumbnails clearfix" id="_gallery">
 
 														<!-- #section:pages/gallery.caption -->
-														<li><a href="./images/act-1.jpg" data-rel="colorbox">
-																<img width="150" height="150" alt="150x150"
-																src="./images/act-1.jpg" />
+														<li class="hide"><a href="./images/act-1.jpg"
+															data-rel="colorbox"> <img width="150" height="150"
+																alt="150x150" src="./images/act-1.jpg" />
 														</a>
 															<div class="tools tools-bottom" data_id="0">
 																<a href="#"> <i class="ace-icon fa fa-times red"></i>
@@ -1069,25 +1069,6 @@
 				$('#simple-table').show();
 			 */
 			//}) 
-			$('#validation-form').on('click', '#btn-save-add', function(event) {
-				FormCtrl("valid");
-
-				SelectContent("List", "en");
-				SelectContent("Form", "dis");
-
-				saveAlbum(TYPEID);
-			})
-
-			$('#validation-form').on('click', '#btn-cancel-add',
-					function(event) {
-						ListCtrl("Clean");
-						Validator.resetForm();
-						ListCtrl("render");
-
-						SelectContent("List", "en");
-						SelectContent("Form", "dis");
-					})
-
 			function disableForm(fn) {
 				$('#album-title').attr('disabled', fn);
 				$('#album-date').attr('disabled', fn);
@@ -1225,7 +1206,10 @@
 
 	<script>
 		var rootURL = "../api";
-		var TYPEID = '3'; //#3 champion
+		/* macro */
+		var CHAMPION = '3';
+		var ACTIVITY = '2';
+		var TYPEID = CHAMPION; //#3 champion
 
 		function getAll(TYPEID) {
 			console.log('getAll album: ' + TYPEID);
@@ -1249,6 +1233,7 @@
 					//renderDonationList(data);
 					//console.log("get Album Info ing...");
 					renderAlbumInfo(data);
+					FormCtrl("valid");
 					console.log(data);
 					//$("#_gallery").show();
 				}
@@ -1276,7 +1261,7 @@
 				type : 'DELETE',
 				url : rootURL + '/album/' + id,
 				success : function(data, textStatus, jqXHR) {
-					//alert('delete successfully');
+					alert('delete album successfully');
 					ListCtrl("render");
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
@@ -1285,14 +1270,50 @@
 			});
 		}
 
-		function loadPhotoSet(id) {
-			console.log('get PhotoSet : ' + id);
+		function deletePhoto(id) {
+			console.log('deletePhoto');
+			$.ajax({
+				type : 'DELETE',
+				url : rootURL + '/photo/' + id,
+				success : function(data, textStatus, jqXHR) {
+					alert('delete photo successfully');
+					GalleryCtrl("render");
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert('deleteAlbum error');
+				}
+			});
+		}
+
+		function savePhotoFn(dataId, albumId) {
+			console.log('savePhotoFn: ' + dataId);
+			$.ajax({
+				type : 'POST',
+				contentType : 'application/json',
+				url : (TYPEID == CHAMPION) ? rootURL + '/photo/' + dataId
+						: rootURL + '/album/' + albumId,
+				dataType : "json",
+				data : PhotoFn2JSON(dataId, albumId),
+				success : function(data, textStatus, jqXHR) {
+					if (TYPEID == CHAMPION)
+						alert("已儲存相片描述！");
+					else if (TYPEID == ACTIVITY)
+						alert("設為封面成功！");
+
+				}
+			});
+		}
+
+		function loadPhotoSet(albumId) {
+			console.log('get PhotoSet : ' + albumId);
 			$.ajax({
 				type : 'GET',
-				url : rootURL + '/photo/' + id,
+				url : rootURL + '/photo/' + albumId,
 				dataType : "json",
 				success : function(data) {
 					renderGallery(data);
+					if (TYPEID == ACTIVITY)
+						$('.photo-fn-desc').addClass("hide");
 				}
 			});
 		}
@@ -1309,6 +1330,8 @@
 			$('#album-date').val(list[0].date);
 			$('#album-title').val(list[0].title);//
 			$('#state').val(list[0].tag);
+
+			$('#album-cover').val(list[0].cover_id);
 			//$('#opt_ikt option:eq(2)').attr('selected',true);
 		}
 
@@ -1317,7 +1340,8 @@
 			var list = data == null ? [] : (data instanceof Array ? data
 					: [ data ]);
 			var photoBox = '';
-
+			var btn_fn_text = (TYPEID == ACTIVITY) ? '<i class="ace-icon fa fa-heart-o bigger-100">&nbsp;封面</i>'
+					: '<i class="ace-icon fa fa-pencil bigger-100">&nbsp;更新</i>';
 			$("#_gallery").empty();
 
 			$
@@ -1330,17 +1354,35 @@
 										+ '<a href="#_gallery"'
 								+ '" data-rel="colorbox"><img width="150" height="150" alt="150x150" src="../' + imgUrl+ '" />' //* album/main_2.jpg */" >'
 										//+"" +'" />'
-										+ '</a><div class="tools tools-bottom"><button id="btn-delete-photo" class="btn btn-xs btn-danger" data-id="'
+										+ '</a>'
+										/* <div class="tags hide"><span class="label label-success">toast</span></span></div>\ */
+										/* <div class="tools inner tools-top hide">\
+											<button id="btn-delete-photo" class="btn btn-xs btn-danger" data-id="'
+									+ item.id 
+								+'"><i class="ace-icon fa fa-trash-o bigger-100">&nbsp;刪除</i></button>&nbsp;&nbsp;'
+												+ '<button id="btn-fn-photo" class="btn btn-xs btn-info" data-id="'
+								+ item.id + '"><i class="ace-icon fa fa-heart-o bigger-100">&nbsp;封面</i></button>\
+										</div>'  */
+										+ '<textarea class="input-medium photo-fn-desc" id="photo-fn-desc-'+item.id+'" name="photo-fn-desc" maxlength="17">' //17字內
+										+ (TYPEID == ACTIVITY ? item.file
+												: (item.desc == null ? ""
+														: item.desc))
+										+ '</textarea>'
+										+ '<div>&nbsp;&nbsp;&nbsp;&nbsp;<button id="btn-delete-photo" class="btn btn-xs btn-danger" data-id="'
 								+ item.id
-								+'"><i class="ace-icon fa fa-trash-o bigger-120">&nbsp;刪除</i></button>&nbsp;&nbsp;'
+								+'"><i class="ace-icon fa fa-trash-o bigger-100">&nbsp;刪除</i></button>&nbsp;&nbsp;&nbsp;&nbsp;'
 										+ '<button id="btn-fn-photo" class="btn btn-xs btn-info" data-id="'
-								+ item.id +'"><i class="ace-icon fa fa-heart-o bigger-120">&nbsp;封面</i></button></div></li>';
+								+ item.id +'">'
+										+ btn_fn_text
+										+ '</button></div>\
+								</li>';
 
 								$("#_gallery").append(photoBox);
 
 							});
 		}
 
+		/* * render Album List: #, album.title, album.cover/album.tag_id, album.date * */
 		function renderList(data) {
 			/*  <td width="7%" style="vertical-align: middle;" class="center">(index
 										+ 1)</td>
@@ -1370,34 +1412,45 @@
 			var dntBox = "";
 			var cover_imgsrc = "";
 
+			var imgUrl = "";
+
 			$
 					.each(
 							list,
 							function(index, item) {
 								dntBox = '';
+								//imgUrl = 'album/' + item.path + item.file;
 
 								var btns = '<td width="13%" style="vertical-align: middle;"><div class="btn-group">'
-										+ '<button class="btn btn-xs btn-info" id="btn-edit" data-id="'+item.id+'">'
-										+ '<i class="ace-icon fa fa-pencil bigger-120"><font style="color: #fff;">&nbsp;編輯</font></i></button>'
 										+ '<button class="btn btn-xs btn-warning" id="btn-upload" data-id="'+item.id +'">'
-										+ '<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;上傳</i></button>'
+										+ '<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;相片集管理</i></button>'
+										+ '<br><br><button class="btn btn-xs btn-info" id="btn-edit" data-id="'+item.id+'">'
+										+ '<i class="ace-icon fa fa-pencil bigger-120"><font style="color: #fff;">&nbsp;編輯</font></i></button>'
 										+ '<button class="btn btn-xs btn-danger" id="btn-delete" data-id="'+item.id+'"><i class="ace-icon fa fa-trash-o bigger-120">&nbsp;刪除</i></button>'
 										+ '</div></td>';
 
 								dntBox = '<td width="7%" style="vertical-align: middle;" class="center">'
-										+ (index + 1);
-								if (item.cover_id) {
-									cover_imgsrc = item.id + '/' + cover_id;
-								} else {
-									cover_imgsrc = "images/cover_default.jpg";
-								}
+										+ (index + 1) + '</td>';
+
 								dntBox = dntBox
 										+ '</td><td width="20%" style="vertical-align: middle;">'
-										+ item.title
-										+ '<td width="20%" class="center"><img src="'
+										+ item.title + '</td>';
+								/* * cover = photo.id -> photo.path/photo.fileName * */
+								if (TYPEID == ACTIVITY) {
+									if (item.cover_id) {
+										cover_imgsrc = '../album/' + item.id
+												+ '/' + item.cover_id;
+									} else {
+										cover_imgsrc = "images/cover_default.jpg";
+									}
+									dntBox = dntBox
+											+ '<td width="20%" class="center"><img src="'
 										+ cover_imgsrc
 										//+ 'images/cover_default.jpg'
-										+ '" height="100" /><td width="10%" style="vertical-align: middle;">'
+										+ '" height="100" /></td>';
+								}
+								dntBox = dntBox
+										+ '<td width="10%" style="vertical-align: middle;">'
 										+ item.date + '</td>';
 
 								$("#simple-table tbody").append(
@@ -1411,12 +1464,31 @@
 
 			//loadAlbumInfo($(this).data('id'));
 			FormCtrl("clean");
-			
 			SelectContent("List", "dis");
 			SelectContent("Form", "en");
 
 		});
-		
+
+		/* 儲存 */
+		$('#validation-form').on('click', '#btn-save-add', function(event) {
+			if (FormCtrl("valid")) {
+
+				SelectContent("List", "en");
+				SelectContent("Form", "dis");
+
+				saveAlbum(TYPEID);
+			}
+		})
+		/* 取消 */
+		$('#validation-form').on('click', '#btn-cancel-add', function(event) {
+			ListCtrl("Clean");
+			Validator.resetForm();
+			ListCtrl("render");
+
+			SelectContent("List", "en");
+			SelectContent("Form", "dis");
+		})
+
 		/* 編輯 */
 		$('#simple-table').on('click', '#btn-edit', function(event) {
 
@@ -1426,7 +1498,7 @@
 			SelectContent("Form", "en");
 
 		});
-		
+
 		/* 上傳 */
 		$('#simple-table').on('click', '#btn-upload', function(event) {
 
@@ -1444,25 +1516,79 @@
 
 		});
 
+		/* fn相片 */
+		$('.widget-body').on('click', '#btn-fn-photo', function(event) {
+			//alert('fn : ' + $(this).data('id'));
+			savePhotoFn($(this).data('id'), $('#passAlbumId').val());
+
+			//SelectContent("List", "dis");
+			//SelectContent("Gallery", "en");
+
+		});
+
+		/* 刪除相片 */
+		$('.widget-body').on('click', '#btn-delete-photo', function(event) {
+			//alert('delete : ' + $(this).data('id'));
+			deletePhoto($(this).data('id'));
+
+		});
+
 		/* <!-- util --> */
-		//console.log(formToJSON());
 		// Helper function to serialize all the form fields into a JSON string
 		function formToJSON(TYPEID) {
+			/* * automatic generated * */
 			var _id = $('#album-title').attr('data-id');
+			var _type = (TYPEID == CHAMPION ? "Champion" : "Activity");
+			/* * user input * */
+			var _title = $('#album-title').val();
+			var _date = $('#album-date').val();
+			/* * "Activity" Only * */
+			var _tag = $("#state option:selected").val() || '0';
+			/* * "Champion" Only * */
 
-			var _title = $('#album-title').val() || '0';
-			var _date = $('#album-date').val() || '0';
-			var _tag =  $("#state option:selected").val();
-			var _type = TYPEID == '3' ? "Champion" : "Activity";
-			console.log("_tag=" + _tag);
+			//console.log("_tag=" + _tag);
 			//console.log($('#album-title').val());
 			return JSON.stringify({
 				"id" : _id,
+				"type" : _type,
 				"title" : _title,
 				"date" : _date,
-				"type" : _type,
 				"tag" : _tag
 			});
+		}
+
+		// Helper function to serialize all the form fields into a JSON string
+		function PhotoFn2JSON(photoId, albumID) {
+			var _photo_fn_desc = $('#photo-fn-desc-' + photoId).val();
+			/* * 1.Activity : cover_id * */
+			/* * 2.Champion : desc * */
+			var _parent_id = "0"; //specific Album/Photo
+			var JSON_str = ""; //data return to Server for processing
+
+			if (TYPEID == ACTIVITY) { //Activity
+				/* * 1-1. get albumId * */
+				_parent_id = albumID;
+
+				/* * 1-2. set cover_id to #albumId * */
+				JSON_str = JSON.stringify({
+					"id" : _parent_id,
+					"cover_id" : _photo_fn_desc
+				});
+			} else if (TYPEID == CHAMPION) { //Champion
+				/* * 2-1. get photoId * */
+				_parent_id = photoId; //photo
+
+				/* * 2-2. set desc to #photoId * */
+				JSON_str = JSON.stringify({
+					"id" : _parent_id,
+					"desc" : _photo_fn_desc
+				});
+			}
+
+			//alert('photo-id = ' + _parent_id);
+			//console.log("_photo_fn_desc=" + _photo_fn_desc);
+			//console.log($('#album-title').val());
+			return JSON_str;
 		}
 
 		function SelectContent(part, opt) {
@@ -1501,33 +1627,18 @@
 				loadAlbumInfo();
 			} else if (opt == "clean") {
 				Content.trigger('reset');
+				$("#passAlbumId").val(0);
 			} else if (opt == "valid") {
-				Content.valid()
-			} /* else if (opt == "2JSON") {
-								var _id = $('#album-title').attr('data-id');
-								var _title = $('#album-title').val() || '0';
-								var _date = $('#album-date').val() || '0';
-								var _tag = TYPEID == '3' ? '0' : $("#state option:selected")
-										.val();
-								var _type = TYPEID == '3' ? "Champion" : "Activity";
-								console.log("_tag=" + _tag);
-								//console.log($('#album-title').val());
-								return JSON.stringify({
-									"id" : _id,
-									"title" : _title,
-									"date" : _date,
-									"type" : _type,
-									"tag" : _tag
-								});
-							} */
-
+				return Content.valid()
+			}
 		}
 
 		function GalleryCtrl(opt) {
 			var Content = $("#_gallery");
 
 			if (opt == "render") {
-				loadPhotoSet();
+				loadPhotoSet($('#passAlbumId').val());
+
 			} else if (opt == "clean") {
 				Content.empty();
 			}

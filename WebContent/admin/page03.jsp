@@ -240,7 +240,7 @@
 						<!-- ALBUM INFO -->
 						<!-- //相片內容 -->
 
-						<form class="form-horizontal" id="validation-form" method="get"
+						<form class="form-horizontal" id="validation-form" method="post"
 							action="./">
 							<!-- <input type="text" id="album-id" value="ForTest" class="hide"> -->
 							<div class="form-group">
@@ -1069,26 +1069,6 @@
 				$('#simple-table').show();
 			 */
 			//}) 
-			$('#validation-form').on('click', '#btn-save-add', function(event) {
-				if (FormCtrl("valid")) {
-
-					SelectContent("List", "en");
-					SelectContent("Form", "dis");
-
-					saveAlbum(TYPEID);
-				}
-			})
-
-			$('#validation-form').on('click', '#btn-cancel-add',
-					function(event) {
-						ListCtrl("Clean");
-						Validator.resetForm();
-						ListCtrl("render");
-
-						SelectContent("List", "en");
-						SelectContent("Form", "dis");
-					})
-
 			function disableForm(fn) {
 				$('#album-title').attr('disabled', fn);
 				$('#album-date').attr('disabled', fn);
@@ -1229,7 +1209,7 @@
 		/* macro */
 		var CHAMPION = '3';
 		var ACTIVITY = '2';
-		var TYPEID = ACTIVITY; //#3 champion
+		var TYPEID = CHAMPION; //#3 champion
 
 		function getAll(TYPEID) {
 			console.log('getAll album: ' + TYPEID);
@@ -1350,7 +1330,7 @@
 			$('#album-date').val(list[0].date);
 			$('#album-title').val(list[0].title);//
 			$('#state').val(list[0].tag);
-	
+
 			$('#album-cover').val(list[0].cover_id);
 			//$('#opt_ikt option:eq(2)').attr('selected',true);
 		}
@@ -1384,7 +1364,7 @@
 								+ item.id + '"><i class="ace-icon fa fa-heart-o bigger-100">&nbsp;封面</i></button>\
 										</div>'  */
 										+ '<textarea class="input-medium photo-fn-desc" id="photo-fn-desc-'+item.id+'" name="photo-fn-desc" maxlength="17">' //17字內
-										+ (TYPEID == ACTIVITY ? item.id
+										+ (TYPEID == ACTIVITY ? item.file
 												: (item.desc == null ? ""
 														: item.desc))
 										+ '</textarea>'
@@ -1402,6 +1382,7 @@
 							});
 		}
 
+		/* * render Album List: #, album.title, album.cover/album.tag_id, album.date * */
 		function renderList(data) {
 			/*  <td width="7%" style="vertical-align: middle;" class="center">(index
 										+ 1)</td>
@@ -1431,11 +1412,14 @@
 			var dntBox = "";
 			var cover_imgsrc = "";
 
+			var imgUrl = "";
+
 			$
 					.each(
 							list,
 							function(index, item) {
 								dntBox = '';
+								//imgUrl = 'album/' + item.path + item.file;
 
 								var btns = '<td width="13%" style="vertical-align: middle;"><div class="btn-group">'
 										+ '<button class="btn btn-xs btn-warning" id="btn-upload" data-id="'+item.id +'">'
@@ -1446,20 +1430,27 @@
 										+ '</div></td>';
 
 								dntBox = '<td width="7%" style="vertical-align: middle;" class="center">'
-										+ (index + 1);
-								if (item.cover_id) {
-									cover_imgsrc = item.id + '/'
-											+ item.cover_id;
-								} else {
-									cover_imgsrc = "images/cover_default.jpg";
-								}
+										+ (index + 1) + '</td>';
+
 								dntBox = dntBox
 										+ '</td><td width="20%" style="vertical-align: middle;">'
-										+ item.title
-										+ '<td width="20%" class="center"><img src="'
+										+ item.title + '</td>';
+								/* * cover = photo.id -> photo.path/photo.fileName * */
+								if (TYPEID == ACTIVITY) {
+									if (item.cover_id) {
+										cover_imgsrc = '../album/' + item.id
+												+ '/' + item.cover_id;
+									} else {
+										cover_imgsrc = "images/cover_default.jpg";
+									}
+									dntBox = dntBox
+											+ '<td width="20%" class="center"><img src="'
 										+ cover_imgsrc
 										//+ 'images/cover_default.jpg'
-										+ '" height="100" /><td width="10%" style="vertical-align: middle;">'
+										+ '" height="100" /></td>';
+								}
+								dntBox = dntBox
+										+ '<td width="10%" style="vertical-align: middle;">'
 										+ item.date + '</td>';
 
 								$("#simple-table tbody").append(
@@ -1477,6 +1468,26 @@
 			SelectContent("Form", "en");
 
 		});
+
+		/* 儲存 */
+		$('#validation-form').on('click', '#btn-save-add', function(event) {
+			if (FormCtrl("valid")) {
+
+				SelectContent("List", "en");
+				SelectContent("Form", "dis");
+
+				saveAlbum(TYPEID);
+			}
+		})
+		/* 取消 */
+		$('#validation-form').on('click', '#btn-cancel-add', function(event) {
+			ListCtrl("Clean");
+			Validator.resetForm();
+			ListCtrl("render");
+
+			SelectContent("List", "en");
+			SelectContent("Form", "dis");
+		})
 
 		/* 編輯 */
 		$('#simple-table').on('click', '#btn-edit', function(event) {
@@ -1523,45 +1534,51 @@
 		});
 
 		/* <!-- util --> */
-		//console.log(formToJSON());
 		// Helper function to serialize all the form fields into a JSON string
 		function formToJSON(TYPEID) {
+			/* * automatic generated * */
 			var _id = $('#album-title').attr('data-id');
+			var _type = (TYPEID == CHAMPION ? "Champion" : "Activity");
+			/* * user input * */
+			var _title = $('#album-title').val();
+			var _date = $('#album-date').val();
+			/* * "Activity" Only * */
+			var _tag = $("#state option:selected").val() || '0';
+			/* * "Champion" Only * */
 
-			var _title = $('#album-title').val() || '0';
-			var _date = $('#album-date').val() || '0';
-			var _tag = $("#state option:selected").val();
-			var _type = TYPEID == CHAMPION ? "Champion" : "Activity";
-			console.log("_tag=" + _tag);
+			//console.log("_tag=" + _tag);
 			//console.log($('#album-title').val());
 			return JSON.stringify({
 				"id" : _id,
+				"type" : _type,
 				"title" : _title,
 				"date" : _date,
-				"type" : _type,
 				"tag" : _tag
 			});
 		}
 
-		/* <!-- util --> */
-		//console.log(formToJSON());
 		// Helper function to serialize all the form fields into a JSON string
-		function PhotoFn2JSON(ID, albumID) {
-			var _photo_fn_desc = $('#photo-fn-desc-' + ID).val();
-
-			var _parent_id = "0";
-			var JSON_str = "";
+		function PhotoFn2JSON(photoId, albumID) {
+			var _photo_fn_desc = $('#photo-fn-desc-' + photoId).val();
+			/* * 1.Activity : cover_id * */
+			/* * 2.Champion : desc * */
+			var _parent_id = "0"; //specific Album/Photo
+			var JSON_str = ""; //data return to Server for processing
 
 			if (TYPEID == ACTIVITY) { //Activity
+				/* * 1-1. get albumId * */
 				_parent_id = albumID;
 
+				/* * 1-2. set cover_id to #albumId * */
 				JSON_str = JSON.stringify({
 					"id" : _parent_id,
 					"cover_id" : _photo_fn_desc
 				});
 			} else if (TYPEID == CHAMPION) { //Champion
-				_parent_id = ID; //photo
+				/* * 2-1. get photoId * */
+				_parent_id = photoId; //photo
 
+				/* * 2-2. set desc to #photoId * */
 				JSON_str = JSON.stringify({
 					"id" : _parent_id,
 					"desc" : _photo_fn_desc
@@ -1610,27 +1627,10 @@
 				loadAlbumInfo();
 			} else if (opt == "clean") {
 				Content.trigger('reset');
-
+				$("#passAlbumId").val(0);
 			} else if (opt == "valid") {
 				return Content.valid()
-			} /* else if (opt == "2JSON") {
-																																																																																												var _id = $('#album-title').attr('data-id');
-																																																																																												var _title = $('#album-title').val() || '0';
-																																																																																												var _date = $('#album-date').val() || '0';
-																																																																																												var _tag = TYPEID == '3' ? '0' : $("#state option:selected")
-																																																																																														.val();
-																																																																																												var _type = TYPEID == '3' ? "Champion" : "Activity";
-																																																																																												console.log("_tag=" + _tag);
-																																																																																												//console.log($('#album-title').val());
-																																																																																												return JSON.stringify({
-																																																																																													"id" : _id,
-																																																																																													"title" : _title,
-																																																																																													"date" : _date,
-																																																																																													"type" : _type,
-																																																																																													"tag" : _tag
-																																																																																												});
-																																																																																											} */
-
+			}
 		}
 
 		function GalleryCtrl(opt) {
