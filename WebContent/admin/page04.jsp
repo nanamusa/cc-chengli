@@ -138,12 +138,12 @@
 							最新消息管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class=""><a href="page03.jsp"> <span
-						class="menu-text"> 菁英薈萃管理 </span>
+				<li class=""><a href="page03.jsp"> <span class="menu-text">
+							菁英薈萃管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class="active"><a href="page04.jsp"> <span class="menu-text">
-							活動櫥窗管理 </span>
+				<li class="active"><a href="page04.jsp"> <span
+						class="menu-text"> 活動櫥窗管理 </span>
 				</a> <b class="arrow"></b></li>
 			</ul>
 			<!-- /.nav-list -->
@@ -543,6 +543,7 @@
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
 		jQuery(function($) {
+			var Validator;
 			/* #dropzone */
 			try {
 				Dropzone.autoDiscover = false;
@@ -1084,7 +1085,7 @@
 						|| /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
 			}, "Enter a valid phone number.");
 
-			var Validator = $('#validation-form')
+			Validator = $('#validation-form')
 					.validate(
 							{
 								errorElement : 'div',

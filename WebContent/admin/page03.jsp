@@ -543,6 +543,7 @@
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
 		jQuery(function($) {
+			var Validator;
 			/* #dropzone */
 			try {
 				Dropzone.autoDiscover = false;
@@ -1098,7 +1099,7 @@
 						|| /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
 			}, "Enter a valid phone number.");
 
-			var Validator = $('#validation-form')
+			Validator = $('#validation-form')
 					.validate(
 							{
 								errorElement : 'div',
