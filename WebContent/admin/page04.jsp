@@ -138,11 +138,11 @@
 							最新消息管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class="active"><a href="page03.jsp"> <span
+				<li class=""><a href="page03.jsp"> <span
 						class="menu-text"> 菁英薈萃管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class=""><a href="page04.jsp"> <span class="menu-text">
+				<li class="active"><a href="page04.jsp"> <span class="menu-text">
 							活動櫥窗管理 </span>
 				</a> <b class="arrow"></b></li>
 			</ul>
@@ -179,7 +179,7 @@
 					<ul class="breadcrumb">
 						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">首頁</a>
 						</li>
-						<li class="active">菁英薈萃</li>
+						<li class="active">活動櫥窗管理</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>
@@ -188,7 +188,7 @@
 				<div class="page-content">
 
 					<div class="page-header">
-						<h1>菁英薈萃管理</h1>
+						<h1>活動櫥窗管理</h1>
 					</div>
 					<!-- /.page-header -->
 
@@ -201,7 +201,7 @@
 								<tr>
 									<th class="center" width="7%">編號</th>
 									<th class="center" width="20%">相簿名稱</th>
-									<th width="20%">圖片</th>
+									<!--<th width="20%">圖片</th>-->
 									<th width="10%">日期</th>
 									<th width="13%">
 										<button id="btn-add" class="btn btn-insert btn-xs btn-primary">
@@ -216,8 +216,8 @@
 									<td width="7%" style="vertical-align: middle;" class="center">(index
 										+ 1)</td>
 									<td width="20%" style="vertical-align: middle;">ALBUM NAME</td>
-									<td width="20%" class="center"><img src="images/user.jpg"
-										height="100" />
+									<!--<td width="20%" class="center"><img src="images/user.jpg"
+										height="100" />-->
 									<td width="10%" style="vertical-align: middle;">DATE</td>
 									<td width="13%" style="vertical-align: middle;">
 										<div class="hidden-sm hidden-xs btn-group">
@@ -294,7 +294,7 @@
 								</div>
 							</div> -->
 
-							<div class="form-group">
+							<div class="form-group hide">
 								<label class="col-sm-3 control-label no-padding-right"
 									for="form-field-1"> 活動封面 </label>
 
@@ -408,7 +408,7 @@
 
 										<div class="step-pane" data-step="2">
 											<div class="center ">
-												<h3 class="red">注意：圖片敘述限制字數17字內！</h3>
+												<h3 class="red hide">注意：圖片敘述限制字數17字內！</h3>
 												<br> <br>
 											</div>
 											<div class="row">
@@ -1069,20 +1069,6 @@
 				$('#simple-table').show();
 			 */
 			//}) 
-			function disableForm(fn) {
-				$('#album-title').attr('disabled', fn);
-				$('#album-date').attr('disabled', fn);
-				$('#state').attr('disabled', fn);
-				//alert(fn);
-				if (fn) {
-					$('#btngp-album-content').addClass('hide');
-					$('#btngp-reEdit').removeClass('hide');
-				} else {
-					$('#btngp-album-content').removeClass('hide');
-					$('#btngp-reEdit').addClass('hide');
-				}
-			}
-
 			/* $('#upload-photo').on('click', '#btn-upload-done', function(event) {
 				//alert('btn-upload-done');
 
@@ -1209,7 +1195,7 @@
 		/* macro */
 		var CHAMPION = '3';
 		var ACTIVITY = '2';
-		var TYPEID = CHAMPION; //#3 champion
+		var TYPEID = ACTIVITY; //#3 champion
 
 		function getAll(TYPEID) {
 			console.log('getAll album: ' + TYPEID);
@@ -1363,7 +1349,7 @@
 												+ '<button id="btn-fn-photo" class="btn btn-xs btn-info" data-id="'
 								+ item.id + '"><i class="ace-icon fa fa-heart-o bigger-100">&nbsp;封面</i></button>\
 										</div>'  */
-										+ '<textarea class="input-medium photo-fn-desc" id="photo-fn-desc-'+item.id+'" name="photo-fn-desc" maxlength="17">' //17字內
+										+ '<textarea class="input-medium photo-fn-desc hide" id="photo-fn-desc-'+item.id+'" name="photo-fn-desc" maxlength="17">' //17字內
 										+ (TYPEID == ACTIVITY ? item.file
 												: (item.desc == null ? ""
 														: item.desc))
