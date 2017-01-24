@@ -59,7 +59,7 @@
 										<%
 											ArrayList<Album> albums = new ArrayList<Album>();
 											albums = AlbumDao.getAll("Activity");
-										 	request.setAttribute("albums", albums);
+											request.setAttribute("albums", albums);
 											Album tmp = new Album();
 										%>
 										<%
@@ -68,14 +68,21 @@
 												request.setAttribute("album", albums.get(offset));
 												//String URL_SINGLE_POST = "7.2.jsp?albumId";
 												tmp = albums.get(offset);
-												String URL_SINGLE_POST = "7-2.jsp?albumId="+tmp.getId()+"&tag="+tmp.getTag();
+												String URL_SINGLE_POST = "7-2.jsp?albumId=" + tmp.getId()
+														+ "&tag=" + tmp.getTag();
+												String ImgUrl = "img/pic/index01.jpg";
+												if (tmp.getPic() != null) {
+													ImgUrl = "../album/" + tmp.getId() + "/" + tmp.getPic();
+												}
+												request.setAttribute("ImgUrl", ImgUrl);
 										%>
 										<!--Item with no lightbox, only link to the item page-->
 										<li class="case" data-type="photo${album.tag}"
 											data-id="id-${album.id}">
 											<!-- Button to trigger modal --> <a class="portfolio_box "
-											href="7-2.jsp?albumId=${album.id}&tag=${album.tag}" role="button"> <img
-												src="img/pic/index01.jpg" alt="portfolio single item image">
+											href="7-2.jsp?albumId=${album.id}&tag=${album.tag}"
+											role="button"> <img src="${ImgUrl}"
+												alt="portfolio single item image">
 												<div class="portfolio_box_text">
 													<h6>${album.title}</h6>
 												</div>

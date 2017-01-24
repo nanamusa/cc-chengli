@@ -74,11 +74,11 @@
 												System.out.println(IMG_PATH);
 										%>
 										<li class="case">
-											<!-- portfolio item to trigger modal --> <a href="#myModal1"
-											role="button" data-toggle="modal"> <img
+											<!-- portfolio item to trigger modal --> <a href="#myModal${photo.id}"
+											role="button" data-toggle="modal" > <img
 												src="../album/${photo.path}${photo.file}" alt="portfolio single item image">
 										</a> <!-- Lightbox modal -->
-											<div id="myModal1" class="modal hide fade" tabindex="-1"
+											<div id="myModal${photo.id}" class="modal hide fade" tabindex="-1"
 												role="dialog" aria-labelledby="myModalLabel"
 												aria-hidden="true">
 												<div class="modal-body">

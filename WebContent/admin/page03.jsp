@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="html" tagdir="/WEB-INF/tags"%>
-
+<%
+	if (session.getAttribute("name") == null) {
+		response.sendRedirect("login.html");
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -196,12 +200,12 @@
 						<div class="col-xs-12"></div>
 						<!-- /.row -->
 						<table id="simple-table"
-							class="table table-striped table-bordered table-hover col-xs-10">
+							class=" hide table table-striped table-bordered table-hover col-xs-10">
 							<thead>
 								<tr>
 									<th class="center" width="7%">編號</th>
 									<th class="center" width="20%">相簿名稱</th>
-									<th width="20%">圖片</th>
+									<!-- <th width="20%">圖片</th> -->
 									<th width="10%">日期</th>
 									<th width="13%">
 										<button id="btn-add" class="btn btn-insert btn-xs btn-primary">
@@ -212,7 +216,7 @@
 							</thead>
 
 							<tbody id="table-album-list">
-								<tr class="hide[[[[]]]]">
+								<tr class="hide">
 									<td width="7%" style="vertical-align: middle;" class="center">(index
 										+ 1)</td>
 									<td width="20%" style="vertical-align: middle;">ALBUM NAME</td>
@@ -240,7 +244,7 @@
 						<!-- ALBUM INFO -->
 						<!-- //相片內容 -->
 
-						<form class="form-horizontal" id="validation-form" method="post"
+						<form class="hide form-horizontal" id="validation-form" method="post"
 							action="./">
 							<!-- <input type="text" id="album-id" value="ForTest" class="hide"> -->
 							<div class="form-group">
@@ -267,7 +271,7 @@
 								</div>
 							</div>
 
-							<div class="form-group">
+							<div class="form-group hide">
 								<label class="control-label col-xs-12 col-sm-3 no-padding-right"
 									for="state">活動標籤</label>
 
@@ -294,7 +298,7 @@
 								</div>
 							</div> -->
 
-							<div class="form-group">
+							<div class="form-group hide">
 								<label class="col-sm-3 control-label no-padding-right"
 									for="form-field-1"> 活動封面 </label>
 
@@ -357,7 +361,7 @@
 
 						<!-- ALBUM INFO END -->
 						<!-- PAGE CONTENT BEGINS -->
-						<div class="widget-body">
+						<div class="widget-body hide">
 							<div class="widget-main">
 								<!-- #section:plugins/fuelux.wizard -->
 								<div id="fuelux-wizard-container">
@@ -551,7 +555,7 @@
 						"#dropzone",
 						{
 							paramName : "file", // The name that will be used to transfer the file
-							maxFilesize : 1, // MB
+							maxFilesize : 5, // MB
 							acceptedFiles : ".jpg, .jpeg",
 							//autoProcessQueue : false, // 不主動提交
 							parallelUploads : 10, // 同時上傳多少文件
@@ -1111,9 +1115,6 @@
 									name : {
 										required : true
 									},
-									state : {
-										required : true
-									},
 									date : {
 										required : true,
 										date : true
@@ -1124,7 +1125,6 @@
 								},
 
 								messages : {
-									state : "請選擇活動分類",
 									date : "必要欄位",
 									title : "必要欄位",
 								},

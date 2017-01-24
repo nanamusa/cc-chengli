@@ -41,14 +41,14 @@ public class test_UploadServlet extends HttpServlet {
 
 	}
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	// disable unchecked warning
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		int MaxMemorySize = 1024 * 1024 * 1024;
 		File TempDirectory = new File("/tmp");
-		int MaxRequestSize = 1 * 1024 * 1024;
+		int MaxRequestSize = 1024 * 1024 * 1024;
 		boolean writeToFile = true;
 		String allowedFileTypes = ".gif .jpg .jpeg .png";
 		// Photo photo = new Photo();

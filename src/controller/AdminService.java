@@ -11,10 +11,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import model.Admin;
-
 import com.google.gson.Gson;
 
+import model.Admin;
 import dao.AdminDAO;
 
 @Path("/admin")
@@ -27,13 +26,13 @@ public class AdminService {
 		System.out.println("verify uid...");
 
 		Gson gson = new Gson();
-		//SearchCond obj = gson.fromJson(sc, SearchCond.class);
-		//System.out.println(obj);
+		// SearchCond obj = gson.fromJson(sc, SearchCond.class);
+		// System.out.println(obj);
 		String rs = gson.toJson(AdminDAO.getByUid(userId));
 		System.out.println(rs);
 		return Response.status(200).entity(rs).build();
 	}
-	
+
 	@GET
 	@Produces("application/json")
 	public Response getAdmin() throws Exception {
@@ -47,7 +46,8 @@ public class AdminService {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public Response getAdminById(@DefaultValue("0") @PathParam("id") int id) throws Exception {
+	public Response getAdminById(@DefaultValue("0") @PathParam("id") int id)
+			throws Exception {
 		System.out.println("get admin By Id : " + id);
 		Gson gson = new Gson();
 		String str = gson.toJson(AdminDAO.getById(id));
@@ -59,7 +59,7 @@ public class AdminService {
 	// create or update
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response saveAdmin(String _admin) throws Exception  {
+	public Response saveAdmin(String _admin) throws Exception {
 
 		Gson gson = new Gson();
 		Admin obj = gson.fromJson(_admin, Admin.class);

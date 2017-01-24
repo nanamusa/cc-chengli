@@ -137,20 +137,20 @@
 			</script>
 
 			<ul class="nav nav-list">
-				<li class="active"><a href="admin.jsp"> <span class="menu-text">
-							後台帳號管理 </span>
+				<li class="active"><a href="admin.jsp"> <span
+						class="menu-text"> 後台帳號管理 </span>
 				</a> <b class="arrow"></b></li>
 
 				<li class=""><a href="page02.jsp"> <span class="menu-text">
 							最新消息管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class=""><a href="page03.html"> <span class="menu-text">
+				<li class=""><a href="page03.jsp"> <span class="menu-text">
 							菁英薈萃管理 </span>
 				</a> <b class="arrow"></b></li>
 
-				<li class=""><a href="page04.html"> <span
-						class="menu-text"> 活動櫥窗管理 </span>
+				<li class=""><a href="page04.jsp"> <span class="menu-text">
+							活動櫥窗管理 </span>
 				</a> <b class="arrow"></b></li>
 			</ul>
 			<!-- /.nav-list -->

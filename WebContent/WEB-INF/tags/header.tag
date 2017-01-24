@@ -18,13 +18,13 @@
 				</ul></li>
 			<li><a href="3-1.html"><i class="fa fa-users"
 					aria-hidden="true"></i> 服務項目</a></li>
-			<li><a href="4-1.html"><i class="fa fa-newspaper-o"
+			<li><a href="4-1.jsp"><i class="fa fa-newspaper-o"
 					aria-hidden="true"></i> 最新消息</a></li>
-			<li><a href="5-1.html"><i class="fa fa-asterisk"
+			<li><a href="5-1.jsp"><i class="fa fa-asterisk"
 					aria-hidden="true"></i> 精華薈萃</a></li>
 			<li><a href="#"><i class="fa fa-graduation-cap"
 					aria-hidden="true"></i> 精英招募</a></li>
-			<li><a href="7-1.html"><i class="fa fa-calendar"
+			<li><a href="7-1.jsp"><i class="fa fa-calendar"
 					aria-hidden="true"></i> 活動櫥窗</a></li>
 			<li><a href="8-1.html"><i
 					class="fa fa-american-sign-language-interpreting"
@@ -68,13 +68,13 @@
 					</ul></li>
 				<li><a href="3-1.html"><i class="fa fa-users"
 						aria-hidden="true"></i> 服務項目</a></li>
-				<li><a href="4-1.html"><i class="fa fa-newspaper-o"
+				<li><a href="4-1.jsp"><i class="fa fa-newspaper-o"
 						aria-hidden="true"></i> 最新消息</a></li>
-				<li><a href="5-1.html"><i class="fa fa-asterisk"
+				<li><a href="5-1.jsp"><i class="fa fa-asterisk"
 						aria-hidden="true"></i> 精華薈萃</a></li>
 				<li><a href="#"><i class="fa fa-graduation-cap"
 						aria-hidden="true"></i> 精英招募</a></li>
-				<li><a href="7-1.html"><i class="fa fa-calendar"
+				<li><a href="7-1.jsp"><i class="fa fa-calendar"
 						aria-hidden="true"></i> 活動櫥窗</a></li>
 				<li><a href="8-1.html"><i
 						class="fa fa-american-sign-language-interpreting"
