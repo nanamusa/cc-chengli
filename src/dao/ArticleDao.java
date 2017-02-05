@@ -136,7 +136,8 @@ public class ArticleDao {
 		return arrList;
 	}// end getAll()
 
-	public static ArrayList<Article> search(String keyWord) throws Exception {
+	public static ArrayList<Article> search(String keyWord, int Page, int num)
+			throws Exception {
 		System.out.println("dao.Article: search keyWord => " + keyWord);
 		ArrayList<Article> arrayList = new ArrayList<Article>();
 		DBConnectionManager manager;
@@ -148,11 +149,22 @@ public class ArticleDao {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 
+			int id = 1 + (Page - 1) * num;
+
 			StringBuilder sqlCmd = new StringBuilder();
-			sqlCmd.append("SELECT * FROM article");
-			sqlCmd.append(" WHERE title like '%" + keyWord + "%'");
-			sqlCmd.append(" OR content like '%" + keyWord + "%'");
-			sqlCmd.append(" ORDER BY date DESC, id DESC");
+
+			Page = 1;
+			num = 100;
+			sqlCmd.append(
+					"SELECT id,title, SUBSTRING(content,1,80) AS content,pic,date FROM article")
+					.append(" WHERE title like '%" + keyWord + "%'")
+					.append(" OR content like '%" + keyWord + "%'")
+					.append(" ORDER BY date DESC, id DESC");
+			if (Page > 1) {
+				sqlCmd.append(" LIMIT ").append(id - 1).append(",").append(num);
+			} else if (Page == 1) {
+				sqlCmd.append(" LIMIT 0, ").append(num);
+			}
 
 			String qSQL = sqlCmd.toString();
 			System.out.println(qSQL);
@@ -220,9 +232,9 @@ public class ArticleDao {
 		return ret;
 	}
 
-	public static ArrayList<Article> getArticles(int id, int num)
+	public static ArrayList<Article> getArticles(int Page, int num)
 			throws Exception {
-		System.out.println("getArticles: " + id);
+		System.out.println("getArticles Page: " + Page);
 		DBConnectionManager manager;
 
 		try {
@@ -231,11 +243,21 @@ public class ArticleDao {
 
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			StringBuilder sqlCmd = new StringBuilder();
 
-			sqlCmd.append("SELECT * FROM article");
-			sqlCmd.append(" ORDER BY date DESC LIMIT ").append(id - 1)
-					.append(",").append(num);
+			int id;
+
+			StringBuilder sqlCmd = new StringBuilder();
+			if (Page > 0) {
+				id = 1 + (Page - 1) * num;
+				sqlCmd.append(
+						"SELECT id,title, SUBSTRING(content,1,80) AS content,pic,date FROM article ORDER BY date DESC LIMIT ")
+						.append(id - 1).append(",").append(num);
+			} else {
+				id = 1;
+				sqlCmd.append(
+						"SELECT * FROM article ORDER BY date DESC LIMIT 0, ")
+						.append(num);
+			}
 
 			String qSQL = sqlCmd.toString();
 			System.out.println(qSQL);
@@ -265,7 +287,7 @@ public class ArticleDao {
 
 	}
 
-	public static int getTotalNum() throws Exception {
+	public static int getTotalNum(String keyWord) throws Exception {
 		System.out.println("getArticles: TotalNum");
 		DBConnectionManager manager;
 
@@ -276,6 +298,10 @@ public class ArticleDao {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String qSQL = "SELECT COUNT(*)AS num FROM article";
+			if (keyWord != "") {
+				qSQL = "SELECT COUNT(*)AS num FROM article WHERE title Like %"
+						+ keyWord + "% OR content Like %" + keyWord + "%";
+			}
 			int total = -1;
 			pstmt = conn.prepareStatement(qSQL);
 			rs = pstmt.executeQuery();
@@ -311,75 +337,5 @@ public class ArticleDao {
 		// System.out.println(article);
 		return article;
 	}
-
-	// public static boolean[] SC_emptyCheck(SearchCond sc) {
-	// boolean[] flagCheck = new boolean[7];
-	//
-	// for (int index = 0; index < flagCheck.length; index++)
-	// flagCheck[index] = true;
-	//
-	// // 0:name, 1:iktBranch, 2:organization, 3:amount, 4:id, 5,6:date
-	// flagCheck[0] = sc.getSdate().isEmpty();
-	// flagCheck[1] = sc.getEdate().isEmpty();
-	// flagCheck[2] = sc.getId().isEmpty();
-	// flagCheck[3] = sc.getName().isEmpty();
-	// flagCheck[4] = sc.getI_ikt().isEmpty();
-	// flagCheck[5] = sc.getI_org().isEmpty();
-	// flagCheck[6] = sc.get_amount().isEmpty();
-	//
-	// return flagCheck;
-	// }
-
-	// /* useless */
-	// public static ArrayList<String> getContent(String sql, String data) {
-	//
-	// DBConnectionManager manager;
-	//
-	// try {
-	// manager = new DBConnectionManager();
-	// Connection conn = manager.getConnection();
-	//
-	// PreparedStatement pstmt = null;
-	// ResultSet rs = null;
-	//
-	// pstmt = conn.prepareStatement(sql);
-	// rs = pstmt.executeQuery();
-	//
-	// ArrayList<String> list = new ArrayList<String>();
-	//
-	// while (rs.next()) {
-	// list.add(rs.getString(data));
-	// } // rs.next()
-	//
-	// rs.close();
-	// pstmt.close();
-	//
-	// conn.close();
-	// return list;
-	// } catch (ClassNotFoundException | SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return null;
-	//
-	// }
-
-	/*
-	 * public static void main(String args[]) {
-	 * 
-	 * String cond_name="Ｏ", cond_iktBranch="", cond_organization="",
-	 * cond_amount="", cond_id="", sDate="", eDate="20170101";
-	 * ArrayList<DonationObject> tmp; //tmp = GetDonationList(cond_name,
-	 * cond_iktBranch, cond_organization, cond_amount, cond_id, sDate, eDate);
-	 * String qSearch =
-	 * "SELECT dnt_donor_name, ib_name, dnt_organization, dnt_amount, LPAD(dnt_id, 6, '0') AS dnt_id, dnt_date FROM dnt "
-	 * ; String qJoin = "INNER JOIN ikt ON dnt_ikt_branch_id = ib_id  "; String
-	 * qOrder = "ORDER BY dnt_date DESC "; System.out.println(qSearch+ qJoin+
-	 * qOrder); tmp = searchDnts(qSearch, qJoin, qOrder); if (tmp.isEmpty()) {
-	 * System.out.println("no result!"); } else {
-	 * System.out.println(tmp.size()); }
-	 * 
-	 * }
-	 */
 
 }
