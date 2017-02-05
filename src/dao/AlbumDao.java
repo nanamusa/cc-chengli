@@ -279,7 +279,7 @@ public class AlbumDao {
 		 * else { classSet.setDate(classSet.getTitle().substring(0, 4)); //
 		 * classSet.setTitle(classSet.getTitle().substring(4)); }
 		 */
-
+		classSet.setType(anObject);
 		if ("Blog".equals(anObject)) {
 			classSet.setId(rs.getInt("id"));
 			classSet.setTitle("Blog pic");
@@ -313,7 +313,8 @@ public class AlbumDao {
 			ps.setString(1, coverId);
 			ps.setInt(2, albumId);
 			ps.executeUpdate();
-			System.out.println("Album#" + albumId + " Cover => Photo#" + coverId);
+			System.out.println("Album#" + albumId + " Cover => Photo#"
+					+ coverId);
 			conn.close();
 			return true;
 		} catch (SQLException e) {
