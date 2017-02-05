@@ -56,21 +56,18 @@ public class ArticleService {
 		return Response.status(200).entity(str).build();
 	}
 
-	//
-	// @GET
-	// @Path("/dnt/exist/{id}")//@Produces("application/json")
-	// @Produces("application/json")
-	// public Response getDontationById(
-	// @DefaultValue("0") @PathParam("id") int id) throws Exception {
-	// System.out.println("get Donation By id : " + id);
-	// Gson gson = new Gson();
-	// String str = gson.toJson(DonationDAO.getById(id));
-	// System.out.println(str);
-	//
-	// return Response.status(200).entity(str).build();
-	// }
-	//
-	// create or update
+	@POST
+	@Path("/search")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Response searchDonation(String _keyWord) throws Exception {
+		System.out.println("article.Searching: " + _keyWord);
+		Gson gson = new Gson();
+		String ret = gson.toJson(ArticleDao.search(_keyWord));
+		System.out.println(ret);
+		return Response.status(200).entity(ret).build();
+	}
+
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")

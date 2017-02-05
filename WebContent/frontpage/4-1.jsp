@@ -22,23 +22,23 @@
 							<div class="content_center alignleft ">
 								<%
 									/* 分頁 */
-																					String start = request.getParameter("start");
-																					if (start == null) {
-																						start = "1";
-																					}
-																					int MINI_ARTICLE = 90;
-																					int total = ArticleDao.getTotalNum();
-																					int currentPage = Integer.parseInt(start); //current page
-																					ArrayList<Article> articles = new ArrayList<Article>();
-																					int begin = 5 * currentPage - 4;
-																					articles = ArticleDao.getArticles(begin, 5);
-																					int end = begin + articles.size() - 1;//5 * count;
+																																							String start = request.getParameter("start");
+																																							if (start == null) {
+																																								start = "1";
+																																							}
+																																							int MINI_ARTICLE = 90;
+																																							int total = ArticleDao.getTotalNum();
+																																							int currentPage = Integer.parseInt(start); //current page
+																																							ArrayList<Article> articles = new ArrayList<Article>();
+																																							int begin = 5 * currentPage - 4;
+																																							articles = ArticleDao.getArticles(begin, 5);
+																																							int end = begin + articles.size() - 1;//5 * count;
 								%>
 								<%
 									System.out.println(articles.size());
-																					for (int offset = 0; offset < articles.size(); offset++) {
-																						String URL_SINGLE_POST = "4-2.jsp?id="
-																								+ articles.get(offset).getId();
+																																							for (int offset = 0; offset < articles.size(); offset++) {
+																																								String URL_SINGLE_POST = "4-2.jsp?id="
+																																										+ articles.get(offset).getId();
 								%>
 								<div class="content_post <%=offset > 0 ? "" : "first"%>">
 									<h2 class="sub_title">
@@ -48,8 +48,8 @@
 										width="215" height="145" alt="//" />
 									<%
 										int contentLen = articles.get(offset).getContent().length();
-																									if (contentLen > MINI_ARTICLE)
-																										contentLen = MINI_ARTICLE;
+																																													if (contentLen > MINI_ARTICLE)
+																																														contentLen = MINI_ARTICLE;
 									%>
 									<p><%=articles.get(offset).getContent()
 						.substring(0, contentLen)
@@ -62,41 +62,41 @@
 								</div>
 								<%
 									} // for begin~end
-																						//system.out.println("第 " + begin + " 篇 到 第 " + end + " 篇");
+																																																										//system.out.println("第 " + begin + " 篇 到 第 " + end + " 篇");
 								%>
 
 								<div class="pagination pagination-small pagination-right">
 									<ul>
 										<%
 											if (currentPage > 1) {
-																												out.println("<li><a href=\"4-1.jsp?start=" + (currentPage - 1)
-																														+ "\">&lsaquo;</a></li>");
-																											} else {
-																												out.println("<li class='disabled'><a href='#'>&lsaquo;</a></li>");
-																											}
+																																																																												out.println("<li><a href=\"4-1.jsp?start=" + (currentPage - 1)
+																																																																														+ "\">&lsaquo;</a></li>");
+																																																																											} else {
+																																																																												out.println("<li class='disabled'><a href='#'>&lsaquo;</a></li>");
+																																																																											}
 										%>
 										<%
 											for (int i = 1; i <= (total + 4) / 5; i++) {
-																												/* if (i == currentPage) {
-																													out.println("<li class='active'>" + i + "</li>");
-																													continue;
-																												} */
-																												if (i == currentPage) {
-																													out.println("<li class='active'>");
-																												} else {
-																													out.println("<li>");
-																												}
-																												out.println("<a href=\"4-1.jsp?start=" + i + "\">" + i
-																														+ "</a></li>");
-																											}
+																																																																												/* if (i == currentPage) {
+																																																																													out.println("<li class='active'>" + i + "</li>");
+																																																																													continue;
+																																																																												} */
+																																																																												if (i == currentPage) {
+																																																																													out.println("<li class='active'>");
+																																																																												} else {
+																																																																													out.println("<li>");
+																																																																												}
+																																																																												out.println("<a href=\"4-1.jsp?start=" + i + "\">" + i
+																																																																														+ "</a></li>");
+																																																																											}
 										%>
 										<%
 											if (currentPage < (total + 4) / 5) {
-																												out.println("<li><a href=\"4-1.jsp?start=" + (currentPage + 1)
-																														+ "\">&rsaquo;</a></li>");
-																											} else {
-																												out.println("<li class='disabled'><a href='#'>&rsaquo;</a></li>");
-																											}
+																																																																												out.println("<li><a href=\"4-1.jsp?start=" + (currentPage + 1)
+																																																																														+ "\">&rsaquo;</a></li>");
+																																																																											} else {
+																																																																												out.println("<li class='disabled'><a href='#'>&rsaquo;</a></li>");
+																																																																											}
 										%>
 									</ul>
 								</div>
@@ -104,20 +104,9 @@
 							<div class="content_left_bar alignright ">
 
 								<!-- #section:basics/content.searchbox -->
-								<div class="nav-search" id="nav-search">
-									<form class="form-search">
-										<span class="input-icon"> <input type="text"
-											placeholder="Search ..." class="nav-search-input"
-											id="nav-search-input" autocomplete="off" /> <i
-											class="ace-icon fa fa-search nav-search-icon"></i>
-										</span>
-									</form>
-								</div>
-								<!-- /.nav-search -->
-
-								<!-- #section:basics/content.searchbox -->
-								<form class="form-search" method="get" onsubmit="search();">
-									<input class="search_input" type="text" placeholder="搜尋…">
+								<form class="form-search" method="post" onsubmit="search();">
+									<input class="search_input" id="art_search_input" type="text"
+										placeholder="搜尋…">
 								</form>
 								<!-- /.nav-search -->
 
@@ -129,16 +118,16 @@
 										<ul>
 											<%
 												ArrayList<Article> recentArts = new ArrayList<Article>();
-																														recentArts = ArticleDao.getArticles(1, 4);
-																														Article tmp = new Article();
+																																																																																				recentArts = ArticleDao.getArticles(1, 4);
+																																																																																				Article tmp = new Article();
 											%>
 											<%
 												System.out.println(recentArts.size());
-																														for (int offset = 0; offset < recentArts.size(); offset++) {
-																															String URL_SINGLE_POST = "single_post.html?id=" + offset;
-																															tmp = recentArts.get(offset);
-																															String TITLE = tmp.getTitle().length() > 10 ? tmp.getTitle()
-																																	.substring(0, 10) + "..." : tmp.getTitle();
+																																																																																				for (int offset = 0; offset < recentArts.size(); offset++) {
+																																																																																					String URL_SINGLE_POST = "single_post.html?id=" + offset;
+																																																																																					tmp = recentArts.get(offset);
+																																																																																					String TITLE = tmp.getTitle().length() > 10 ? tmp.getTitle()
+																																																																																							.substring(0, 10) + "..." : tmp.getTitle();
 											%>
 											<li class="console <%=offset > 0 ? "" : "first"%>">
 												<div class="content_img">
@@ -190,13 +179,19 @@
 			$.ajax({
 				type : 'POST',
 				contentType : 'application/json',
-				url : rootURL + 'articles/search/',
+				url : rootURL + '/articles/search/',
 				dataType : "json",
-				data : formToJSON(),
+				data : sendKeyWord(),
 				success : console.log("hello")
 			/* renderDetails */
 			});
 		}
+
+		function sendKeyWord() {
+			var _keyWord = $('#art_search_input').val() || '';// || '0';
+			return _keyWord;
+		}
+		
 	</script>
 	<!-- ======================= End JQuery libs =========================== -->
 </body>

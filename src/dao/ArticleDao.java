@@ -24,11 +24,9 @@ public class ArticleDao {
 		try {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
-			PreparedStatement ps = conn
-					.prepareStatement(
-							"INSERT INTO article (title, content, date, pic) "
-									+ "VALUES (?, ?, ?, ?)",
-							new String[] { "id" });
+			PreparedStatement ps = conn.prepareStatement(
+					"INSERT INTO article (title, content, date, pic) "
+							+ "VALUES (?, ?, ?, ?)", new String[] { "id" });
 			ps.setString(1, article.getTitle());
 			ps.setString(2, article.getContent());
 			ps.setString(3, article.getDate());
@@ -138,6 +136,46 @@ public class ArticleDao {
 		return arrList;
 	}// end getAll()
 
+	public static ArrayList<Article> search(String keyWord) throws Exception {
+		System.out.println("dao.Article: search keyWord => " + keyWord);
+		ArrayList<Article> arrayList = new ArrayList<Article>();
+		DBConnectionManager manager;
+
+		try {
+			manager = new DBConnectionManager();
+			Connection conn = manager.getConnection();
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			StringBuilder sqlCmd = new StringBuilder();
+			sqlCmd.append("SELECT * FROM article");
+			sqlCmd.append(" WHERE title like '%" + keyWord + "%'");
+			sqlCmd.append(" OR content like '%" + keyWord + "%'");
+			sqlCmd.append(" ORDER BY date DESC, id DESC");
+
+			String qSQL = sqlCmd.toString();
+			System.out.println(qSQL);
+
+			pstmt = conn.prepareStatement(qSQL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				arrayList.add(processRow(rs));
+			} // rs.next()
+
+			rs.close();
+			pstmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return arrayList;
+	}
+
 	public static Article getById(int id) throws Exception {
 		System.out.println("dao.Article: getById...");
 
@@ -163,7 +201,7 @@ public class ArticleDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				ret= processRow(rs);
+				ret = processRow(rs);
 			} // rs.next()
 
 			rs.close();
@@ -172,7 +210,7 @@ public class ArticleDao {
 			conn.close();
 
 			System.out.println(ret);
-			
+
 			return ret;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -182,7 +220,8 @@ public class ArticleDao {
 		return ret;
 	}
 
-	public static ArrayList<Article> getArticles(int id,int num) throws Exception {
+	public static ArrayList<Article> getArticles(int id, int num)
+			throws Exception {
 		System.out.println("getArticles: " + id);
 		DBConnectionManager manager;
 
@@ -210,7 +249,7 @@ public class ArticleDao {
 				Article tmp = processRow(rs);
 
 				list.add(tmp);
-				//System.out.println(tmp.toString());
+				// System.out.println(tmp.toString());
 			} // rs.next()
 
 			rs.close();
@@ -236,8 +275,8 @@ public class ArticleDao {
 
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			String qSQL= "SELECT COUNT(*)AS num FROM article";
-			int total=-1;
+			String qSQL = "SELECT COUNT(*)AS num FROM article";
+			int total = -1;
 			pstmt = conn.prepareStatement(qSQL);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -249,7 +288,7 @@ public class ArticleDao {
 
 			conn.close();
 			return total;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -267,9 +306,9 @@ public class ArticleDao {
 
 		article.setTitle(rs.getString("title"));
 		article.setContent(rs.getString("content"));
-		article.setPic("0.jpg");//rs.getString("pic"));
+		article.setPic("0.jpg");// rs.getString("pic"));
 		article.setId(rs.getInt("id"));
-		//System.out.println(article);
+		// System.out.println(article);
 		return article;
 	}
 
