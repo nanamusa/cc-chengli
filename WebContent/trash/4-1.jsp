@@ -27,7 +27,7 @@
 										start = "1";
 									}
 									int MINI_ARTICLE = 90;
-									int total = ArticleDao.getTotalNum();
+									int total = ArticleDao.getTotalNum("");
 									int currentPage = Integer.parseInt(start); //current page
 									ArrayList<Article> articles = new ArrayList<Article>();
 									int begin = 5 * currentPage - 4;

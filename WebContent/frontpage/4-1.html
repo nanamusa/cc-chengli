@@ -449,6 +449,7 @@
 			$.ajax({
 				type : 'GET',
 				url : rootURL + '/articles/page=' + currentPage + '&show=5',
+				async : false,
 				dataType : "json",
 				success : function(data) {
 
@@ -545,6 +546,7 @@
 			$.ajax({
 				type : 'GET',
 				url : rootURL + '/articles/page=0&show=5',
+				async : false,
 				dataType : "text",
 				success : function(data) {
 					totalAmount = data;
@@ -611,6 +613,7 @@
 			$.ajax({
 				type : 'GET',
 				url : rootURL + '/articles/page=1&show=4',
+				async : false,
 				dataType : "json",
 				success : function(data) {
 					$("#popular").empty();
@@ -771,7 +774,7 @@
 
 		clearCenterContent();
 		getPopular();
-		
+
 		// 4-1 only
 		if (obj.page > 0) {
 			currentPage = obj.page;

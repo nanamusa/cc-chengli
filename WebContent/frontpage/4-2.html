@@ -463,6 +463,7 @@
 			$.ajax({
 				type : 'GET',
 				url : rootURL + '/articles/page=1&show=4',
+				async : false,
 				dataType : "json",
 				success : function(data) {
 					$("#popular").empty();
@@ -488,7 +489,7 @@
 								popularHeader = '<ul>';
 
 								popularBody = '';
-								detailLink = '4-2.jsp?id=' + _id;
+								detailLink = '4-2.html?id=' + _id;
 								photoURL = "img/news01.jpg";//'' + _pic;
 
 								if (index == 0) {
