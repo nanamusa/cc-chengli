@@ -205,8 +205,8 @@
 								<tr>
 									<th class="center" width="7%">編號</th>
 									<th class="center" width="20%">相簿名稱</th>
-									<th width="20%">圖片</th>
-									<th width="10%">日期</th>
+									<th class="center" width="20%">封面</th>
+									<th class="center" width="10%">日期</th>
 									<th width="13%">
 										<button id="btn-add" class="btn btn-insert btn-xs btn-primary">
 											<i class="ace-icon fa fa-plus bigger-120">&nbsp;新增</i>
@@ -1414,10 +1414,10 @@
 
 								var btns = '<td width="13%" style="vertical-align: middle;"><div class="btn-group">'
 										+ '<button class="btn btn-xs btn-warning" id="btn-upload" data-id="'+item.id +'">'
-										+ '<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;相片集管理</i></button>'
+										+ '<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;相片管理</i></button>'
 										+ '<br><br><button class="btn btn-xs btn-info" id="btn-edit" data-id="'+item.id+'">'
-										+ '<i class="ace-icon fa fa-pencil bigger-120"><font style="color: #fff;">&nbsp;編輯</font></i></button>'
-										+ '<button class="btn btn-xs btn-danger" id="btn-delete" data-id="'+item.id+'"><i class="ace-icon fa fa-trash-o bigger-120">&nbsp;刪除</i></button>'
+										+ '<i class="ace-icon fa fa-pencil bigger-120"><font style="color: #fff;">&nbsp;編輯相簿</font></i></button>'
+										+ '<br><br><button class="btn btn-xs btn-danger" id="btn-delete" data-id="'+item.id+'"><i class="ace-icon fa fa-trash-o bigger-120">&nbsp;刪除相簿</i></button>'
 										+ '</div></td>';
 
 								dntBox = '<td width="7%" style="vertical-align: middle;" class="center">'

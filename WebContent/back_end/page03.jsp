@@ -196,8 +196,167 @@
 					</div>
 					<!-- /.page-header -->
 
+
+
 					<div class="row">
 						<div class="col-xs-12"></div>
+
+
+						<div id="_gallery">
+
+							<!-- #section:elements.form.input-state -->
+							<form class="form-horizontal" id="validation-form" method="post">
+								<div class="form-group has-info">
+									<label for="inputInfo"
+										class="col-xs-12 col-sm-2 control-label no-padding-right">活動標題</label>
+
+									<div class="col-xs-12 col-sm-5">
+										<span class="block input-icon input-icon-right"> <input
+											type="text" id="new-album-title" name="title"
+											placeholder="活動標題" class="width-100">
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group has-info">
+									<label for="inputInfo"
+										class="col-xs-12 col-sm-2 control-label no-padding-right">活動日期</label>
+
+									<div class="col-xs-12 col-sm-5">
+										<span class="block input-icon input-icon-right"> <input
+											type="date" id="new-album-date" name="date"
+											class="form-control" name="date" class="width-100"> <!-- <i
+																class="ace-icon fa fa-info-circle"></i> -->
+										</span>
+									</div>
+									<!-- <div class="help-block col-xs-12 col-sm-reset inline">
+															Info tip help!</div> -->
+								</div>
+
+								<div class="form-group has-info">
+									<label for="inputInfo"
+										class="col-xs-12 col-sm-2 control-label no-padding-right">活動標籤</label>
+
+									<div class="col-xs-12 col-sm-5">
+										<span class="block input-icon input-icon-right"> <select
+											id="new-album-state" name="state" class="select width-100"
+											data-placeholder="選擇活動標籤">
+												<option value="">-- 選擇活動標籤 --</option>
+												<option value="1">頒給典禮</option>
+												<option value="2">活動花絮</option>
+												<option value="3">環遊世界</option>
+										</select></span>
+									</div>
+								</div>
+								<div class="clearfix form-actions col-xs-12">
+									<div class="col-sm-offset-1 col-sm-5">
+										<div class="btn-group pull-left">
+											<button class="btn btn-warning" id="album-btn-upload">
+												<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;上傳
+												</i>
+											</button>
+										</div>
+									</div>
+									<div class="col-xs-offset-3 col-xs-reset">
+										<div class="btn-group">
+											<button id="album-btn-update" class="btn btn-success"
+												type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i> 確定
+											</button>
+
+											<button id="album-btn-cancel" class="btn btn-danger">
+												<i class="ace-icon fa fa-times"></i> 取消
+											</button>
+										</div>
+									</div>
+									<!-- </div> -->
+								</div>
+							</form>
+							<div class="hr hr-24"></div>
+							<!-- PAGE CONTENT BEGINS -->
+							<div>
+								<ul class="ace-thumbnails clearfix">
+									<!-- #section:pages/gallery -->
+									<li><div>
+											<img height="150" alt="150x150"
+												src="./album/upload/0/chengli-10098.jpg" />
+											<div class="text">
+												<div class="inner">
+													<span>照片描述</span> <br />
+													<textarea class="form-control limited" id="form-field-9"
+														maxlength="17"></textarea>
+													<br /> <a href="./album/upload/0/chengli-10098.jpg"
+														data-rel="colorbox"> <i
+														class="ace-icon fa fa-external-link"></i>
+													</a> <a href="#"> <i class="fa fa-floppy-o"></i>
+													</a> <a href="#"> <i class="fa fa-book"></i>
+													</a> <a href="#"> <i class="ace-icon fa fa-times red"></i>
+													</a>
+												</div>
+											</div>
+										</div></li>
+									<!-- #section:pages/gallery -->
+									<li><div>
+											<img height="150" alt="150x150"
+												src="./album/upload/0/chengli-10098.jpg" />
+											<div class="text">
+												<div class="inner">
+													<span>照片描述</span> <br />
+													<textarea class="form-control limited" id="form-field-9"
+														maxlength="17"></textarea>
+													<br /> <a href="./album/upload/0/chengli-10098.jpg"
+														data-rel="colorbox"> <i
+														class="ace-icon fa fa-external-link"></i>
+													</a> <a href="#"> <i class="fa fa-floppy-o"></i>
+													</a> <a href="#"> <i class="fa fa-book"></i>
+													</a> <a href="#"> <i class="ace-icon fa fa-times red"></i>
+													</a>
+												</div>
+											</div>
+										</div></li>
+									<!-- #section:pages/gallery -->
+									<li><div>
+											<img height="150" alt="150x150"
+												src="./album/upload/0/chengli-10098.jpg" />
+											<div class="text">
+												<div class="inner">
+													<span>照片描述</span> <br />
+													<textarea class="form-control limited" id="form-field-9"
+														maxlength="17"></textarea>
+													<br /> <a href="./album/upload/0/chengli-10098.jpg"
+														data-rel="colorbox"> <i
+														class="ace-icon fa fa-external-link"></i>
+													</a> <a href="#"> <i class="fa fa-floppy-o"></i>
+													</a> <a href="#"> <i class="fa fa-book"></i>
+													</a> <a href="#"> <i class="ace-icon fa fa-times red"></i>
+													</a>
+												</div>
+											</div>
+										</div></li>
+									<!-- #section:pages/gallery -->
+									<li><div>
+											<img height="150" alt="150x150"
+												src="./album/upload/0/chengli-10098.jpg" />
+											<div class="text">
+												<div class="inner">
+													<span>照片描述</span> <br />
+													<textarea class="form-control limited" id="form-field-9"
+														maxlength="17"></textarea>
+													<br /> <a href="./album/upload/0/chengli-10098.jpg"
+														data-rel="colorbox"> <i
+														class="ace-icon fa fa-external-link"></i>
+													</a> <a href="#"> <i class="fa fa-floppy-o"></i>
+													</a> <a href="#"> <i class="fa fa-book"></i>
+													</a> <a href="#"> <i class="ace-icon fa fa-times red"></i>
+													</a>
+												</div>
+											</div>
+										</div></li>
+								</ul>
+							</div>
+						</div>
+						<!-- PAGE CONTENT ENDS -->
+
 						<!-- /.row -->
 						<table id="simple-table"
 							class=" hide table table-striped table-bordered table-hover col-xs-10">
@@ -208,7 +367,12 @@
 									<!-- <th width="20%">圖片</th> -->
 									<th width="10%">日期</th>
 									<th width="13%">
-										<button id="btn-add" class="btn btn-insert btn-xs btn-primary">
+										<!-- <button id="btn-add" class="btn btn-insert btn-xs btn-primary">
+											<i class="ace-icon fa fa-plus bigger-120">&nbsp;新增</i>
+										</button> 
+										-->
+										<button id="btn-add_tmp" href="#AlbumCreate"
+											data-toggle="modal" class="btn btn-insert btn-xs btn-primary">
 											<i class="ace-icon fa fa-plus bigger-120">&nbsp;新增</i>
 										</button>
 									</th>
@@ -244,227 +408,155 @@
 						<!-- ALBUM INFO -->
 						<!-- //相片內容 -->
 
-						<form class="hide form-horizontal" id="validation-form" method="post"
-							action="./">
-							<!-- <input type="text" id="album-id" value="ForTest" class="hide"> -->
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"
-									for="title"> 活動標題 </label>
-								<div class="col-sm-9">
-									<div class="clearfix">
-										<input type="text" id="album-title" name="title"
-											placeholder="活動標題" class="col-xs-10 col-sm-5">
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"
-									for="date"> 活動日期 </label>
-								<div class="col-sm-9" for="dnt_date">
-									<div class="input-group col-xs-10 col-sm-5">
-										<span class="input-group-addon"> <i
-											class="fa fa-calendar bigger-110"></i>
-										</span> <input id="album-date" class="form-control" type="date"
-											name="date" id="date-picker-1">
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group hide">
-								<label class="control-label col-xs-12 col-sm-3 no-padding-right"
-									for="state">活動標籤</label>
-
-								<div class="col-xs-12 col-sm-9">
-									<select id="state" name="state" class="select"
-										data-placeholder="選擇活動標籤">
-										<option value="">-- 選擇活動標籤 --</option>
-										<option value="1">頒給典禮</option>
-										<option value="2">活動花絮</option>
-										<option value="3">環遊世界</option>
-									</select>
-								</div>
-							</div>
-
-							<!-- <div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"
-									for="form-field-1"> 活動封面 </label>
-								<div class="col-sm-9">
-									<div class="input-group col-xs-10 col-sm-5">
-										<div class="clearfix">
-											<input type="file" id="id-input-file-3" />
+						<div id="AlbumCreate" class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<!-- <div id="modal-wizard-container"> -->
+									<div class="modal-header">
+										<div class="center">
+											<h4 class="blue">新增相簿資訊</h4>
 										</div>
 									</div>
-								</div>
-							</div> -->
+									<form class="form-horizontal" id="validation-form"
+										method="post">
+										<div class="modal-body">
+											<div class="center">
 
-							<div class="form-group hide">
-								<label class="col-sm-3 control-label no-padding-right"
-									for="form-field-1"> 活動封面 </label>
+												<!-- #section:elements.form.input-state -->
+												<div class="form-group has-info">
+													<label for="inputInfo"
+														class="col-xs-12 col-sm-3 control-label no-padding-right">活動標題</label>
 
-								<div class="col-sm-9">
-									<input id="album-cover" type="text" placeholder="活動封面"
-										class="col-xs-10 col-sm-5" disabled />
-								</div>
-							</div>
+													<div class="col-xs-12 col-sm-5">
+														<span class="block input-icon input-icon-right"> <input
+															type="text" id="new-album-title" name="title"
+															placeholder="活動標題" class="width-100">
+														</span>
+													</div>
+												</div>
 
-							<div id="btngp-album-content" class="row">
-								<div class="col-xs-12">
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											&nbsp; &nbsp; &nbsp;
-											<button id="btn-save-add" class="btn btn-info" type="submit">
-												<i class="ace-icon fa fa-check bigger-110"></i> 儲存
-											</button>
+												<div class="form-group has-info">
+													<label for="inputInfo"
+														class="col-xs-12 col-sm-3 control-label no-padding-right">活動日期</label>
 
-											&nbsp; &nbsp; &nbsp;
-											<button id="btn-cancel-add" class="btn" type="reset">
-												<i class="ace-icon fa fa-undo bigger-110"></i> 取消
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="btngp-reEdit" class="row hide">
-								<div class="col-xs-12">
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-7 col-md-11">
-											&nbsp; &nbsp; &nbsp;
-											<button id="btn-edit-add" class="btn btn-info">
-												<i class="ace-icon fa fa-pencil bigger-110"></i> 編輯
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
+													<div class="col-xs-12 col-sm-5">
+														<span class="block input-icon input-icon-right"> <input
+															type="date" id="new-album-date" name="date"
+															class="form-control" name="date" class="width-100">
+															<!-- <i
+																class="ace-icon fa fa-info-circle"></i> -->
+														</span>
+													</div>
+													<!-- <div class="help-block col-xs-12 col-sm-reset inline">
+															Info tip help!</div> -->
+												</div>
 
-							<div class="alert alert-success hide">
-								<button type="button" class="close" data-dismiss="alert">
-									<i class="ace-icon fa fa-times"></i>
-								</button>
+												<div class="form-group has-info -hide">
+													<label for="inputInfo"
+														class="col-xs-12 col-sm-3 control-label no-padding-right">活動標籤</label>
 
-								<strong> <i class="ace-icon fa fa-check"></i> Well
-									done!
-								</strong> 新增相簿成功！ <br />
-							</div>
-
-							<div class="alert alert-danger hide">
-								<button type="button" class="close" data-dismiss="alert">
-									<i class="ace-icon fa fa-times"></i>
-								</button>
-
-								<strong> <i class="ace-icon fa fa-times"></i> Oops!
-								</strong> 相簿新增失敗，請再試一次。 <br />
-							</div>
-
-						</form>
-
-						<!-- ALBUM INFO END -->
-						<!-- PAGE CONTENT BEGINS -->
-						<div class="widget-body hide">
-							<div class="widget-main">
-								<!-- #section:plugins/fuelux.wizard -->
-								<div id="fuelux-wizard-container">
-									<div>
-										<!-- #section:plugins/fuelux.wizard.steps -->
-										<ul class="steps">
-											<!-- <li data-step="1" class="active"><span class="step"><i
-													class="ace-icon fa fa-book bigger-120"></i></span> <span
-												class="title">相簿內容</span></li> -->
-
-											<li data-step="1" class="active"><span class="step"><i
-													class="ace-icon fa fa-cloud-upload bigger-120"></i></span> <span
-												class="title">相片上傳</span></li>
-
-											<li data-step="2"><span class="step"><i
-													class="ace-icon fa fa-camera-retro bigger-120"></i></span> <span
-												class="title">相片集</span></li>
-										</ul>
-
-										<!-- /section:plugins/fuelux.wizard.steps -->
-									</div>
-
-									<hr />
-
-									<!-- #section:plugins/fuelux.wizard.container -->
-									<div class="step-content pos-rel">
-
-										<div class="step-pane active" data-step="1">
-											<div class="center hide">
-												<h3 class="green">Congrats!</h3>
-												Your product is ready to ship! Click finish to continue!
-											</div>
-											<div class="row" id="upload-photo">
-												<div class="col-xs-12">
-													<form action="../UploadServlet" method="post"
-														enctype="multipart/form-data" class="dropzone"
-														id="dropzone">
-														<div class="fallback">
-															<input type="file" name="filename" multiple="" />
-														</div>
-														<input type="text" id="passAlbumId" name="passAlbumId"
-															value="1234" class="hide">
-
-													</form>
+													<div class="col-xs-12 col-sm-5">
+														<span class="block input-icon input-icon-right"> <select
+															id="new-album-state" name="state"
+															class="select width-100" data-placeholder="選擇活動標籤">
+																<option value="">-- 選擇活動標籤 --</option>
+																<option value="1">頒給典禮</option>
+																<option value="2">活動花絮</option>
+																<option value="3">環遊世界</option>
+														</select></span>
+													</div>
 												</div>
 											</div>
+											<!-- cent  -->
 										</div>
+										<!-- BODY -->
 
-										<div class="step-pane" data-step="2">
-											<div class="center ">
-												<h3 class="red">注意：圖片敘述限制字數17字內！</h3>
-												<br> <br>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<ul class="ace-thumbnails clearfix" id="_gallery">
+										<div class="modal-footer wizard-actions">
+											<button id="new-btn-success"
+												class="btn btn-success btn-sm btn-next" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>確定
+											</button>
 
-														<!-- #section:pages/gallery.caption -->
-														<li class="hide"><a href="./images/act-1.jpg"
-															data-rel="colorbox"> <img width="150" height="150"
-																alt="150x150" src="./images/act-1.jpg" />
-														</a>
-															<div class="tools tools-bottom" data_id="0">
-																<a href="#"> <i class="ace-icon fa fa-times red"></i>
-																</a>
-															</div></li>
-													</ul>
-												</div>
-											</div>
+											<button id="new-btn-cancel" class="btn btn-danger btn-sm"
+												data-dismiss="modal">
+												<i class="ace-icon fa fa-times"></i>取消
+											</button>
+											<!-- </div> -->
 										</div>
-
-									</div>
-
-									<!-- /section:plugins/fuelux.wizard.container -->
+									</form>
 								</div>
-
-								<hr />
-								<div class="wizard-actions">
-									<!-- #section:plugins/fuelux.wizard.buttons -->
-
-									<button class="btn btn-prev">
-										<i class="ace-icon fa fa-arrow-left"></i> 上一步
-									</button>
-
-									<button class="btn btn-success btn-next" data-last="完成">
-										下一步 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-									</button>
-
-									<!-- /section:plugins/fuelux.wizard.buttons -->
-								</div>
-
-								<!-- /section:plugins/fuelux.wizard -->
 							</div>
 						</div>
+
+						<!-- PAGE CONTENT BEGINS -->
+
+						<div id="PhotoUpload" class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<!-- <div id="modal-wizard-container"> -->
+									<div class="modal-header">
+										<div class="center">
+											<h4 class="blue">新增相片</h4>
+										</div>
+									</div>
+									<form class="form-horizontal" id="-validation-form"
+										method="post">
+										<div class="modal-body">
+											<div class="center">
+
+												<!-- #section:elements.form.input-state -->
+												<div class="form-group has-info">
+													<label for="inputInfo"
+														class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label>
+
+													<div class="col-xs-12 col-sm-5">
+														<span class="block input-icon input-icon-right"> <input
+															type="text" id="new-album-title" name="title"
+															placeholder="活動標題" class="width-100">
+														</span>
+													</div>
+
+													<div class="col-xs-12 col-sm-reset inline">
+														<input type="file" id="up-photo-0" value="1234"
+															accept="image/png,image/jpg"
+															class="control-label width-100">
+													</div>
+												</div>
+
+											</div>
+											<!-- cent  -->
+										</div>
+										<!-- BODY -->
+
+										<div class="modal-footer ">
+											<button id="photo-btn-more" class="btn btn-warning btn-sm"
+												type="button" onsubmit="return false;">
+												<i class="ace-icon fa fa-plus bigger-110"></i>增加
+											</button>
+
+											<button id="photo-btn-success"
+												class="btn btn-success btn-sm btn-next" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>確定
+											</button>
+
+											<button id="photo-btn-cancel" class="btn btn-danger btn-sm"
+												data-dismiss="modal">
+												<i class="ace-icon fa fa-times"></i>取消
+											</button>
+											<!-- </div> -->
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
 					</div>
-					<!-- /.widget-main -->
+					<!-- PAGE CONTENT ENDS -->
 				</div>
-				<!-- /.widget-body -->
 			</div>
-			<!-- PAGE CONTENT ENDS -->
 		</div>
+		<!-- /.page-content -->
 	</div>
-	<!-- /.page-content -->
 	<!-- /.main-content -->
 
 	<html:ad_foot headline="承利保險經紀人 後台管理" />
@@ -485,7 +577,6 @@
 	</script>
 
 	<!-- <![endif]-->
-
 	<!--[if IE]>
 <script type="text/javascript">
  window.jQuery || document.write("<script src='assets/js/jquery1x.js'>"+"<"+"/script>");
@@ -499,7 +590,6 @@
 	<script src="assets/js/bootstrap.js"></script>
 
 	<!-- page specific plugin scripts -->
-	<script src="assets/js/dropzone.js"></script>
 
 	<!--[if lte IE 8]>
 		  <script src="../assets/js/excanvas.js"></script>
@@ -545,59 +635,6 @@
 	<script src="./assets/js/ace/ace.searchbox-autocomplete.js"></script>
 
 	<!-- inline scripts related to this page -->
-	<script type="text/javascript">
-		jQuery(function($) {
-			var Validator;
-			/* #dropzone */
-			try {
-				Dropzone.autoDiscover = false;
-				var myDropzone = new Dropzone(
-						"#dropzone",
-						{
-							paramName : "file", // The name that will be used to transfer the file
-							maxFilesize : 5, // MB
-							acceptedFiles : ".jpg, .jpeg",
-							//autoProcessQueue : false, // 不主動提交
-							parallelUploads : 10, // 同時上傳多少文件
-							//url: "upload", // 文件提交頁面
-							maxFiles : 10, // 限制檔案上傳數量
-							uploadMultiple : true, // 一次上傳
-							//addRemoveLinks : true,
-							dictDefaultMessage : '<span class="bigger-150 bolder"><i class="ace-icon fa fa-caret-right red"></i> 將檔案拖放到這裡</span> 上傳圖片<br> \
-				<span class="smaller-80 grey"> (您可以上傳10張 jpg, jpeg 圖檔)</span> <br /> \
-				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>',
-							dictFallbackMessage : "您的瀏覽器不支援拖放檔案上傳",
-							dictFallbackText : "您的瀏覽器不支援拖放檔案上傳",
-							dictFileTooBig : "檔案大小限制：{{maxFilesize}}MB, 檔案太大 ({{filesize}}MB)",
-							dictInvalidFileType : "您可以上傳 jpg, jpeg 圖檔",
-							dictCancelUpload : "取消上傳",
-							dictCancelUploadConfirmation : "您確定取消上傳這張圖檔嗎？",
-							dictRemoveFile : "刪除檔案",
-							//dictRemoveFileConfirmation : "您確定刪除這張圖檔嗎？",
-							dictMaxFilesExceeded : "檔案個數限制：10",
-
-							dictResponseError : 'Error while uploading file!',
-
-							//change the previewTemplate to use Bootstrap progress bars
-							previewTemplate : "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
-
-						});
-
-				$(document).one('ajaxloadstart.page', function(e) {
-					try {
-						myDropzone.destroy();
-					} catch (e) {
-					}
-				});
-
-			} catch (e) {
-				alert('Dropzone.js does not support older browsers!');
-			}
-
-		});
-	</script>
-
-
 
 	<script type="text/javascript">
 		jQuery(function($) {
@@ -1095,23 +1132,15 @@
 				$('.wizard-actions').removeClass('hide');
 			}) */
 
-			$.mask.definitions['~'] = '[+-]';
-			$('#phone').mask('9999-999-999');
-
-			jQuery.validator.addMethod("phone", function(value, element) {
-				return this.optional(element)
-						|| /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
-			}, "Enter a valid phone number.");
-
 			Validator = $('#validation-form')
 					.validate(
 							{
 								errorElement : 'div',
-								errorClass : 'help-block',
-								focusInvalid : false,
+								//<div class="help-block col-xs-12 col-sm-reset inline">
+								errorClass : 'help-block col-xs-12 col-sm-reset inline',
+								focusInvalid : true,
 								ignore : "",
 								rules : {
-
 									name : {
 										required : true
 									},
@@ -1121,12 +1150,16 @@
 									},
 									title : {
 										required : true,
+									},
+									state : {
+										required : true,
 									}
 								},
 
 								messages : {
 									date : "必要欄位",
 									title : "必要欄位",
+									state : "必要欄位",
 								},
 
 								highlight : function(e) {
@@ -1158,8 +1191,11 @@
 										error
 												.insertAfter(element
 														.siblings('[class*="chosen-container"]:eq(0)'));
-									} else
-										error.insertAfter(element.parent());
+									} else {
+										element.parent().parent().parent()
+												.append(error);
+										//error.insertAfter(element.parent());
+									}
 								},
 
 								submitHandler : function(form) {
@@ -1192,6 +1228,8 @@
 	<!-- the following scripts are used in demo only for onpage help and you don't need them -->
 	<link rel="stylesheet" href="./assets/css/ace.onpage-help.css" />
 	<link rel="stylesheet" href="./docs/assets/js/themes/sunburst.css" />
+	<link rel="stylesheet" href="./assets/css/colorbox.css" />
+
 
 	<script type="text/javascript">
 		ace.vars['base'] = '..';
@@ -1204,6 +1242,7 @@
 	<script src="./docs/assets/js/language/css.js"></script>
 	<script src="./docs/assets/js/language/javascript.js"></script>
 	<script src="./js/jquery.validate.js"></script>
+	<script src="./assets/js/jquery.colorbox.js"></script>
 
 	<script>
 		var rootURL = "../api";
@@ -1251,7 +1290,13 @@
 				data : formToJSON(TYPEID),
 				success : function(data, textStatus, jqXHR) {
 					//console.log("saveAlbum success...");
-					ListCtrl("render");
+					if ($('#album-title').attr('data-id')) {
+						alert("相簿修改成功！");
+					} else {
+						alert("新增相簿成功！");
+						location.reload();
+					}
+
 				}
 			});
 		}
@@ -1423,7 +1468,7 @@
 								//imgUrl = 'album/' + item.path + item.file;
 
 								var btns = '<td width="13%" style="vertical-align: middle;"><div class="btn-group">'
-										+ '<button class="btn btn-xs btn-warning" id="btn-upload" data-id="'+item.id +'">'
+										+ '<button class="btn btn-xs btn-warning" id="btn-upload" href="#PhotoUpload" data-toggle="modal" data-id="'+item.id +'">'
 										+ '<i class="ace-icon fa fa-cloud-upload bigger-110">&nbsp;相片集管理</i></button>'
 										+ '<br><br><button class="btn btn-xs btn-info" id="btn-edit" data-id="'+item.id+'">'
 										+ '<i class="ace-icon fa fa-pencil bigger-120"><font style="color: #fff;">&nbsp;編輯</font></i></button>'
@@ -1460,53 +1505,83 @@
 							});
 		}
 
-		/* 新增 */
-		$('#simple-table').on('click', '#btn-add', function(event) {
-
-			//loadAlbumInfo($(this).data('id'));
-			FormCtrl("clean");
-			SelectContent("List", "dis");
-			SelectContent("Form", "en");
+		/* 新增相簿 */
+		$('#simple-table').on('click', "#btn-add_tmp", function(event) {
+			//alert('btn-add_tmp');
+			$("#validation-form").validate().resetForm();
 
 		});
 
-		/* 儲存 */
-		$('#validation-form').on('click', '#btn-save-add', function(event) {
-			if (FormCtrl("valid")) {
+		/* 新增相簿-完成 */
+		$('#validation-form').on('click', '#new-btn-success', function(event) {
 
+			//loadAlbumInfo($(this).data('id'));
+
+			//SelectContent("List", "dis");
+			//SelectContent("Form", "en");
+			if (FormCtrl("valid")) {
+				saveAlbum(TYPEID);
+				//FormCtrl("clean");
+			}
+		});
+
+		/* 儲存 */
+		$('#validation-form').on('click', '#-new-btn-success', function(event) {
+			if (FormCtrl("valid")) {
+				alert('儲存');
+				this.trigger("reset");
 				SelectContent("List", "en");
-				SelectContent("Form", "dis");
+				//SelectContent("Form", "dis");
 
 				saveAlbum(TYPEID);
 			}
 		})
-		/* 取消 */
-		$('#validation-form').on('click', '#btn-cancel-add', function(event) {
-			ListCtrl("Clean");
-			Validator.resetForm();
+		/* 新增相簿-取消 */
+		$('#validation-form').on('click', '#new-btn-cancel', function(event) {
+			ListCtrl("clean");
 			ListCtrl("render");
-
+			FormCtrl("clean");
+			//$("#validation-form").trigger('reset')
 			SelectContent("List", "en");
-			SelectContent("Form", "dis");
+			//SelectContent("Form", "dis");
 		})
 
 		/* 編輯 */
 		$('#simple-table').on('click', '#btn-edit', function(event) {
 
 			loadAlbumInfo($(this).data('id'));
-
+			SelectContent("Gallery", "en");
 			SelectContent("List", "dis");
-			SelectContent("Form", "en");
+			//SelectContent("Form", "en");
 
 		});
+
+		var upline = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"> <inputtype="text" id="new-photo-desc'+index+'" name="title-'+index+'" placeholder="相片描述，最多17字" maxlength="17" class="width-100"></span></div><div class="col-xs-12 col-sm-reset inline"><input type="file" id="up-photo'+index+'" name="title-'+index+'accept="image/png,image/jpg" class="control-label width-100"></div></div>';
+		var index = 0, count = 0;
+		/* 增加 */
+		$('#PhotoUpload')
+				.on(
+						'click',
+						'#photo-btn-more',
+						function(event) {
+							index++;
+							var upline = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"> <input type="text" id="new-photo-desc-'+index+'" name="title-'+index+'" placeholder="相片描述，最多17字" maxlength="17" class="width-100"></span></div><div class="col-xs-12 col-sm-reset inline"><input type="file" id="up-photo-'+index+'" name="title-'+index+' accept="image/png,image/jpg" class="control-label width-100"></div></div>';
+
+							$('#up-photo-' + (index - 1)).parent().parent()
+									.parent().append(upline);
+
+							//SelectContent("List", "dis");
+							//SelectContent("Gallery", "en");
+
+						});
 
 		/* 上傳 */
 		$('#simple-table').on('click', '#btn-upload', function(event) {
 
 			$('#passAlbumId').val($(this).data('id'));
 
-			SelectContent("List", "dis");
-			SelectContent("Gallery", "en");
+			//SelectContent("List", "dis");
+			//SelectContent("Gallery", "en");
 
 		});
 
@@ -1540,13 +1615,21 @@
 			/* * automatic generated * */
 			var _id = $('#album-title').attr('data-id');
 			var _type = (TYPEID == CHAMPION ? "Champion" : "Activity");
-			/* * user input * */
-			var _title = $('#album-title').val();
-			var _date = $('#album-date').val();
-			/* * "Activity" Only * */
-			var _tag = $("#state option:selected").val() || '0';
-			/* * "Champion" Only * */
-
+			if (_id) {
+				/* * user input * */
+				var _title = $('#album-title').val();
+				var _date = $('#album-date').val();
+				/* * "Activity" Only * */
+				var _tag = $("#state option:selected").val() || '0';
+				/* * "Champion" Only * */
+			} else {
+				/* * user input * */
+				var _title = $('#new-album-title').val();
+				var _date = $('#new-album-date').val();
+				/* * "Activity" Only * */
+				var _tag = $("#new-album-state option:selected").val() || '0';
+				/* * "Champion" Only * */
+			}
 			//console.log("_tag=" + _tag);
 			//console.log($('#album-title').val());
 			return JSON.stringify({
@@ -1600,7 +1683,7 @@
 			} else if (part == "Form") {
 				Content = $('#validation-form');
 			} else if (part == "Gallery") {
-				Content = $('.widget-body');
+				Content = $('#_gallery');
 			}
 			// opt = {dis, en}
 			if (opt == "dis") {
@@ -1627,10 +1710,12 @@
 			if (opt == "render") {
 				loadAlbumInfo();
 			} else if (opt == "clean") {
+				//Content.validate().resetForm();
+				$('.has-error').removeClass('has-error').addClass('has-info');
 				Content.trigger('reset');
 				$("#passAlbumId").val(0);
 			} else if (opt == "valid") {
-				return Content.valid()
+				return Content.valid();
 			}
 		}
 
@@ -1647,11 +1732,33 @@
 		}
 		/** init page  **/
 		ListCtrl("render");
-		SelectContent("List", "en");
-		SelectContent("Form", "dis");
-		SelectContent("Gallery", "dis");
+		//SelectContent("List", "en");
+		//SelectContent("Form", "dis");
+		//SelectContent("Gallery", "dis");
 		/** init page end **/
 	</script>
+	<script>
+		var colorbox_params = {
+			rel : 'colorbox',
+			reposition : true,
+			scalePhotos : true,
+			scrolling : false,
+			previous : '<i class="ace-icon fa fa-arrow-left"></i>',
+			next : '<i class="ace-icon fa fa-arrow-right"></i>',
+			close : '&times;',
+			current : '{current} of {total}',
+			maxWidth : '100%',
+			maxHeight : '100%',
+			onComplete : function() {
+				$.colorbox.resize();
+			}
+		}
+
+		$('[data-rel="colorbox"]').colorbox(colorbox_params);
+		$('#cboxLoadingGraphic').append(
+				"<i class='ace-icon fa fa-spinner orange'></i>");
+	</script>
+
 </body>
 </html>
 

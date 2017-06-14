@@ -585,3 +585,340 @@ function renderList(data){
 
 
 </script>
+
+<script type="text/javascript">
+	
+var boxBody ='',photoURL='',detailLink='';
+$('#case_content').empty();
+function renderList(data){
+
+	setVar(data);
+
+	detailLink = '7-2.html?id='+_id;
+	photoURL = '../album/' + _id + '/' + _coverId;//'img/pic/IMG_4833.JPG';
+
+
+	boxBody += '<li class="case" data-type="'+_tag+'" data-id="id-'+_id+'">'
+	+'<a class="portfolio_box" href="'+detailLink+'" role="button"> <img src="'
+	+ photoURL+'" alt="portfolio single item image">'
+	+'<div class="portfolio_box_text"><h6>'+_title+'</h6></div></a></li>';
+
+	boxBody = '<li class="case" data-type="photo01" data-id="id-1"><a class="portfolio_box" href="7-2.html" role="button"> <img src="img/pic/index01.jpg" alt="portfolio single item image"><div class="portfolio_box_text"><h6>2014年表揚大會</h6></div></a></li>';
+
+
+	boxBody += boxBody;
+	$('#case_content').append(boxBody);
+}	
+
+</script>
+
+<ul id="case_content">
+	<!--Item with no lightbox, only link to the item page-->
+	<li class="case" data-type="photo01" data-id="id-1">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/index01.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2015頒獎典禮</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo01" data-id="id-2">
+		<!-- portfolio item to trigger modal --> <a
+		class="portfolio_box" href="7-2.html" role="button"> <img
+			src="img/pic/index01.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2014年表揚大會</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo01" data-id="id-3">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/index01.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2013年表揚大會</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo02" data-id="id-4">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/DSC06021.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2016.05 員工旅遊</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo01" data-id="id-5">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/index01.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2012年表揚大會</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo02" data-id="id-6">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/DSC06021.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2015.10.秋季養生之旅</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo01" data-id="id-7">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/index01.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2011年表揚大會</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo03" data-id="id-8">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/1473299112650.jpg"
+			alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2016澳洲之旅</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo03" data-id="id-9">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-4.html" role="button"> <img
+			src="img/pic/1473299112650.jpg"
+			alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2014澳洲之旅</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo01" data-id="id-10">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/index01.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2010年表揚大會</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo03" data-id="id-11">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-4.html" role="button"> <img
+			src="img/pic/1473299112650.jpg"
+			alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2015澳洲之旅</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo02" data-id="id-12">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/DSC06021.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2015.8.24.話術競賽</h6>
+			</div>
+	</a>
+	</li>
+	<li class="case" data-type="photo02" data-id="id-13">
+		<!-- Button to trigger modal --> <a class="portfolio_box "
+		href="7-2.html" role="button"> <img
+			src="img/pic/DSC06021.jpg" alt="portfolio single item image">
+			<div class="portfolio_box_text">
+				<h6>2015.1.14 外部訓練</h6>
+			</div>
+	</a>
+	</li>
+</ul>
+
+
+
+<script type="text/javascript">
+	
+var boxBody ='';
+
+function renderList(data){
+
+	setVar(data);
+
+	photoURL ='img/pic/DPP_1609.jpg';
+	
+
+	boxBody = '<li class="case"><a href="#myModal'+_id+'" role="button" data-toggle="modal"> <img src="'
+	+photoURL+'" alt="portfolio single item image"></a>'
+
+	Lightbox='<div id="myModal-'+_id+'" class="modal hide fade" tabindex="-1" aria-hidden="true"><div class="modal-body">'
+	+'<button type="button" class="close" data-dismiss="modal" ria-hidden="true"><i class="icon-cancel-circle"></i></button>'
+	+'<div class="content_modal"><img src="'+photoURL+'" alt="image"></div></div></div>'
+	+'<p class="champion_name">'+_desc+'</p></li>';
+
+
+
+
+	boxBody = '<ul>'+boxBody+lightbox+'</ul>';
+	$('#case_content').append(boxBody);
+}	
+
+
+
+
+</script>
+<ul id="case_content">
+	<li class="case">
+		<!-- portfolio item to trigger modal --> <a href="#myModal1"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/DPP_1609.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal1" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/DPP_1609.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+	<li class="case">
+		<!-- Button to trigger modal --> <a href="#myModal2"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/IMG_4833.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal2" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/IMG_4833.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+	<li class="case">
+		<!-- portfolio item to trigger modal --> <a href="#myModal3"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/DPP_1609.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal3" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/DPP_1609.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+	<li class="case">
+		<!-- Button to trigger modal --> <a href="#myModal4"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/IMG_4833.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal4" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/IMG_4833.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+	<li class="case">
+		<!-- portfolio item to trigger modal --> <a href="#myModal1"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/DPP_1609.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal1" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/DPP_1609.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+	<li class="case">
+		<!-- Button to trigger modal --> <a href="#myModal2"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/IMG_4833.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal2" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/IMG_4833.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+	<li class="case">
+		<!-- portfolio item to trigger modal --> <a href="#myModal3"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/DPP_1609.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal3" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/DPP_1609.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+	<li class="case">
+		<!-- Button to trigger modal --> <a href="#myModal4"
+		role="button" data-toggle="modal"> <img
+			src="img/pic/IMG_4833.jpg" alt="portfolio single item image">
+	</a> <!-- Lightbox modal -->
+		<div id="myModal4" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<i class="icon-cancel-circle"></i>
+				</button>
+				<div class="content_modal">
+					<img src="img/pic/IMG_4833.jpg" alt="image">
+				</div>
+			</div>
+		</div> <!-- End Lightbox modal -->
+	</li>
+</ul>

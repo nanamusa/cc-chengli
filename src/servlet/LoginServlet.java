@@ -15,7 +15,7 @@ import model.Admin;
 /**
  * Servlet implementation class loginService
  */
-@WebServlet("/admin/LoginServlet")
+@WebServlet("/back_end/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
