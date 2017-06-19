@@ -8,11 +8,26 @@ public class Album {
 	private String title;// 相簿名稱
 	private String desc;// 描述
 	private String type;//
+	private String path;
 	private int tag; // 編號
 	private String cover_id;// 圖片
 	private int id; // 編號
 
 	public Album() {
+
+	}
+
+	public Album(int id, String coverPath, String opt) {
+
+		this.setId(id);
+		this.setCover_id(path);
+
+	}
+
+	public Album(int id, String path) {
+
+		this.setId(id);
+		this.setPath(path);
 
 	}
 
@@ -72,5 +87,20 @@ public class Album {
 		this.desc = desc;
 	}
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getCover_id() {
+		return cover_id;
+	}
+
+	public void setCover_id(String cover_id) {
+		this.cover_id = cover_id;
+	}
 
 }

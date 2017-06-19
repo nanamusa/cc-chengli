@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,18 @@ import java.util.Date;
 import model.Album;
 
 public class AlbumDao {
+
+	
+	public static Boolean mkdir(int id, String path) throws Exception {
+
+		Album album = getById(id);
+
+		album.setPath(path);
+
+		boolean ret = updatePath(album);
+		System.out.println("mkdir album = " + id + " result:" + ret);
+		return ret;
+	}
 
 	public static Album save(Album album) throws Exception {
 		return album.getId() > 0 ? update(album) : create(album);
@@ -50,6 +63,32 @@ public class AlbumDao {
 		return album;
 	}
 
+	public static boolean updatePath(Album album) throws Exception {
+		System.out.println("dao.Album: update...");
+		boolean ret = false;
+		if (album.getPath().isEmpty()) {
+			return ret;
+		}
+
+		DBConnectionManager manager;
+		try {
+			manager = new DBConnectionManager();
+			Connection conn = manager.getConnection();
+			PreparedStatement ps = conn
+					.prepareStatement("UPDATE album SET album.path=? WHERE id=?");
+			ps.setString(1, album.getPath());
+			ps.setInt(2, album.getId());
+			ps.executeUpdate();
+			conn.close();
+			ret = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ret;
+	}
+
 	public static Album update(Album album) throws Exception {
 		System.out.println("dao.Album: update...");
 
@@ -58,10 +97,11 @@ public class AlbumDao {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
 			PreparedStatement ps = conn
-					.prepareStatement("UPDATE album SET title=?, date=?, tag_id=? WHERE id=?");
+					.prepareStatement("UPDATE album SET album.title=?, album.date=?, album.tag_id=? WHERE id=?");
 			ps.setString(1, album.getTitle());
 			ps.setString(2, album.getDate());
 			ps.setInt(3, album.getTag());
+			//ps.setString(4, album.getPath());
 			ps.setInt(4, album.getId());
 			ps.executeUpdate();
 			conn.close();
@@ -74,23 +114,79 @@ public class AlbumDao {
 		return album;
 	}
 
-	public static boolean remove(int sid) throws Exception {
-		DBConnectionManager manager;
-		try {
-			manager = new DBConnectionManager();
-			Connection conn = manager.getConnection();
-			PreparedStatement ps = conn
-					.prepareStatement("DELETE FROM album WHERE id=?");
-			ps.setInt(1, sid);
-			int count = ps.executeUpdate();
-			conn.close();
+	public static boolean remove(int albumId) throws Exception {
+		Album album = getById(albumId);
+		String path = album.getPath();
+		File file = new File(path);
+		if (file.exists() && deleteDirectory(path)) {
+			PhotoDao.removeByAlbum(albumId);
+			DBConnectionManager manager;
+			try {
+				manager = new DBConnectionManager();
+				Connection conn = manager.getConnection();
+				PreparedStatement ps = conn
+						.prepareStatement("DELETE FROM album WHERE id=?");
+				ps.setInt(1, albumId);
+				int count = ps.executeUpdate();
+				conn.close();
 
-			return count == 1;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				return count == 1;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
 		}
 		return false;
+
+	}
+
+	public static boolean deleteFile(String sPath) {
+		boolean flag = false;
+		File file = new File(sPath);
+		// 路径为文件且不为空则进行删除
+		if (file.isFile() && file.exists()) {
+			file.delete();
+			flag = true;
+		}
+		return flag;
+	}
+
+	public static boolean deleteDirectory(String sPath) {
+		boolean flag = false;
+		// 如果sPath不以文件分隔符结尾，自动添加文件分隔符
+		if (!sPath.endsWith(File.separator)) {
+			sPath = sPath + File.separator;
+		}
+		File dirFile = new File(sPath);
+		// 如果dir对应的文件不存在，或者不是一个目录，则退出
+		if (!dirFile.exists() || !dirFile.isDirectory()) {
+			return false;
+		}
+		flag = true;
+		// 删除文件夹下的所有文件(包括子目录)
+		File[] files = dirFile.listFiles();
+		for (int i = 0; i < files.length; i++) {
+			// 删除子文件
+			if (files[i].isFile()) {
+				flag = deleteFile(files[i].getAbsolutePath());
+				if (!flag)
+					break;
+			} // 删除子目录
+			else {
+				flag = deleteDirectory(files[i].getAbsolutePath());
+				if (!flag)
+					break;
+			}
+		}
+		if (!flag)
+			return false;
+		// 删除当前目录
+		if (dirFile.delete()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public static ArrayList<Album> getAll(String type) throws Exception {
@@ -147,7 +243,7 @@ public class AlbumDao {
 	}// end getAll()
 
 	public static Album getById(int id) throws Exception {
-		System.out.println("dao.Album: getById...");
+		System.out.println("dao.Album: getById..." + id);
 
 		Album ret = new Album();
 
@@ -268,6 +364,7 @@ public class AlbumDao {
 	protected static Album processRow(ResultSet rs) throws SQLException {
 		Album classSet = new Album();
 
+		classSet.setPath(rs.getString("path"));
 		String anObject = rs.getString("type");
 
 		if (rs.getDate("date") != null) {
@@ -295,7 +392,7 @@ public class AlbumDao {
 			classSet.setTitle(rs.getString("title"));
 			classSet.setTag(rs.getInt("tag_id"));
 		}
-
+		System.out.println(classSet.toString());
 		return classSet;
 	}
 

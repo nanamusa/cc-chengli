@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,10 +8,30 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import model.Album;
 import model.Photo;
 
 public class PhotoDao {
+
+	public static String dbPhoto = "photo"; // table name
+	public static String sqlSavePhoto = "(path, fileName, album_id)";
+	public static String sqlUpdateDesc = "(desc)";
+
+	public static int save(List<Photo> items, String albumId) throws Exception {
+		int index = 0;
+
+		while (items.size() > index) {
+			items.get(index).setAlbumId(albumId);
+			save(items.get(index));
+			index++;
+		}
+
+		int ret = index;
+
+		return ret;
+	}
 
 	public static Photo save(Photo item) throws Exception {
 		return item.getId() > 0 ? update(item) : create(item);
@@ -24,17 +45,21 @@ public class PhotoDao {
 		try {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
-			PreparedStatement ps = conn.prepareStatement(
-					"INSERT INTO photo (path, fileName, album_id) "
-							+ "VALUES (?, ?, ?)", new String[] { "id" });
+			PreparedStatement ps = conn
+					.prepareStatement(
+							"INSERT INTO photo (photo.path, photo.fileName, photo.album_id, photo.date, photo.desc) "
+									+ "VALUES (?, ?, ?, ?, ?)",
+							new String[] { "id" });
 
 			ps.setString(1, item.getPath());
 			ps.setString(2, item.getFile());
 			ps.setString(3, item.getAlbumId());
-			// ps.setString(4, item.getDate());
+			ps.setString(4, item.getDate());
 			// ps.setString(5, item.getTitle());
-			// ps.setString(6, item.getDesc());
+			ps.setString(5, item.getDesc());
 			// ps.setBoolean(1, item.isHide());
+
+			// System.out.println(ps.toString());
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
@@ -42,7 +67,7 @@ public class PhotoDao {
 			// value must be returned to the client.
 			int sid = rs.getInt(1);
 			item.setId(sid);
-			System.out.print(sid);
+			// System.out.print(sid);
 
 			conn.close();
 
@@ -62,14 +87,12 @@ public class PhotoDao {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
 			PreparedStatement ps = conn
-					.prepareStatement("UPDATE photo SET path=?, fileName=?, album_Id=?, date=? WHERE id=?");
-			ps.setString(1, item.getPath());
-			ps.setString(2, item.getFile());
-			ps.setString(3, item.getAlbumId());
-			ps.setString(4, item.getDate());
-			//ps.setString(5, item.getDesc());
+					.prepareStatement("UPDATE photo SET date=?, desc=? WHERE id=?");
+			ps.setString(1, item.getDate());
+			ps.setString(2, item.getDesc());
+			// ps.setString(5, item.getDesc());
 			// ps.setBoolean(1, item.isHide());
-			ps.setInt(5, item.getId());
+			ps.setInt(3, item.getId());
 			ps.executeUpdate();
 			conn.close();
 
@@ -81,15 +104,15 @@ public class PhotoDao {
 		return item;
 	}
 
-	public static boolean saveDesc(int photoId, String desc)
-			throws Exception {
+	public static boolean saveDesc(int photoId, String desc) throws Exception {
 		DBConnectionManager manager;
 		try {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
-			PreparedStatement ps = conn //UPDATE `chengli`.`photo` SET `desc`='人很多人很多' WHERE `id`='47';
+			PreparedStatement ps = conn // UPDATE `chengli`.`photo` SET
+										// `desc`='人很多人很多' WHERE `id`='47';
 					.prepareStatement("UPDATE `photo` SET `desc`=? WHERE `id`=?");// and
-																				// type='Champion'");
+																					// type='Champion'");
 			ps.setString(1, desc);
 			ps.setInt(2, photoId);
 			ps.executeUpdate();
@@ -104,18 +127,46 @@ public class PhotoDao {
 
 	}
 
-	public static boolean remove(int sid) throws Exception {
+	public static boolean removeByAlbum(int albumId) throws Exception {
 		DBConnectionManager manager;
 		try {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
 			PreparedStatement ps = conn
-					.prepareStatement("DELETE FROM photo WHERE id=?");
-			ps.setInt(1, sid);
+					.prepareStatement("DELETE FROM photo WHERE album_Id=?");
+			ps.setInt(1, albumId);
 			int count = ps.executeUpdate();
 			conn.close();
 
 			return count == 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean remove(int sid) throws Exception {
+		DBConnectionManager manager;
+		try {
+			List<Photo> photo = getAll(sid);
+			Album album = AlbumDao.getById(Integer.parseInt(photo.get(0)
+					.getAlbumId()));
+			String filePath = album.getPath() + photo.get(0).getFile();
+			File file = new File(filePath);
+			System.out.println("path:" + album.getPath() + " " + file.exists());
+			if (file.exists()) {
+				file.delete();
+				manager = new DBConnectionManager();
+				Connection conn = manager.getConnection();
+				PreparedStatement ps = conn
+						.prepareStatement("DELETE FROM photo WHERE id=?");
+				ps.setInt(1, sid);
+				int count = ps.executeUpdate();
+				conn.close();
+
+				return count == 1;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,13 +189,13 @@ public class PhotoDao {
 			ResultSet rs = null;
 
 			StringBuilder sqlCmd = new StringBuilder();
-			
+
 			sqlCmd.append("SELECT * FROM photo");
-			
-			if (id > 0) {//specific photo by id
+
+			if (id > 0) {// specific photo by id
 				sqlCmd.append(" WHERE id = " + id);
 			}
-			
+
 			sqlCmd.append(" ORDER BY id DESC");
 
 			String qSQL = sqlCmd.toString();
@@ -162,14 +213,14 @@ public class PhotoDao {
 			conn.close();
 
 			return photos;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return photos;
-		
+
 	}// end getAll()
 
 	public static ArrayList<Photo> getByAlbum(int albumId) throws Exception {
@@ -187,9 +238,9 @@ public class PhotoDao {
 			ResultSet rs = null;
 
 			StringBuilder sqlCmd = new StringBuilder();
-			
-			sqlCmd.append("SELECT * FROM photo")
-				  .append(" WHERE album_Id = " + albumId);
+
+			sqlCmd.append("SELECT * FROM photo").append(
+					" WHERE album_Id = " + albumId);
 			sqlCmd.append(" ORDER BY id DESC");
 
 			String qSQL = sqlCmd.toString();
@@ -207,14 +258,14 @@ public class PhotoDao {
 			conn.close();
 
 			return photoSet;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return photoSet;
-		
+
 	}// end getByAlbum()
 
 	public static ArrayList<Photo> getBlogPhoto(int BlogId) throws Exception {
@@ -232,13 +283,13 @@ public class PhotoDao {
 			ResultSet rs = null;
 
 			StringBuilder sqlCmd = new StringBuilder();
-			
+
 			sqlCmd.append("SELECT * FROM photo");
 			sqlCmd.append(" WHERE path LIKE 'Blog%'");
-			
+
 			if (BlogId > 0)
 				sqlCmd.append(" AND album_id like '%" + BlogId + "%'");
-			
+
 			sqlCmd.append(" ORDER BY id DESC");
 
 			String qSQL = sqlCmd.toString();
@@ -265,11 +316,10 @@ public class PhotoDao {
 		return arrList;
 	}// end getBlogPhoto()
 
-
 	protected static Photo processRow(ResultSet rs) throws SQLException {
 		Photo item = new Photo();
 		if (rs.getDate("date") != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date tranDate = rs.getDate("date");
 			item.setDate(sdf.format(tranDate));
 			// System.out.println(classSet.getDate());

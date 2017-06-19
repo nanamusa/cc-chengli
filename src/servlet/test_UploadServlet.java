@@ -28,10 +28,11 @@ import dao.PhotoDao;
 public class test_UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().println("use POTH method to upload file.");
+		response.getWriter().println("use POST method to upload file.");
 		response.getWriter().println(request.getLocalAddr());
 		response.getWriter().println(request.getQueryString());
 		response.getWriter().println(request.getRemoteAddr());
@@ -41,6 +42,7 @@ public class test_UploadServlet extends HttpServlet {
 
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	// disable unchecked warning
 	protected void doPost(HttpServletRequest request,

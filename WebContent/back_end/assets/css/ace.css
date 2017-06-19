@@ -12689,7 +12689,8 @@ td .lbl:only-child {
   position: relative;
   overflow: hidden;
   margin: 2px;
-  border: 2px solid #333;
+  padding:1px;
+  /*border: 2px solid #333;*/
 }
 .ace-thumbnails > li > :first-child {
   display: block;

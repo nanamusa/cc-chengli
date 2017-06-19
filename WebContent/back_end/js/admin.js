@@ -59,8 +59,7 @@ function deleteAdmin(id) {
 }
 
 function renderDetail(data) {
-	var list = data == null ? []
-			: (data instanceof Array ? data : [ data ]);
+	var list = data == null ? [] : (data instanceof Array ? data : [ data ]);
 	// alert(list[0].id);
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an
 	// object (not an 'array of one')
@@ -76,8 +75,7 @@ function renderAdminList(data) {
 	console.log("renderAdminList: ");
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an
 	// object (not an 'array of one')
-	var list = data == null ? []
-			: (data instanceof Array ? data : [ data ]);
+	var list = data == null ? [] : (data instanceof Array ? data : [ data ]);
 
 	$("#simple-table tbody").empty();
 
@@ -90,64 +88,41 @@ function renderAdminList(data) {
 						// if(index%4 == 0){
 						dntBox = '';
 						// }
-						var btns = '<td><div class="hidden-sm hidden-xs btn-group"><button class="btn btn-xs btn-info" data-id="'+dnt.id+'"><i class="ace-icon fa fa-pencil bigger-120"><font style="color: #fff;">編輯</font></i></button><button class="btn btn-xs btn-danger" data-id="'+dnt.id+'"><i class="ace-icon fa fa-trash-o bigger-120">刪除</i></button></div><div class="hidden-md hidden-lg"><div class="inline pos-rel"><button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto" data-id="'+dnt.id+'"><i class="ace-icon fa fa-cog icon-only bigger-110"></i></button><ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close"><li><a class="tooltip-success" data-rel="tooltip" title="Edit" data-id="'+dnt.id+'"><span class="green"><i class="ace-icon fa fa-pencil-square-o bigger-120"></i></span></a></li><li><a class="tooltip-error" data-rel="tooltip" title="Delete" data-id="'+dnt.id+'"><span class="red"><i class="ace-icon fa fa-trash-o bigger-120"></i></span></a></li></ul></div></div></td>';
+						var btns = '<td><div class="hidden-sm hidden-xs btn-group"><button class="btn btn-xs btn-info" data-id="'
+								+ dnt.id
+								+ '"><i class="ace-icon fa fa-pencil bigger-120"><font style="color: #fff;">編輯</font></i></button><button class="btn btn-xs btn-danger" data-id="'
+								+ dnt.id
+								+ '"><i class="ace-icon fa fa-trash-o bigger-120">刪除</i></button></div><div class="hidden-md hidden-lg"><div class="inline pos-rel"><button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto" data-id="'
+								+ dnt.id
+								+ '"><i class="ace-icon fa fa-cog icon-only bigger-110"></i></button><ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close"><li><a class="tooltip-success" data-rel="tooltip" title="Edit" data-id="'
+								+ dnt.id
+								+ '"><span class="green"><i class="ace-icon fa fa-pencil-square-o bigger-120"></i></span></a></li><li><a class="tooltip-error" data-rel="tooltip" title="Delete" data-id="'
+								+ dnt.id
+								+ '"><span class="red"><i class="ace-icon fa fa-trash-o bigger-120"></i></span></a></li></ul></div></div></td>';
 
 						dntBox = '<td class="center">' + (index + 1)
 								+ '</td><td>' + dnt.name + '</td><td>'
 								+ dnt.email + '</td><td>' + dnt.uid
 								+ '</td><td>' + dnt.upwd + '</td>';
 
-						$("#simple-table tbody").append(
-								'<tr>' + dntBox + btns);
+						$("#simple-table tbody").append('<tr>' + dntBox + btns);
 
 					});
 
 	console.log('renderBeta : bye');
 }
 
-var validator = $('.form-horizontal').validate({
-	
-				  rules: { 
-					ad_name: { required: true,
-							    maxlength: 20,
-							    minlength:3 
-					},
-						   
-					ad_uid: { required: true,
-							    maxlength: 20,
-							    minlength:3 
-					},
-
-					ad_upwd: { required: true,
-							    maxlength: 20,
-							    minlength:3 
-					},
-
-					ad_email: { required: true,
-								email: true
-					}
-
-				}
-		// errorPlacement: function(error, element) {
-		// // Append error within linked label
-		// $( element )
-		// .closest( "form" )
-		// .find( "div[for='" + element.attr( "id" ) + "']" )
-		// .append( error );
-		// },
-		// errorElement: "span"
-		 });
 
 /* save */
 $('.form-horizontal').on('click', '.btn-info', function(event) {
-	if($('.form-horizontal').valid()){
+	if ($('.form-horizontal').valid()) {
 		saveAdmin();
 		$('.form-horizontal').hide();
-	}else{
-		alert( "Valid: " + $('.form-horizontal').valid() );
+	} else {
+		alert("Valid: " + $('.form-horizontal').valid());
 	}
 	// alert('saved!! /ndata-id:'+$('.form-horizontal').attr('data-id'));
-	
+
 })
 /* cancel */
 $('.form-horizontal').on('click', '.btn-cancel', function(event) {

@@ -221,17 +221,17 @@
 							<!-- PAGE CONTENT BEGINS -->
 
 							<div class="row">
-								<div class="col-xs-12">
+								<div class="table-responsive">
 									<table id="simple-table"
-										class="table table-striped table-bordered table-hover"
+										class="col-xs-12 table table-striped table-bordered table-hover"
 										hidden="true">
 										<thead>
 											<tr>
-												<th class="center">編號</th>
-												<th>管理員姓名</th>
-												<th>電子信箱</th>
-												<th>帳號</th>
-												<th>密碼</th>
+												<th width="5%" class="center">編號</th>
+												<th width="20%">管理員姓名</th>
+												<th width="20%">電子信箱</th>
+												<th width="20%">帳號</th>
+												<th width="20%">密碼</th>
 												<th>
 													<button class="btn btn-xs btn-primary btn-insert">
 														<i class="ace-icon fa fa-search-plus bigger-120">新增</i>

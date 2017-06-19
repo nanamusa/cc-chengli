@@ -113,15 +113,15 @@
 							<!-- PAGE CONTENT BEGINS -->
 
 							<div class="row">
-								<div class="col-xs-12">
+								<div class=" table-responsive">
 
 									<table id="simple-table"
-										class="table table-striped table-bordered table-hover">
+										class=" col-xs-12 table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
 												<th class="center" width="7%">編號</th>
 												<th width="20%">文章標題</th>
-												<th width="30%">內文</th>
+												<th width="30%" class="hidden-xs">內文</th>
 												<th width="20%">圖片</th>
 												<th width="10%">日期</th>
 												<th width="13%">
@@ -210,10 +210,9 @@
 								<!-- /.span -->
 							</div>
 							<!-- /.row -->
-							<div id="fileUpload" class="modal">
+							<div id="-fileUpload" class="modal">
 								<div class="modal-dialog">
-									<form action="../UploadServlet" method="post"
-										enctype="multipart/form-data">
+									<form name="upload" enctype="multipart/form-data" method="post" action="../PhotoUploader">
 										<div class="modal-content">
 											<div id="modal-wizard-container">
 												<div class="modal-header">
@@ -1057,7 +1056,7 @@
 
 								dntBox = '<td class="center" width="7%">' + (index+1)
 										+ '</td><td width="20%">' + item.title.substr(0,12)	//文章標題
-										+ '</td><td width="30%">' + item.content.substr(0,100) + "..." 	//內文
+										+ '</td><td width="30%" class="hidden-xs">' + item.content.substr(0,100) + "..." 	//內文
 										+ '</td><td width="20%" class="center"><img src="images/user.jpg'+/* ' + item.file +' */'" height="100" />' 	//圖片
 										+ '</td><td width="10%">' + item.date + '</td>>';	//日期
 
