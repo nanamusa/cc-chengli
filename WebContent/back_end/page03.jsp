@@ -1647,7 +1647,7 @@
 
 			var tmp_formUpload = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"> <input type="text" id="new-photo-desc-0" name="textBox" placeholder="相片描述，最多17字" maxlength="17" class="width-100"></span></div><div class="col-xs-12 col-sm-5 inline"><input type="file" name="file" id="up-photo-0" value="photo" accept="image/png,image/jpg" class="control-label width-100"></div></div>';
 
-			var upline = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"><input type="text" id="new-photo-desc-'+index+'" name="textBox" placeholder="相片描述，最多17字" maxlength="17" class="width-100">_$tag___$tag__$tag___________________________________$tag_____________________________________________________________________________________________________________________________$tag__$tag_';
+			var upline = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"><input type="text" id="new-photo-desc-'+index+'" name="textBox" placeholder="相片描述，最多17字" maxlength="17" class="width-100"></span></div><div class="col-xs-12 col-sm-5 inline"><input type="file" name="file" id="up-photo-'+index+'" value="photo" accept="image/png,image/jpg" class="control-label width-100"></div></div>';
 
 			var index = 0, count = 0;
 
@@ -1673,7 +1673,7 @@
 								$("#photo-albumId")
 										.val($("#passAlbumId").val());
 								index++;
-								upline = '_$tag_____________________________$tag____________________________________________________________________________相片_$tag____$tag____________________________$tag___________________________________________ _$tag______________________________________________________________________________________________________________________$tag___$tag__$tag___________________________________$tag______________________________________________________________________________________________________________________________$tag__$tag_';
+								upline = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"><input type="text" id="new-photo-desc-'+index+'" name="textBox" placeholder="相片描述，最多17字" maxlength="17" class="width-100"></span></div><div class="col-xs-12 col-sm-5 inline"><input type="file" name="file" id="up-photo-'+index+'" value="photo" accept="image/png,image/jpg" class="control-label width-100"></div></div>';;
 
 								$('#up-photo-' + (index - 1)).parent().parent()
 										.parent().append(upline);
