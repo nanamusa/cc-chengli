@@ -33,6 +33,351 @@
     <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
+    <style type="text/css">
+    /* Varaibles - config */
+    /* SCSS*/
+    
+    .content {
+        position: relative;
+        font-size: 20px;
+        line-height: 40px !important;
+    }
+    
+    .content * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    .org-chart {
+        display: block;
+        clear: both;
+        margin-bottom: 30px;
+        position: relative;
+        /**
+  * For IE 6/7 only
+  * Include this rule to trigger hasLayout and contain floats.
+  */
+        /* Box colors */
+        /* 1 column */
+        /* 2 column */
+        /* 3 column */
+        /* DEPARTMENTS COLUMNs */
+    }
+    
+    .org-chart.cf:before,
+    .org-chart.cf:after {
+        content: " ";
+        /* 1 */
+        display: table;
+        /* 2 */
+    }
+    
+    .org-chart.cf:after {
+        clear: both;
+    }
+    
+    .org-chart.cf {
+        *zoom: 1;
+    }
+    
+    .org-chart ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .org-chart ul li {
+        position: relative;
+    }
+    
+    .org-chart ul li span {
+        display: block;
+        border: 3px solid #2780d8;
+        text-align: center;
+        overflow: hidden;
+        text-decoration: none;
+        color: black;
+        box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.3);
+        -webkit-transition: all linear .5s;
+        -moz-transition: all linear .5s;
+        transition: all linear .5s;
+        background: #ffffff;
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    .org-chart ul li span:hover {
+        box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .org-chart ul li span strong {
+        font-size: 20px !important;
+        line-height: 40px !important;
+    }
+    
+    .org-chart .lvl-b {
+        background: green;
+        color: #92D4A8;
+    }
+    
+    .org-chart .board {
+        width: 70%;
+        margin: 0 auto;
+        display: block;
+        position: relative;
+    }
+    
+    .org-chart .board:before {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 375px;
+        width: 0px;
+        border-left: 2px solid orange;
+        margin-left: 49%;
+        top: 25px;
+    }
+    
+    .org-chart ul.columnOne {
+        height: 90px;
+        position: relative;
+        width: 100%;
+        display: block;
+        clear: both;
+    }
+    
+    .org-chart ul.columnOne li {
+        width: 60%;
+        margin: 0px auto;
+        top: 20px;
+    }
+    
+    .org-chart ul.columnTwo {
+        position: relative;
+        width: 100%;
+        display: block;
+        height: 90px;
+        clear: both;
+    }
+    
+    .org-chart ul.columnTwo li:first-child {
+        width: 30%;
+        float: left;
+    }
+    
+    .org-chart ul.columnTwo li {
+        width: 30%;
+        float: right;
+    }
+    
+    .org-chart ul.columnTwo:before {
+        content: "";
+        display: block;
+        position: relative;
+        width: 80%;
+        height: 10px;
+        border-top: 2px solid orange;
+        margin: 0 auto;
+        top: 40px;
+    }
+    
+    .org-chart ul.columnThree {
+        position: relative;
+        width: 100%;
+        display: block;
+        clear: both;
+    }
+    
+    .org-chart ul.columnThree li:first-child {
+        width: 30%;
+        float: left;
+        margin-left: 0;
+    }
+    
+    .org-chart ul.columnThree li {
+        width: 30%;
+        margin-left: 5%;
+        float: left;
+    }
+    
+    .org-chart ul.columnThree li:last-child {
+        width: 30%;
+        float: right;
+        margin-left: 0;
+    }
+    
+    .org-chart ul.columnThree:before {
+        content: "";
+        display: block;
+        position: relative;
+        width: 80%;
+        height: 10px;
+        border-top: 2px solid orange;
+        margin: 0 auto;
+        top: 40px;
+    }
+    
+    .org-chart .departments {
+        width: 100%;
+        display: block;
+        clear: both;
+    }
+    
+    .org-chart .departments:before {
+        content: "";
+        display: block;
+        width: 85%;
+        height: 22px;
+        border-top: 2px solid orange;
+        border-left: 2px solid orange;
+        border-right: 2px solid orange;
+        margin: 0 auto;
+        top: 0px;
+    }
+    
+    .org-chart .department {
+        border-left: 2px solid orange;
+        width: 13.2%;
+        float: left;
+        margin: 0px 4px;
+    }
+    
+    .org-chart .department:after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 10px;
+        height: 22px;
+        border-left: 2px solid orange;
+        left: 50%;
+        top: -22px;
+    }
+    
+    .org-chart .department:first-child:after {
+        display: none;
+    }
+    
+    .org-chart .department:last-child:after {
+        display: none;
+    }
+    
+    .org-chart .department.central {
+        background: #F5EEC9;
+    }
+    
+    .org-chart .department.central:after {
+        display: none;
+    }
+    
+    .org-chart .department span {
+        border-left: 1px solid orange;
+    }
+    
+    .org-chart .department li {
+        padding-left: 25px;
+        border-bottom: 2px solid orange;
+        height: 80px;
+    }
+    
+    .org-chart .department li span {
+        background: #92D4A8;
+        top: 38px;
+        position: absolute;
+        z-index: 1;
+        width: 95%;
+        height: auto;
+        vertical-align: middle;
+        right: 0px;
+        line-height: 14px;
+        border: 3px solid orange;
+    }
+    
+    .org-chart .department .sections {
+        margin-top: -20px;
+    }
+    /* MEDIA QUERIES */
+    
+    @media all and (max-width: 767px) {
+        .org-chart .board {
+            margin: 0px;
+            width: 100%;
+        }
+        .org-chart .departments:before {
+            border: none;
+        }
+        .org-chart .department {
+            float: none;
+            width: 100%;
+            margin-left: 0;
+            background: #F5EEC9;
+            margin-bottom: 40px;
+        }
+        .org-chart .department:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 15px;
+            height: 60px;
+            border-left: 2px solid orange;
+            z-index: 1;
+            top: -45px;
+            left: 0%;
+            margin-left: -2px;
+        }
+        .org-chart .department:after {
+            display: none;
+        }
+        .org-chart .department:first-child:before {
+            display: none;
+        }
+    }
+    /*--------- TO BE REMOVED FROM YOUR CSS --*/
+    /* this is just to display the behaviour of responsive on codepen */
+    
+    .responsive-content {
+        width: 767px;
+        margin: 0px auto;
+    }
+    
+    .responsive-content .org-chart .board {
+        margin: 0px;
+        width: 100%;
+    }
+    
+    .responsive-content .org-chart .departments:before {
+        border: none;
+    }
+    
+    .responsive-content .org-chart .department {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        background: #F5EEC9;
+        margin-bottom: 40px;
+    }
+    
+    .responsive-content .org-chart .department:before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 15px;
+        height: 60px;
+        border-left: 2px solid orange;
+        z-index: 1;
+        top: -45px;
+        left: 0%;
+        margin-left: -2px;
+    }
+    
+    .responsive-content .org-chart .department:after {
+        display: none;
+    }
+    
+    .responsive-content .org-chart .department:first-child:before {
+        display: none;
+    }
+    </style>
 </head>
 
 <body>
@@ -44,24 +389,15 @@
                 <ul class="wen-nav">
                     <li class="logo" onclick="location.href='index.html'"></li>
                     <!-- <li><a href="#">首頁</a></li> -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> 公司簡介 <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="2-1.html">認識保險經理人</a></li>
-                            <li><a href="2-2.html">經營理念</a></li>
-                            <li><a href="2-3.html">成立背景</a></li>
-                            <li><a href="2-4.html">公司願景</a></li>
-                            <li><a href="2-5.html">組織架構</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="2-2.html"><i class="fa fa-info-circle" aria-hidden="true"></i> 公司簡介</a></li>
                     <li><a href="3-1.html"><i class="fa fa-users" aria-hidden="true"></i> 服務項目</a></li>
                     <li><a href="4-1.html"><i class="fa fa-newspaper-o" aria-hidden="true"></i> 最新消息</a></li>
                     <li><a href="5-1.html"><i class="fa fa-asterisk" aria-hidden="true"></i> 精華薈萃</a></li>
                     <li><a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> 精英招募</a></li>
                     <li><a href="7-1.html"><i class="fa fa-calendar" aria-hidden="true"></i> 活動櫥窗</a></li>
                     <li><a href="8-1.html"><i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i> 合作通路</a></li>
-                    <li><a href="9-1.html"><i class="fa fa-phone" aria-hidden="true"></i> 相關聯絡</a></li>
-                    <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> 聯絡我們</a></li>
+                    <li><a href="9-1.html"><i class="fa fa-phone" aria-hidden="true"></i> 相關連結</a></li>
+                    <li><a href="mailto:chenli.broker@msa.hinet.net"><i class="fa fa-envelope" aria-hidden="true"></i> 聯絡我們</a></li>
                     <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i> 加入最愛</a></li>
                 </ul>
                 <ul class="wen-nav wen-nav-right">
@@ -71,7 +407,7 @@
             </div>
             <!--nav bar-mobile-->
             <div class="container-fluid wen-nav-moblie">
-                <div class="logo logo2"></div>
+                <div class="logo logo2" onclick="location.href='index.html'"></div>
                 <div class="hambergur">
                     <div></div>
                     <div></div>
@@ -81,24 +417,15 @@
                     <div class="wen-close"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
                     <ul>
                         <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> 首頁</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle ddd" data-toggle="dropdown" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>  公司簡介 <span class="caret"></span></a>
-                            <ul class="dropdown-menu dropdown-menu2">
-                                <li><a href="2-1.html">認識保險經理人</a></li>
-                                <li><a href="2-2.html">經營理念</a></li>
-                                <li><a href="2-3.html">成立背景</a></li>
-                                <li><a href="2-4.html">公司願景</a></li>
-                                <li><a href="2-5.html">組織架構</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="2-2.html"><i class="fa fa-info-circle" aria-hidden="true"></i> 公司簡介</a></li>
                         <li><a href="3-1.html"><i class="fa fa-users" aria-hidden="true"></i> 服務項目</a></li>
                         <li><a href="4-1.html"><i class="fa fa-newspaper-o" aria-hidden="true"></i> 最新消息</a></li>
                         <li><a href="5-1.html"><i class="fa fa-asterisk" aria-hidden="true"></i> 精華薈萃</a></li>
                         <li><a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> 精英招募</a></li>
                         <li><a href="7-1.html"><i class="fa fa-calendar" aria-hidden="true"></i> 活動櫥窗</a></li>
                         <li><a href="8-1.html"><i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i> 合作通路</a></li>
-                        <li><a href="9-1.html"><i class="fa fa-phone" aria-hidden="true"></i> 相關聯絡</a></li>
-                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> 聯絡我們</a></li>
+                        <li><a href="9-1.html"><i class="fa fa-phone" aria-hidden="true"></i> 相關連結</a></li>
+                        <li><a href="mailto:chenli.broker@msa.hinet.net"><i class="fa fa-envelope" aria-hidden="true"></i> 聯絡我們</a></li>
                         <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i> 加入最愛</a></li>
                         <li><a href="#"><i class="icon-user-1" style="padding-right: 10px"></i> 業務登入</a></li>
                         <li><a href="#"><i class="icon-cogs" style="padding-right: 10px"></i> 管理者登入</a></li>
@@ -119,24 +446,15 @@
             <div class="menu-box">
                 <ul>
                     <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> 首頁</a></li>
-                    <li class="a-li">
-                        <a class="dropdown-toggle ddd" data-toggle="dropdown" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>  公司簡介 <span class="caret"></span></a>
-                        <ul class="a-ul">
-                            <li><a href="2-1.html">認識保險經理人</a></li>
-                            <li><a href="2-2.html">經營理念</a></li>
-                            <li><a href="2-3.html">成立背景</a></li>
-                            <li><a href="2-4.html">公司願景</a></li>
-                            <li><a href="2-5.html">組織架構</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="2-2.html"><i class="fa fa-info-circle" aria-hidden="true"></i> 公司簡介</a></li>
                     <li><a href="3-1.html"><i class="fa fa-users" aria-hidden="true"></i> 服務項目</a></li>
                     <li><a href="4-1.html"><i class="fa fa-newspaper-o" aria-hidden="true"></i> 最新消息</a></li>
                     <li><a href="5-1.html"><i class="fa fa-asterisk" aria-hidden="true"></i> 精華薈萃</a></li>
                     <li><a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> 精英招募</a></li>
                     <li><a href="7-1.html"><i class="fa fa-calendar" aria-hidden="true"></i> 活動櫥窗</a></li>
                     <li><a href="8-1.html"><i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i> 合作通路</a></li>
-                    <li><a href="9-1.html"><i class="fa fa-phone" aria-hidden="true"></i> 相關聯絡</a></li>
-                    <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> 聯絡我們</a></li>
+                    <li><a href="9-1.html"><i class="fa fa-phone" aria-hidden="true"></i> 相關連結</a></li>
+                    <li><a href="mailto:chenli.broker@msa.hinet.net"><i class="fa fa-envelope" aria-hidden="true"></i> 聯絡我們</a></li>
                     <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i> 加入最愛</a></li>
                     <li><a href="#"><i class="icon-user-1" style="padding-right: 10px"></i> 業務登入</a></li>
                     <li><a href="#"><i class="icon-cogs" style="padding-right: 10px"></i> 管理者登入</a></li>
@@ -149,11 +467,45 @@
                         <div class="wrap">
                             <div class="content_main row-fluid span12">
                                 <h2 class="sub_title"> <span class="little_title">公司簡介 ></span> 組織架構</h2>
-                                <ul class="about01 about02">
-                                    <li>
-                                        <img src="img/org.png">
-                                    </li>
-                                </ul>
+                                <div class="content">
+                                    <figure class="org-chart cf">
+                                        <div class="board ">
+                                            <ul class="columnOne">
+                                                <li>
+                                                    <span>
+                                                        <strong>董事會<br>董事長</strong>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <ul class="columnOne">
+                                                <li>
+                                                    <span>
+                                                        <strong>總經理<br>(經理人)</strong>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <ul class="columnOne">
+                                                <li>
+                                                    <span>
+                                                        <strong>經紀人</strong>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <ul class="columnTwo">
+                                                <li>
+                                                    <span>
+                                                        <strong>業務行銷部</strong>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span>
+                                                        <strong>經營企畫部</strong>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </figure>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -228,9 +580,8 @@
         $('.a-ul').slideToggle("slow");
     });
     </script>
-    <script type="text/javascript">
     <!--
-    < script >
+    <script type="text/javascript">
         $('marquee').marquee(optionalClass);
     </script>
     -->

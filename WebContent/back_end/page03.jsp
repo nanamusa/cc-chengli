@@ -1673,7 +1673,8 @@
 								$("#photo-albumId")
 										.val($("#passAlbumId").val());
 								index++;
-								upline = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"><input type="text" id="new-photo-desc-'+index+'" name="textBox" placeholder="相片描述，最多17字" maxlength="17" class="width-100"></span></div><div class="col-xs-12 col-sm-5 inline"><input type="file" name="file" id="up-photo-'+index+'" value="photo" accept="image/png,image/jpg" class="control-label width-100"></div></div>';;
+								upline = '<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"><input type="text" id="new-photo-desc-'+index+'" name="textBox" placeholder="相片描述，最多17字" maxlength="17" class="width-100"></span></div><div class="col-xs-12 col-sm-5 inline"><input type="file" name="file" id="up-photo-'+index+'" value="photo" accept="image/png,image/jpg" class="control-label width-100"></div></div>';
+								;
 
 								$('#up-photo-' + (index - 1)).parent().parent()
 										.parent().append(upline);
@@ -1691,7 +1692,17 @@
 						$("#photo-albumId").val($("#passAlbumId").val());
 						if ($("#photo-albumId").val() > 0) {
 							$("#PhotoUpload").modal("toggle");
-							loadPhotoSet($("#photo-albumId").val());
+							var delayMillis = 1000; //1 second
+							console.log("before delay:" + delayMillis);
+
+							setTimeout(function() {
+								//your code to be executed after 1 second
+
+								console.log("delay:" + delayMillis);
+								loadPhotoSet($("#photo-albumId").val());
+							}, delayMillis);
+							console.log("after delay:" + delayMillis);
+
 						} else {
 							console.log("renderGallery:Error:"
 									+ $("#photo-albumId").val());
