@@ -396,7 +396,7 @@
 							function(index, item) {
 								setVar(item);
 								if (_file) {
-									photoURL = '../album/' + _path + '' + _file;//'img/pic/IMG_4833.JPG';
+									photoURL = '../' + _path + '' + _file;//'img/pic/IMG_4833.JPG';
 								} else {
 									photoURL = 'img/pic/DPP_1609.jpg';
 								}
@@ -455,7 +455,7 @@
 					if (data.type == "Activity") {
 						renderAlbumInfo(data);
 					} else {
-						alert('此相簿不存在！');
+						//alert('此相簿不存在！');
 						window.location.href = "7-1.html";
 					}
 				}

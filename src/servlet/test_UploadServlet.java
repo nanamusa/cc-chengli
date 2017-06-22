@@ -24,7 +24,7 @@ import dao.PhotoDao;
 /**
  * Servlet implementation class UploadServlet
  */
-@WebServlet("/UploadServlet")
+@WebServlet("/uploder")
 public class test_UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

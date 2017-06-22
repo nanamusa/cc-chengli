@@ -10,18 +10,23 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import model.Album;
+import util.util_log;
 
 public class AlbumDao {
+	static util_log LOG = new util_log();
+	static String msg = "Album::";
+	static int opt = 1;
 
-	
 	public static Boolean mkdir(int id, String path) throws Exception {
+		msg = "mkdir(" + id + ", " + path + " )";
 
+		LOG.DEBUG_LOG(msg, opt);
 		Album album = getById(id);
 
 		album.setPath(path);
 
 		boolean ret = updatePath(album);
-		System.out.println("mkdir album = " + id + " result:" + ret);
+		LOG.DEBUG_LOG("mkdir album = " + id + " result:" + ret, opt);
 		return ret;
 	}
 
@@ -101,7 +106,7 @@ public class AlbumDao {
 			ps.setString(1, album.getTitle());
 			ps.setString(2, album.getDate());
 			ps.setInt(3, album.getTag());
-			//ps.setString(4, album.getPath());
+			// ps.setString(4, album.getPath());
 			ps.setInt(4, album.getId());
 			ps.executeUpdate();
 			conn.close();
@@ -115,11 +120,27 @@ public class AlbumDao {
 	}
 
 	public static boolean remove(int albumId) throws Exception {
+		boolean ret = false;
+		int opt = 1;
+		String msg = "remove album" + albumId;
+		LOG.DEBUG_LOG(msg, opt);
+
 		Album album = getById(albumId);
 		String path = album.getPath();
-		File file = new File(path);
-		if (file.exists() && deleteDirectory(path)) {
-			PhotoDao.removeByAlbum(albumId);
+
+		if (path == "" || path == null) {
+			msg = "empty path info";
+		} else {
+			File file = new File(path);
+			if (file.exists()) {
+				ret = deleteDirectory(path);
+				msg = "remove physical album = " + albumId + " result:" + ret;
+			}
+		}
+		LOG.DEBUG_LOG(msg, opt);
+
+		ret = PhotoDao.removeByAlbum(albumId);
+		if (ret) {
 			DBConnectionManager manager;
 			try {
 				manager = new DBConnectionManager();
@@ -128,16 +149,21 @@ public class AlbumDao {
 						.prepareStatement("DELETE FROM album WHERE id=?");
 				ps.setInt(1, albumId);
 				int count = ps.executeUpdate();
+
+				msg = ps.toString();
+				ret = (count > 1);
+
 				conn.close();
 
-				return count == 1;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return true;
 		}
-		return false;
+
+		LOG.DEBUG_LOG(msg + " result:" + ret, opt);
+
+		return ret;
 
 	}
 
@@ -190,7 +216,8 @@ public class AlbumDao {
 	}
 
 	public static ArrayList<Album> getAll(String type) throws Exception {
-		System.out.println("dao.Album: getAll by :" + type);
+		msg = "dao.Album: getAll by :" + type;
+		LOG.DEBUG_LOG(msg, opt);
 
 		ArrayList<Album> arrList = new ArrayList<Album>();
 
@@ -219,7 +246,6 @@ public class AlbumDao {
 			}
 
 			String qSQL = sqlCmd.toString();
-			System.out.println(qSQL);
 
 			pstmt = conn.prepareStatement(qSQL);
 			rs = pstmt.executeQuery();
@@ -228,22 +254,22 @@ public class AlbumDao {
 				arrList.add(processRow(rs));
 			} // rs.next()
 
-			rs.close();
-			pstmt.close();
-
+			msg = pstmt.toString();
+			LOG.DEBUG_LOG(msg, opt);
 			conn.close();
-			System.out.println("dao.Album: EXIT getAll by :" + type);
-			return arrList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		msg = arrList.toString();
+		LOG.DEBUG_LOG(msg, opt);
 		return arrList;
 	}// end getAll()
 
 	public static Album getById(int id) throws Exception {
-		System.out.println("dao.Album: getById..." + id);
+		msg = "Album getById = " + id;
+		LOG.DEBUG_LOG(msg, opt);
 
 		Album ret = new Album();
 
@@ -253,29 +279,23 @@ public class AlbumDao {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
 
-			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 
-			StringBuilder sqlCmd = new StringBuilder();
-			sqlCmd.append("SELECT * FROM album");
-			sqlCmd.append(" WHERE id=").append(id);
+			PreparedStatement ps = conn
+					.prepareStatement("SELECT * FROM album WHERE album.id=?");
+			ps.setInt(1, id);
 
-			String qSQL = sqlCmd.toString();
-
-			pstmt = conn.prepareStatement(qSQL);
-			rs = pstmt.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				ret = processRow(rs);
-				System.out.println("dao.Album: getById -> " + ret.getTitle());
+				msg = "dao.Album: getById- Name: " + ret.getTitle();
 			} // rs.next()
-
-			rs.close();
-			pstmt.close();
 
 			conn.close();
 
-			return ret;
+			LOG.DEBUG_LOG(msg, opt);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

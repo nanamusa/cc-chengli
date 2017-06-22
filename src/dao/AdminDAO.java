@@ -7,11 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Admin;
+import util.util_log;
 
 public class AdminDAO {
+	static util_log LOG = new util_log();
+	static String msg = "";
+	static int opt = 1;
 
 	public static ArrayList<Admin> getAll() throws Exception {
-		System.out.println("dao.Admin: getAll...");
+		msg = "dao.Admin: getAll...";
+		LOG.DEBUG_LOG(msg, opt);
 
 		ArrayList<Admin> arrList = new ArrayList<Admin>();
 
@@ -24,14 +29,7 @@ public class AdminDAO {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 
-			StringBuilder sqlCmd = new StringBuilder();
-			sqlCmd.append("SELECT * FROM user");
-			// if (id > 0) {
-			// sqlCmd.append(" WHERE ad_id=").append(id);
-			// } else { // All
-			sqlCmd.append(" ORDER BY admin_id ASC");
-			// }
-			String qSQL = sqlCmd.toString();
+			String qSQL = "SELECT * FROM user ORDER BY admin_id ASC";
 
 			pstmt = conn.prepareStatement(qSQL);
 			rs = pstmt.executeQuery();
@@ -40,22 +38,23 @@ public class AdminDAO {
 				arrList.add(processRow(rs));
 			} // rs.next()
 
-			rs.close();
-			pstmt.close();
-
+			msg = pstmt.toString();
+			LOG.DEBUG_LOG(msg, opt);
 			conn.close();
-
-			return arrList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		msg = arrList.toString();
+		LOG.DEBUG_LOG(msg, opt);
 		return arrList;
 	}// end getiKTs
 
 	public static ArrayList<Admin> getById(int id) throws Exception {
-		System.out.println("dao.Admin: getById...");
+
+		msg = "dao.Admin: getById: " + id;
+		LOG.DEBUG_LOG(msg, opt);
 
 		ArrayList<Admin> arrList = new ArrayList<Admin>();
 
@@ -84,17 +83,18 @@ public class AdminDAO {
 				arrList.add(processRow(rs));
 			} // rs.next()
 
-			rs.close();
-			pstmt.close();
+			msg = pstmt.toString();
 
+			LOG.DEBUG_LOG(msg, opt);
 			conn.close();
 
-			return arrList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		msg = arrList.toString();
+		LOG.DEBUG_LOG(msg, opt);
 		return arrList;
 	}
 
@@ -125,9 +125,6 @@ public class AdminDAO {
 			while (rs.next()) {
 				admin = processRow(rs);
 			} // rs.next()
-
-			rs.close();
-			pstmt.close();
 
 			conn.close();
 
@@ -179,7 +176,10 @@ public class AdminDAO {
 	}
 
 	public static Admin update(Admin admin) throws Exception {
-		System.out.println("dao.admin: update...");
+		msg = "dao.admin: update " + admin.toString();
+		int ret = -1;
+
+		LOG.DEBUG_LOG(msg, opt);
 
 		DBConnectionManager manager;
 		try {
@@ -191,9 +191,18 @@ public class AdminDAO {
 			ps.setString(2, admin.getUid());
 			ps.setString(3, admin.getUpwd());
 			ps.setString(4, admin.getEmail());
-			ps.setString(5, admin.getUpwd());
-			ps.setInt(6, admin.getId());
-			ps.executeUpdate();
+			ps.setInt(5, admin.getId());
+			ret = ps.executeUpdate();
+
+			msg = ps.toString() + " result: " + ret;
+			if (ret > 0) {
+				msg = "update success: " + ret;
+			} else {
+				msg = "update fail: " + ret;
+			}
+
+			LOG.DEBUG_LOG(msg, opt);
+
 			conn.close();
 
 		} catch (SQLException e) {
@@ -201,11 +210,17 @@ public class AdminDAO {
 			e.printStackTrace();
 		}
 
+		msg = admin.toString();
+		LOG.DEBUG_LOG(msg, opt);
 		return admin;
 	}
 
 	public static boolean remove(int id) throws Exception {
-		System.out.println("dao.admin: remove...");
+
+		msg = "dao.admin: remove..." + id;
+		boolean ret = false;
+
+		LOG.DEBUG_LOG(msg, opt);
 
 		DBConnectionManager manager;
 
@@ -218,16 +233,17 @@ public class AdminDAO {
 			ps.setInt(1, id);
 			int count = ps.executeUpdate();
 
-			ps.close();
-			conn.close();
+			msg = ps.toString() + ": " + count;
 
-			return count == 1;
+			conn.close();
+			ret = true;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		LOG.DEBUG_LOG(msg, opt);
+		return ret;
 	}
 
 	protected static Admin processRow(ResultSet rs) throws SQLException {

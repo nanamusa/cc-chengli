@@ -240,15 +240,6 @@
 												</div>
 										</a>
 										</li>
-										<li class="case" data-type="photo02" data-id="id-4">
-											<!-- Button to trigger modal --> <a class="portfolio_box "
-											href="7-2.html" role="button"> <img
-												src="img/pic/DSC06021.jpg" alt="portfolio single item image">
-												<div class="portfolio_box_text">
-													<h6>2016.05 員工旅遊</h6>
-												</div>
-										</a>
-										</li>
 										<li class="case" data-type="photo01" data-id="id-5">
 											<!-- Button to trigger modal --> <a class="portfolio_box "
 											href="7-2.html" role="button"> <img
@@ -432,7 +423,7 @@
 			_coverId = data.cover_id || '';
 			_tag = data.tag || '';
 			_type = data.type || '';
-			_path = data.path || '';
+			_path = '';//data.path || '';
 		}
 		function cleanVar() {
 			_title = '';
@@ -457,19 +448,44 @@
 
 								detailLink = "7-2.html?id=" + _id;
 								if (_coverId) {
-									photoURL = "../"+ _path + _file;
+									photoURL = "../album/" + _id + "/" + _coverId;
 								} else {
 									photoURL = "img/pic/index01.jpg";
 								}
 
-								boxBody += '<li class="case" data-type="photo'+_tag+'" data-id="id-'+_id+'">'
+								boxBody += '<li class="case" data-type="photo0'+_tag+'" data-id="id-'+_id+'">'
 										+ '<a class="portfolio_box" href="'+detailLink+'" role="button"> <img src="'+ photoURL+'" alt="portfolio single item image">'
 										+ '<div class="portfolio_box_text"><h6>'
 										+ _title + '</h6></div></a></li>';
 								//boxBody = '<li class="case" data-type="photo1" data-id="id-'+index+'"><a class="portfolio_box" href="7-2.html" role="button"> <img src="img/pic/index01.jpg" alt="portfolio single item image"><div class="portfolio_box_text"><h6>2014年表揚大會</h6></div></a></li>';
-
 							});
 			$('#case_content').append(boxBody);
+			swing();
+		}
+		
+		function swing(){
+			$clientsHolder = jQuery('#case_content'); // get original list
+		    $clientsClone = $clientsHolder.clone(); // clone it so it can be reverted back to
+
+		    jQuery('#menu_content a').click(function(e) {
+		        e.preventDefault(); // stop anchor tags from doing anything
+
+		        $filterClass = jQuery(this).attr('class'); // gets class from clicked anchor
+
+		        jQuery('#menu_content li').removeClass('active'); // remove active class from all filter links
+		        jQuery(this).parent().addClass('active'); // add active class to clicked link
+
+		        if($filterClass == 'all'){
+		            $filters = $clientsClone.find('li'); // get all li's from original cloned list and assign them to variable
+		        } else {
+		            $filters = $clientsClone.find('li[data-type~='+ $filterClass +']'); // get li's from ul.source with data-type containing $filterclass
+		        }
+
+		        $clientsHolder.quicksand($filters, {
+		            duration: 1000,
+		            adjustHeight: 'dynamic'
+		        }); // initiate quicksand fn
+		    });
 		}
 
 		var rootURL = "../api";

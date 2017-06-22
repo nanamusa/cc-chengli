@@ -9,6 +9,25 @@ public class Admin {
 	private String email;
 	private String key;
 	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Admin [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", uid=");
+		builder.append(uid);
+		builder.append(", upwd=");
+		builder.append(upwd);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", key=");
+		builder.append(key);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -45,6 +64,7 @@ public class Admin {
 	public void setKey(String key) {
 		this.key = key;
 	}
+
 	
 	
 	

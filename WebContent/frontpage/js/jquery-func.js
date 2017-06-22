@@ -256,7 +256,7 @@ function iniciarBinds(content,exp,pro,edu,blog,con,por,slider,menu,row_menu,stat
 
     /***************************portfolio filter******************************************/
         // clients filter scripts
-
+/*
     $clientsHolder = jQuery('#case_content'); // get original list
     $clientsClone = $clientsHolder.clone(); // clone it so it can be reverted back to
 
@@ -279,6 +279,7 @@ function iniciarBinds(content,exp,pro,edu,blog,con,por,slider,menu,row_menu,stat
             adjustHeight: 'dynamic'
         }); // initiate quicksand fn
     });
+    */
     /***************************end portfolio filter***************************************/
 
 

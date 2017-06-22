@@ -128,6 +128,10 @@ public class PhotoDao {
 	}
 
 	public static boolean removeByAlbum(int albumId) throws Exception {
+		boolean ret = false;
+
+		String msg = "removeByAlbum: " + albumId;
+
 		DBConnectionManager manager;
 		try {
 			manager = new DBConnectionManager();
@@ -136,42 +140,57 @@ public class PhotoDao {
 					.prepareStatement("DELETE FROM photo WHERE album_Id=?");
 			ps.setInt(1, albumId);
 			int count = ps.executeUpdate();
+
+			if (count > 0) {
+				msg = "remove " + count + " photos of album " + albumId;
+			} else {
+				msg = "empty album " + albumId;
+			}
+			System.out.println(msg);
+
 			conn.close();
 
-			return count == 1;
+			ret = true;
+			// ret = (count > 0);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return ret;
 	}
 
-	public static boolean remove(int sid) throws Exception {
+	public static boolean remove(int id) throws Exception {
+		boolean ret = false;
+
 		DBConnectionManager manager;
 		try {
-			List<Photo> photo = getAll(sid);
-			Album album = AlbumDao.getById(Integer.parseInt(photo.get(0)
-					.getAlbumId()));
+			List<Photo> photo = getAll(id); // 1
+			int aId = Integer.parseInt(photo.get(0).getAlbumId());
+			Album album = AlbumDao.getById(aId);
 			String filePath = album.getPath() + photo.get(0).getFile();
 			File file = new File(filePath);
-			System.out.println("path:" + album.getPath() + " " + file.exists());
+			System.out.println("path:" + album.getPath() + " : "
+					+ file.exists());
+
 			if (file.exists()) {
 				file.delete();
-				manager = new DBConnectionManager();
-				Connection conn = manager.getConnection();
-				PreparedStatement ps = conn
-						.prepareStatement("DELETE FROM photo WHERE id=?");
-				ps.setInt(1, sid);
-				int count = ps.executeUpdate();
-				conn.close();
-
-				return count == 1;
 			}
+
+			manager = new DBConnectionManager();
+			Connection conn = manager.getConnection();
+			PreparedStatement ps = conn
+					.prepareStatement("DELETE FROM photo WHERE id=?");
+			ps.setInt(1, id);
+			int count = ps.executeUpdate();
+			conn.close();
+
+			ret = (count == 1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return ret;
 	}
 
 	public static ArrayList<Photo> getAll(int id) throws Exception {
