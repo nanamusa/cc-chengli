@@ -69,20 +69,20 @@ public class PhotoService {
 		return Response.status(200).entity(str).build();
 	}
 
-	@GET
-	@Path("/Blog:{sid}")
-	@Produces("application/json")
-	public Response getBlogBySid(
-			@DefaultValue("0") @PathParam("sid") int sid) throws Exception {
-		Gson gson = new Gson();
-		String str = "";
-
-		System.out.println("get Photo By sid : " + sid);
-		str = gson.toJson(PhotoDao.getBlogPhoto(sid));
-		System.out.println(str);
-
-		return Response.status(200).entity(str).build();
-	}
+//	@GET
+//	@Path("/Blog:{sid}")
+//	@Produces("application/json")
+//	public Response getBlogBySid(
+//			@DefaultValue("0") @PathParam("sid") int sid) throws Exception {
+//		Gson gson = new Gson();
+//		String str = "";
+//
+//		System.out.println("get Photo By sid : " + sid);
+//		str = gson.toJson(PhotoDao.getBlogPhoto(sid));
+//		System.out.println(str);
+//
+//		return Response.status(200).entity(str).build();
+//	}
 
 	//
 	// @GET

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import util.util_log;
 import model.Album;
 import model.Photo;
 
@@ -19,21 +20,27 @@ public class PhotoDao {
 	public static String sqlSavePhoto = "(path, fileName, album_id)";
 	public static String sqlUpdateDesc = "(desc)";
 
-	public static int save(List<Photo> items, String albumId) throws Exception {
-		int index = 0;
+	static util_log LOG = new util_log();
+	static String msg = "Photo::";
+	static int opt = 1;
 
-		while (items.size() > index) {
-			items.get(index).setAlbumId(albumId);
+	public static boolean save(List<Photo> items) throws Exception {
+		int index = 0;
+		LOG.DEBUG_LOG(items.toString(), opt);
+		for (index = 0; index < items.size(); index++) {
+			msg = items.get(index).toString();
+
 			save(items.get(index));
-			index++;
+			LOG.DEBUG_LOG(msg, opt);
 		}
 
-		int ret = index;
+		boolean ret = (index > 0) ? true : false;
 
 		return ret;
 	}
 
 	public static Photo save(Photo item) throws Exception {
+
 		return item.getId() > 0 ? update(item) : create(item);
 	}
 
@@ -87,7 +94,7 @@ public class PhotoDao {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
 			PreparedStatement ps = conn
-					.prepareStatement("UPDATE photo SET date=?, desc=? WHERE id=?");
+					.prepareStatement("UPDATE photo SET photo.date=?, photo.desc=? WHERE photo.id=?");
 			ps.setString(1, item.getDate());
 			ps.setString(2, item.getDesc());
 			// ps.setString(5, item.getDesc());
@@ -166,8 +173,15 @@ public class PhotoDao {
 		DBConnectionManager manager;
 		try {
 			List<Photo> photo = getAll(id); // 1
-			int aId = Integer.parseInt(photo.get(0).getAlbumId());
-			Album album = AlbumDao.getById(aId);
+			Album album = null;
+			if (photo.get(0).getAlbumId().equals("blog")) {
+				album = AlbumDao.getAll("Blog").get(0);
+
+			} else {
+				int aId = Integer.parseInt(photo.get(0).getAlbumId());
+				album = AlbumDao.getById(aId);
+			}
+
 			String filePath = album.getPath() + photo.get(0).getFile();
 			File file = new File(filePath);
 			System.out.println("path:" + album.getPath() + " : "
@@ -287,11 +301,15 @@ public class PhotoDao {
 
 	}// end getByAlbum()
 
-	public static ArrayList<Photo> getBlogPhoto(int BlogId) throws Exception {
-		System.out.println("dao.Photo: getBlogPhoto : " + BlogId);
+	public static Photo getBlogPhoto(String BlogId) throws Exception {
+		msg = "Photo - getBlogPhoto: " + BlogId;
 
-		ArrayList<Photo> arrList = new ArrayList<Photo>();
+		Photo photo = new Photo();
+		// ArrayList<Photo> photos = new ArrayList<Photo>();
+		String sql = "SELECT * FROM photo  WHERE photo.album_Id LIKE 'blog' AND photo.desc LIKE '"
+				+ BlogId + "' ";
 
+		LOG.DEBUG_LOG(msg, opt);
 		DBConnectionManager manager;
 
 		try {
@@ -301,38 +319,68 @@ public class PhotoDao {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 
-			StringBuilder sqlCmd = new StringBuilder();
+			if (BlogId.isEmpty() || BlogId.equals("") || BlogId.equals("0.jpg")) {
+				msg = "cover photo name null";
+			} else {
 
-			sqlCmd.append("SELECT * FROM photo");
-			sqlCmd.append(" WHERE path LIKE 'Blog%'");
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 
-			if (BlogId > 0)
-				sqlCmd.append(" AND album_id like '%" + BlogId + "%'");
+				while (rs.next()) {
+					photo = processRow(rs);
+				} // rs.next()
 
-			sqlCmd.append(" ORDER BY id DESC");
+				msg = sql;// conn.toString();
 
-			String qSQL = sqlCmd.toString();
-			System.out.println(qSQL);
+				conn.close();
+				msg += ", result: " + photo.toString();
 
-			pstmt = conn.prepareStatement(qSQL);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				arrList.add(processRow(rs));
-			} // rs.next()
-
-			rs.close();
-			pstmt.close();
-
-			conn.close();
-
-			return arrList;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return arrList;
+		LOG.DEBUG_LOG(msg, opt);
+		return photo;
+	}// end getBlogPhoto()
+
+	public static Photo getPhoto(int PhotoId) throws Exception {
+		msg = "Photo - getPhoto: " + PhotoId;
+
+		Photo photo = new Photo();
+		// ArrayList<Photo> photos = new ArrayList<Photo>();
+		String sql = "SELECT * FROM photo WHERE photo.id=" + PhotoId;
+
+		LOG.DEBUG_LOG(msg, opt);
+		DBConnectionManager manager;
+
+		try {
+			manager = new DBConnectionManager();
+			Connection conn = manager.getConnection();
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				photo = processRow(rs);
+			} // rs.next()
+
+			msg = sql;// conn.toString();
+
+			conn.close();
+			msg += ", result: " + photo.toString();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		LOG.DEBUG_LOG(msg, opt);
+		return photo;
 	}// end getBlogPhoto()
 
 	protected static Photo processRow(ResultSet rs) throws SQLException {

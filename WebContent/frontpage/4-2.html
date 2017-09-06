@@ -324,6 +324,9 @@
 							function(index, item) {
 								setVar(data);
 								photoURL = "img/news01.jpg";//'' + _pic;
+								if (_pic) {
+									photoURL = "../album/blog/" + _pic;//'' + _pic;
+								}
 								detailContent = '';
 								detailContent = '<div class="content_post first"><h2 class="sub_title">'
 										+ _title
@@ -405,6 +408,9 @@
 								popularBody = '';
 								detailLink = '4-2.html?id=' + _id;
 								photoURL = "img/news01.jpg";//'' + _pic;
+								if (_pic) {
+									photoURL = "../album/blog/" + _pic;//'' + _pic;
+								}
 
 								if (index == 0) {
 									popularBody = '<li class="console first">';

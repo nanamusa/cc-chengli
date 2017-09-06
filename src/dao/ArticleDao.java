@@ -8,71 +8,146 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import util.util_log;
 import model.Article;
+import model.Photo;
 
 public class ArticleDao {
 
-	public static Article save(Article article) throws Exception {
-		return article.getId() > 0 ? update(article) : create(article);
+	static util_log LOG = new util_log();
+	static String msg = "";
+	static String msg_head = "[dao Article] ";
+	static int opt = 1;
+
+	public static boolean save(Article article) throws Exception {
+		boolean ret = false;
+
+		if (article.getId() > 0) {
+			ret = update(article);
+		} else {
+			ret = create(article);
+		}
+
+		return ret;
 	}
 
-	public static Article create(Article article) throws Exception {
-		System.out.println("dao.Article: create...");
+	public static boolean create(Article article) throws Exception {
+		msg = msg_head + "[create] " + article;
+		LOG.DEBUG_LOG(msg, opt);
+
+		boolean ret = false;
+		String sql = "INSERT INTO article (title, content, date, pic) "
+				+ "VALUES (?, ?, ?, ?)";
 
 		DBConnectionManager manager;
-
 		try {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
-			PreparedStatement ps = conn.prepareStatement(
-					"INSERT INTO article (title, content, date, pic) "
-							+ "VALUES (?, ?, ?, ?)", new String[] { "id" });
+			PreparedStatement ps = conn.prepareStatement(sql,
+					new String[] { "id" });
 			ps.setString(1, article.getTitle());
 			ps.setString(2, article.getContent());
 			ps.setString(3, article.getDate());
 			ps.setString(4, article.getPic());
 			ps.executeUpdate();
+
+			LOG.DEBUG_LOG(msg_head + ps.toString(), opt);
+
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
 			// Update the id in the returned object. This is important as this
 			// value must be returned to the client.
-			int sid = rs.getInt(1);
-			article.setId(sid);
-			System.out.print(sid);
-
+			int id = rs.getInt(1);
+			article.setId(id);
+			if (id > 0) {
+				ret = true;
+				msg = msg_head + "id=" + id;
+			} else {
+				msg = msg_head + "fail";
+			}
 			conn.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		msg += ", result=" + ret;
+		LOG.DEBUG_LOG(msg, opt);
 
-		return article;
+		return ret;
 	}
 
-	public static Article update(Article article) throws Exception {
-		System.out.println("dao.Article: update...");
+	public static boolean update(Article article) throws Exception {
+		msg = msg_head + "[update] " + article;
+		LOG.DEBUG_LOG(msg, opt);
+		String sql = "UPDATE article SET title=?, content=?, date=? WHERE id=?";
+		boolean ret = false;
 
 		DBConnectionManager manager;
 		try {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
-			PreparedStatement ps = conn
-					.prepareStatement("UPDATE article SET title=?, content=?, pic=?, date=? WHERE id=?");
+			PreparedStatement ps = conn.prepareStatement(sql);
+
 			ps.setString(1, article.getTitle());
 			ps.setString(2, article.getContent());
-			ps.setString(3, article.getPic());
-			ps.setString(4, article.getDate());
-			ps.setInt(5, article.getId());
-			ps.executeUpdate();
+			// ps.setString(3, article.getPic());
+			ps.setString(3, article.getDate());
+			ps.setInt(4, article.getId());
+			LOG.DEBUG_LOG(msg_head + ps, opt);
+
+			if (ps.executeUpdate() > 0) {
+				ret = true;
+			}
 			conn.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		msg = msg_head + "result=" + ret;
+		LOG.DEBUG_LOG(msg, opt);
+		return ret;
+	}
 
-		return article;
+	public static boolean updatePic(String fileName, String id)
+			throws Exception {
+		msg = msg_head + "[updatePic] " + id + ", fileName=" + fileName;
+		LOG.DEBUG_LOG(msg, opt);
+
+		String sql = "UPDATE article SET pic=? WHERE id=?";
+		boolean ret = false;
+		int blogId = Integer.parseInt(id);
+
+		// if picture exist, then rm it
+		Article article = getById(blogId);
+		String pic = "" + article.getPic();
+		if (pic.isEmpty() || pic.equals("")) {
+
+		} else {
+			Photo photo = PhotoDao.getBlogPhoto(id);
+			PhotoDao.remove(photo.getId());
+			photo.setFile(fileName);
+			PhotoDao.update(photo);
+		}
+
+		DBConnectionManager manager = new DBConnectionManager();
+		try {
+			Connection conn = manager.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, fileName);
+			ps.setInt(2, blogId);
+			ps.executeUpdate();
+
+			conn.close();
+			ret = true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ret;
 	}
 
 	public static boolean remove(int sid) throws Exception {
@@ -162,9 +237,10 @@ public class ArticleDao {
 					.append(" ORDER BY date DESC, id DESC");
 			if (Page > 1) {
 				sqlCmd.append(" LIMIT ").append(id - 1).append(",").append(num);
-			} else if (Page == 1) {
-				sqlCmd.append(" LIMIT 0, ").append(num);
 			}
+			// } else if (Page == 1) {
+			// sqlCmd.append(" LIMIT 0, ").append(num);
+			// }
 
 			String qSQL = sqlCmd.toString();
 			System.out.println(qSQL);
@@ -332,7 +408,7 @@ public class ArticleDao {
 
 		article.setTitle(rs.getString("title"));
 		article.setContent(rs.getString("content"));
-		article.setPic("0.jpg");// rs.getString("pic"));
+		article.setPic(rs.getString("pic"));// ;
 		article.setId(rs.getInt("id"));
 		// System.out.println(article);
 		return article;

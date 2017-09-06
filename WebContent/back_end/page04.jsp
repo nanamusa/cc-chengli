@@ -1497,7 +1497,7 @@
 
 									photoBox = '<li class="col-xs-12 col-md-3" align="center" valign="center"><div><img class="-img-responsive" height="'+height+'" src="'+imgUrl
 									+'" /><div class="text"><div class="inner">'
-											+ '<span class="hide">照片描述</span> <br /><textarea class="form-control limited" id="photo-fn-desc-'+item.id+'" maxlength="17">'
+											+ '<span class="hide">照片描述</span> <br /><textarea class="form-control hide" id="photo-fn-desc-'+item.id+'" >'
 											+ item.file + '</textarea><br />';
 									photoBox = photoBox + btn_fn;
 									photoBox = photoBox
@@ -1588,7 +1588,7 @@
 											+ item.title + '</td>';
 									/* * cover = photo.id -> photo.path/photo.fileName * */
 									if (TYPEID == ACTIVITY) {
-										if (item.cover_id) {
+										if (item.cover_id != "0") {
 											cover_imgsrc = '../album/'
 													+ item.id + '/'
 													+ item.cover_id;

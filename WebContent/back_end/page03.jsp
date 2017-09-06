@@ -230,7 +230,7 @@
 															Info tip help!</div> -->
 									</div>
 
-									<div class="form-group has-info">
+									<!-- <div class="form-group has-info">
 										<label for="inputInfo"
 											class="col-xs-12 col-sm-2 control-label no-padding-right">活動標籤</label>
 
@@ -244,7 +244,7 @@
 													<option value="3">環遊世界</option>
 											</select></span>
 										</div>
-									</div>
+									</div> -->
 									<div
 										class="clearfix form-actions col-xs-12 no-padding-left no-padding-right">
 										<div class="col-sm-6 no-padding-right pull-left">
@@ -1107,10 +1107,10 @@
 										},
 										title : {
 											required : true,
-										},
+										}/* ,
 										state : {
 											required : true,
-										}
+										} */
 									},
 
 									messages : {

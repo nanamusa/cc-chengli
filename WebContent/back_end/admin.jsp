@@ -215,16 +215,11 @@
 						<h1>帳號管理</h1>
 					</div>
 					<!-- /.page-header -->
-
-					<div class="row">
-						<div class="col-xs-12">
-							<!-- PAGE CONTENT BEGINS -->
-
-							<div class="row">
-								<div class="table-responsive">
-									<table id="simple-table"
-										class="col-xs-12 table table-striped table-bordered table-hover"
-										hidden="true">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="table-responsive hide" id="simple-table">
+									<table class=" table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
 												<th width="5%" class="center">編號</th>
@@ -245,103 +240,100 @@
 											</tr>
 										</tbody>
 									</table>
-
-									<form class="form-horizontal" role="form" hidden="true">
-										<!-- #section:elements.form -->
-
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 姓名 </label>
-
-											<div class="col-sm-9">
-												<input id='ad_name' name="ad_name" type="text"
-													id="form-field-1" placeholder="姓名"
-													class="col-xs-10 col-sm-5" />
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 帳號 </label>
-
-											<div class="col-sm-9">
-												<input id='ad_uid' name='ad_uid' type="text"
-													id="form-field-1" placeholder="帳號"
-													class="col-xs-10 col-sm-5" />
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 密碼 </label>
-
-											<div class="col-sm-9">
-												<input id='ad_upwd' name='ad_upwd' type="password"
-													id="form-field-1" placeholder="密碼"
-													class="col-xs-10 col-sm-5" />
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 電子信箱 </label>
-
-											<div class="col-sm-9">
-												<input id='ad_email' name="ad_email" type="text"
-													id="form-field-1" placeholder="電子信箱"
-													class="col-xs-10 col-sm-5" />
-											</div>
-										</div>
-
-										<div class="clearfix form-actions">
-											<div class="col-md-offset-3 col-md-9">
-												<button class="btn btn-info" type="button">
-													<i class="ace-icon fa fa-check bigger-110"></i> <font
-														style="color: #fff;">儲存</font>
-												</button>
-
-												&nbsp; &nbsp; &nbsp;
-												<button class="btn btn-cancel" type="reset">
-													<i class="ace-icon fa fa-undo bigger-110"></i> 取消
-												</button>
-											</div>
-										</div>
-
-									</form>
 								</div>
-								<!-- /.span -->
 							</div>
-							<!-- /.row -->
-
-							<!-- PAGE CONTENT ENDS -->
 						</div>
-						<!-- /.col -->
 					</div>
-					<!-- /.row -->
+
+					<!-- PAGE CONTENT BEGINS -->
+					<div class="container">
+						<form class="form-horizontal hide" role="form">
+							<!-- #section:elements.form -->
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="form-field-1"> 姓名 </label>
+
+								<div class="col-sm-9">
+									<input id='ad_name' name="ad_name" type="text"
+										id="form-field-1" placeholder="姓名" class="col-xs-10 col-sm-5" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="form-field-1"> 帳號 </label>
+
+								<div class="col-sm-9">
+									<input id='ad_uid' name='ad_uid' type="text" id="form-field-1"
+										placeholder="帳號" class="col-xs-10 col-sm-5" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="form-field-1"> 密碼 </label>
+
+								<div class="col-sm-9">
+									<input id='ad_upwd' name='ad_upwd' type="password"
+										id="form-field-1" placeholder="密碼" class="col-xs-10 col-sm-5" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="form-field-1"> 電子信箱 </label>
+
+								<div class="col-sm-9">
+									<input id='ad_email' name="ad_email" type="text"
+										id="form-field-1" placeholder="電子信箱"
+										class="col-xs-10 col-sm-5" />
+								</div>
+							</div>
+
+							<div class="clearfix form-actions">
+								<div class="col-md-offset-3 col-md-9">
+									<button class="btn btn-info" type="button">
+										<i class="ace-icon fa fa-check bigger-110"></i> <font
+											style="color: #fff;">儲存</font>
+									</button>
+
+									&nbsp; &nbsp; &nbsp;
+									<button class="btn btn-cancel" type="reset">
+										<i class="ace-icon fa fa-undo bigger-110"></i> 取消
+									</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<!-- /.span -->
 				</div>
-				<!-- /.page-content -->
+				<!-- /.row -->
+
+				<!-- PAGE CONTENT ENDS -->
 			</div>
+			<!-- /.page-content -->
 		</div>
 		<!-- /.main-content -->
-
-		<div class="footer">
-			<div class="footer-inner">
-				<!-- #section:basics/footer -->
-				<div class="footer-content">
-					<span class="bigger-120"> <span class="blue bolder">承利保險經紀人
-							後台管理</span> &copy; 2016
-					</span>
-				</div>
-
-				<!-- /section:basics/footer -->
-			</div>
-		</div>
-
-		<a href="#" id="btn-scroll-up"
-			class="btn-scroll-up btn btn-sm btn-inverse"> <i
-			class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-		</a>
 	</div>
+	<div class="footer">
+		<div class="footer-inner">
+			<!-- #section:basics/footer -->
+			<div class="footer-content">
+				<span class="bigger-120"> <span class="blue bolder">承利保險經紀人
+						後台管理</span> &copy; 2016
+				</span>
+			</div>
+
+			<!-- /section:basics/footer -->
+		</div>
+	</div>
+
+	<a href="#" id="btn-scroll-up"
+		class="btn-scroll-up btn btn-sm btn-inverse"> <i
+		class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+	</a>
 	<!-- /.main-container -->
 
 	<!-- basic scripts -->
@@ -360,11 +352,6 @@
  window.jQuery || document.write("<script src='assets/js/jquery1x.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
-	<script type="text/javascript">
-		if ('ontouchstart' in document.documentElement)
-			document.write("_$tag___________________________________________"
-					+ "_$tag_______");
-	</script>
 	<script src="assets/js/bootstrap.js"></script>
 
 	<!-- page specific plugin scripts -->
@@ -475,7 +462,7 @@
 				data : 10,
 				color : "#FEE074"
 			} ]
-			function drawPieChart(placeholder, data, position) {
+			/* function drawPieChart(placeholder, data, position) {
 				$.plot(placeholder, data, {
 					series : {
 						pie : {
@@ -503,14 +490,14 @@
 					}
 				})
 			}
-			drawPieChart(placeholder, data);
+			drawPieChart(placeholder, data); */
 
 			/**
 			we saved the drawing function and the data to redraw with different position later when switching to RTL mode dynamically
 			so that's not needed actually.
 			 */
-			placeholder.data('chart', data);
-			placeholder.data('draw', drawPieChart);
+			/* placeholder.data('chart', data);
+			placeholder.data('draw', drawPieChart); */
 
 			//pie chart tooltip example
 			var $tooltip = $(

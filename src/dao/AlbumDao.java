@@ -1,6 +1,8 @@
 package dao;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,16 +19,29 @@ public class AlbumDao {
 	static String msg = "Album::";
 	static int opt = 1;
 
-	public static Boolean mkdir(int id, String path) throws Exception {
-		msg = "mkdir(" + id + ", " + path + " )";
-
+	public static int mkdir(String dir, String path) throws Exception {
+		msg = "mkdir(" + dir + ", " + path + " )";
+		int ret = -1;
 		LOG.DEBUG_LOG(msg, opt);
-		Album album = getById(id);
+		Album album = new Album();
+		if (dir.equals("blog")) {
+			album.setType("Blog");
+			album.setTitle("Blog");
+			save(album);
+
+		} else {
+			album = getById(Integer.parseInt(dir));
+
+		}
 
 		album.setPath(path);
+		ret = 1;
 
-		boolean ret = updatePath(album);
-		LOG.DEBUG_LOG("mkdir album = " + id + " result:" + ret, opt);
+		if (updatePath(album))
+			ret = 2;
+
+		msg = "mkdir album=" + dir + " result:" + ret;
+		LOG.DEBUG_LOG(msg, opt);
 		return ret;
 	}
 
@@ -43,12 +58,13 @@ public class AlbumDao {
 			manager = new DBConnectionManager();
 			Connection conn = manager.getConnection();
 			PreparedStatement ps = conn.prepareStatement(
-					"INSERT INTO album (title,type,date,tag_id) "
-							+ "VALUES (?,?,?,?)", new String[] { "id" });
+					"INSERT INTO album (title,type,date,tag_id,path) "
+							+ "VALUES (?,?,?,?,?)", new String[] { "id" });
 			ps.setString(1, album.getTitle());
 			ps.setString(2, album.getType());
 			ps.setString(3, album.getDate());
 			ps.setInt(4, album.getTag());
+			ps.setString(5, album.getPath()+"");
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
@@ -57,7 +73,7 @@ public class AlbumDao {
 			int sid = rs.getInt(1);
 			album.setId(sid);
 			System.out.print(sid);
-
+			LOG.DEBUG_LOG(album.toString(), opt);
 			conn.close();
 
 		} catch (SQLException e) {
@@ -261,7 +277,7 @@ public class AlbumDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		msg = arrList.toString();
 		LOG.DEBUG_LOG(msg, opt);
 		return arrList;
@@ -384,7 +400,7 @@ public class AlbumDao {
 	protected static Album processRow(ResultSet rs) throws SQLException {
 		Album classSet = new Album();
 
-		classSet.setPath(rs.getString("path"));
+		classSet.setPath(rs.getString("path") + "");
 		String anObject = rs.getString("type");
 
 		if (rs.getDate("date") != null) {
@@ -440,6 +456,85 @@ public class AlbumDao {
 		}
 		return false;
 
+	}
+
+	public static Album search(String albumName) throws FileNotFoundException,
+			IOException {
+		Album ret = new Album();
+		String sql = "";
+		String msg_head = "[Search Album] ";
+
+		if (albumName.equals("Blog")) {
+			sql = "SELECT * FROM album WHERE album.title LIKE '" + albumName
+					+ "'";
+		} else {
+			sql = "SELECT * FROM album WHERE album.id LIKE '" + albumName + "'";
+		}
+
+		DBConnectionManager manager;
+		try {
+			manager = new DBConnectionManager();
+			Connection conn = manager.getConnection();
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			msg = sql;
+			LOG.DEBUG_LOG(msg_head + msg, opt);
+
+			while (rs.next()) {
+				ret = processRow(rs);
+			} // rs.next()
+
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		msg = "result: " + ret.toString();
+		LOG.DEBUG_LOG(msg_head + msg, opt);
+		return ret;
+	}
+
+	public static String getBlogRealPath() throws FileNotFoundException,
+			IOException {
+		Album ret = new Album();
+		String sql = "";
+		String msg_head = "[Search Album: Blog Real Path] ";
+
+		sql = "SELECT * FROM album WHERE album.title LIKE 'Blog'";
+
+		DBConnectionManager manager;
+		try {
+			manager = new DBConnectionManager();
+			Connection conn = manager.getConnection();
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			msg = sql;
+			LOG.DEBUG_LOG(msg_head + msg, opt);
+
+			while (rs.next()) {
+				ret = processRow(rs);
+			} // rs.next()
+
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		msg = "result: " + ret.getPath();
+		LOG.DEBUG_LOG(msg_head + msg, opt);
+		return ret.getPath();
 	}
 
 }

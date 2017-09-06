@@ -7,9 +7,9 @@ function getAll() {
 		url : rootURL + '/admin',
 		dataType : "json",
 		success : function(data) {
-			console.log("getAll Admin ing...");
+			// console.log("getAll Admin ing...");
 			renderAdminList(data);
-			$("#simple-table").show();
+			$("#simple-table").removeClass("hide");
 		}
 	});
 }
@@ -21,7 +21,7 @@ function getAdminById(id) {
 		url : rootURL + '/admin/' + id,
 		dataType : "json",
 		success : function(data) {
-			console.log("getById Admin ing...");
+			// console.log("getById Admin ing...");
 			renderDetail(data);
 		}
 	});
@@ -36,7 +36,7 @@ function saveAdmin() {
 		dataType : "json",
 		data : formToJSON(),
 		success : function() {
-			console.log("saveAdmin Admin success...");
+			// console.log("saveAdmin Admin success...");
 			$('.form-horizontal').trigger('reset');
 			getAll();
 		}
@@ -53,7 +53,7 @@ function deleteAdmin(id) {
 			getAll();
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('deleteAdmin error');
+			alert('delete Admin fail');
 		}
 	});
 }
@@ -72,7 +72,6 @@ function renderDetail(data) {
 }
 
 function renderAdminList(data) {
-	console.log("renderAdminList: ");
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an
 	// object (not an 'array of one')
 	var list = data == null ? [] : (data instanceof Array ? data : [ data ]);
@@ -100,24 +99,22 @@ function renderAdminList(data) {
 								+ dnt.id
 								+ '"><span class="red"><i class="ace-icon fa fa-trash-o bigger-120"></i></span></a></li></ul></div></div></td>';
 
-						dntBox = '<td class="center">' + (index + 1)
-								+ '</td><td>' + dnt.name + '</td><td>'
-								+ dnt.email + '</td><td>' + dnt.uid
-								+ '</td><td>' + dnt.upwd + '</td>';
+						dntBox = '<td width="5%" class="center">' + (index + 1)
+								+ '</td><td width="20%">' + dnt.name
+								+ '</td><td width="20%">' + dnt.email
+								+ '</td><td width="20%">' + dnt.uid
+								+ '</td><td width="20%">' + dnt.upwd + '</td>';
 
 						$("#simple-table tbody").append('<tr>' + dntBox + btns);
 
 					});
-
-	console.log('renderBeta : bye');
 }
-
 
 /* save */
 $('.form-horizontal').on('click', '.btn-info', function(event) {
 	if ($('.form-horizontal').valid()) {
 		saveAdmin();
-		$('.form-horizontal').hide();
+		$('.form-horizontal').addClass("hide");
 	} else {
 		alert("Valid: " + $('.form-horizontal').valid());
 	}
@@ -126,18 +123,20 @@ $('.form-horizontal').on('click', '.btn-info', function(event) {
 })
 /* cancel */
 $('.form-horizontal').on('click', '.btn-cancel', function(event) {
-	validator.resetForm();
-	$('.form-horizontal').hide();
+	$('.form-horizontal').addClass("hide");
+	// $('.form-horizontal').hide();
 	// alert('cancel!!');
 	getAll();
+	// validator.resetForm();
 })
 
 /* 新增 */
 $('#simple-table').on('click', '.btn-insert', function(event) {
 	$('.form-horizontal').attr("data-id", '0');
-
-	$('.form-horizontal').show();
-	$('#simple-table').hide();
+	$('#simple-table').addClass("hide");
+	$('.form-horizontal').removeClass("hide");
+	// $('.form-horizontal').show();
+	// $('#simple-table').hide();
 	// alert('on insert');
 });
 
@@ -145,14 +144,14 @@ $('#simple-table').on('click', '.btn-insert', function(event) {
 $('#simple-table').on('click', '.btn-info', function(event) {
 	// alert('Edit: id='+$(this).data('id'));
 	getAdminById($(this).data('id'));
-	$('.form-horizontal').show();
-	$('#simple-table').hide();
+	$('.form-horizontal').removeClass("hide");
+	$('#simple-table').addClass("hide");
 });
 $('#simple-table').on('click', '.tooltip-success', function(event) {
 	// alert('Edit: id='+ $(this).data('id'));
 	getAdminById($(this).data('id'));
-	$('.form-horizontal').show();
-	$('#simple-table').hide();
+	$('.form-horizontal').removeClass("hide");
+	$('#simple-table').addClass("hide");
 });
 
 /* 刪除 */
@@ -186,8 +185,9 @@ function formToJSON() {
 }
 
 /* init Page */
-$('.form-horizontal').hide();
+// $('.form-horizontal').hide();
 // $("#simple-table tbody").empty();
+$("#simple-table").addClass("hide");
+$('.form-horizontal').addClass("hide");
 getAll();
-
 /* --------- */

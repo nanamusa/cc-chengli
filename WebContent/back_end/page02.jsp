@@ -114,7 +114,6 @@
 
 							<div class="row">
 								<div class=" table-responsive">
-
 									<table id="simple-table"
 										class=" col-xs-12 table table-striped table-bordered table-hover">
 										<thead>
@@ -138,131 +137,161 @@
 											</tr>
 										</tbody>
 									</table>
+								</div>
+								<form class="form-horizontal " role="form"
+									novalidate="novalidate" style="display: block;" data-id="0">
+									<input id="passBlogId" class="hide">
+									<!-- #section:elements.form -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-1"> 文章標題 </label>
 
-									<form class="form-horizontal" role="form" hidden="true">
-										<!-- #section:elements.form -->
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 文章標題 </label>
-
-											<div class="col-sm-9">
-												<input id="news_title" name="dnt_name" type="text"
-													id="form-field-1" placeholder="文章標題"
-													class="col-xs-10 col-sm-5" />
-											</div>
+										<div class="col-sm-9">
+											<input id="news_title" name="dnt_name" type="text"
+												placeholder="文章標題" class="col-sm-6">
 										</div>
+									</div>
 
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 內文 </label>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-1"> 內文 </label>
 
-											<div class="col-sm-9" for="dnt_ikt">
-												<!-- <input id="dnt_ikt" name="dnt_ikt" type="text"
+										<div class="col-sm-9" for="dnt_ikt">
+											<!-- <input id="dnt_ikt" name="dnt_ikt" type="text"
 													id="form-field-1" placeholder="內文"
 													class="col-xs-10 col-sm-5" required /> -->
-												<textarea class="col-xs-10 col-sm-5" id="news_content"
-													cols="30" rows="20" wrap="soft" placeholder="文章內容"></textarea>
+											<textarea class="col-sm-8" id="news_content" cols="30"
+												rows="20" wrap="soft" placeholder="文章內容"></textarea>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-1"> 日期 </label>
+										<div class="col-sm-9" for="dnt_date">
+											<div class="input-group col-sm-4">
+												<span class="input-group-addon"> <i
+													class="fa fa-calendar bigger-110"></i>
+												</span> <input id="news_date" class="form-control" type="date"
+													name="date-picker">
 											</div>
 										</div>
+									</div>
 
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 日期 </label>
-											<div class="col-sm-9" for="dnt_date">
-												<div class="input-group col-xs-10 col-sm-5">
-													<span class="input-group-addon"> <i
-														class="fa fa-calendar bigger-110"></i>
-													</span> <input id="news_date" class="form-control" type="date"
-														name="date-picker" id="date-picker-1">
-												</div>
-											</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right"
+											for="form-field-1"> 文章圖片 </label>
+
+										<div class="col-sm-9">
+											<input id="news_file" type="text" placeholder="文章圖片"
+												class="col-xs-4 inline" disabled="">
+											<h5 class="inline col-xs-4">
+												&nbsp;<a href="#PhotoUpload" data-toggle="modal"><i
+													class="ace-icon fa fa-cloud-upload bigger-120"></i> 上傳文章圖片</a>
+											</h5>
 										</div>
+									</div>
 
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right"
-												for="form-field-1"> 文章圖片 </label>
-
-											<div class="col-sm-9">
-												<input id="news_file" type="text" placeholder="文章圖片"
-													class="col-xs-10 col-sm-5" disabled />
-												<h5>
-													&nbsp;<a href="#fileUpload" data-toggle="modal"><i
-														class="ace-icon fa fa-cloud-upload bigger-120"></i> 上傳文章圖片</a>
-												</h5>
-											</div>
-										</div>
-
-										<div class="clearfix form-actions">
-											<div class="col-md-offset-3 col-md-9">
-												<button id="btn_save" class="btn btn-info" type="button">
+									<div class="clearfix form-actions col-xs-12">
+										<div class="pull-right">
+											<span class="col-md-4 inline ">
+												<button id="btn_save" class="btn btn-info "
+													style="padding: 10px" type="button">
 													<i class="ace-icon fa fa-check bigger-110"></i> <font
 														style="color: #fff;">儲存</font>
 												</button>
-
-												&nbsp; &nbsp; &nbsp;
-												<button id="btn_cancel" class="btn btn-cancel" type="reset">
+											</span> <span class="col-md-4 inline">
+												<button id="btn_cancel" class="btn btn-cancel "
+													style="padding: 10px" type="reset">
 													<i class="ace-icon fa fa-undo bigger-110"></i> 取消
 												</button>
-											</div>
+											</span>
 										</div>
-									</form>
-								</div>
+									</div>
+
+								</form>
 								<!-- /.span -->
 							</div>
 							<!-- /.row -->
-							<div id="-fileUpload" class="modal">
+							<div id="PhotoUpload" class="modal" role="dialog">
 								<div class="modal-dialog">
-									<form name="upload" enctype="multipart/form-data" method="post" action="../PhotoUploader">
-										<div class="modal-content">
-											<div id="modal-wizard-container">
-												<div class="modal-header">
-													<div class="center">
-														<h4 class="blue">請選擇要上傳的圖片</h4>
-													</div>
-												</div>
-
-												<div class="modal-body">
-													<div class="center">
-														<input type="text" id="passBlogId" name="passBlogId"
-															value="1234" class="hide" /> <input type="file"
-															name="fileName" />
-													</div>
-
-												</div>
-											</div>
-
-											<div class="modal-footer wizard-actions">
-												<button class="btn btn-success btn-sm btn-next"
-													type="submit" data-last="Finish">
-													<i class="ace-icon fa fa-check bigger-110"></i>確定
-												</button>
-
-												<button class="btn btn-danger btn-sm" type="reset"
-													data-dismiss="modal">
-													<i class="ace-icon fa fa-times"></i>取消
-												</button>
+									<div class="modal-content">
+										<!-- <div id="modal-wizard-container"> -->
+										<div class="modal-header">
+											<div class="center">
+												<h4 class="blue">新增相片</h4>
 											</div>
 										</div>
-									</form>
+										<form id="form-photo-upload" name="upload"
+											enctype="multipart/form-data" method="post"
+											action="../PhotoUploader" class="form-horizontal"
+											target="ifmForm">
+											<input type="text" name="photo-albumId" id="photo-albumId"
+												value="blog" class="hide">
+											<div class="modal-body">
+												<div class="center">
+
+													<!-- #section:elements.form.input-state -->
+													<div class="form-group has-info">
+														<label for="inputInfo"
+															class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label>
+
+														<div class="col-xs-12 col-sm-5 hide">
+															<span class="block input-icon input-icon-right"> <input
+																type="text" id="new-photo-title" name="textBox"
+																placeholder="文章編號" class="width-100">
+															</span>
+														</div>
+
+														<div class="col-xs-12 col-sm-5 inline">
+															<input type="file" id="up-photo-0"
+																accept="image/png,image/jpg" name="file" value=""
+																class="control-label width-100">
+														</div>
+													</div>
+
+												</div>
+												<!-- cent  -->
+											</div>
+											<!-- BODY -->
+											<div class="modal-footer ">
+												<button id="photo-btn-success"
+													class="btn btn-success btn-sm" type="submit">
+													<i class="ace-icon fa fa-upload bigger-110"></i>上傳
+												</button>
+
+												<button id="photo-btn-cancel" class="btn btn-danger btn-sm"
+													data-dismiss="modal">
+													<i class="ace-icon fa fa-reply bigger-110"></i>離開
+												</button>
+												<!-- </div> -->
+											</div>
+										</form>
+										<iframe name="ifmForm" id="ifmForm" src=""
+											style="display: none" height="60"> </iframe>
+									</div>
 								</div>
 							</div>
-							<!-- PAGE CONTENT ENDS -->
+
+
 						</div>
-						<!-- /.col -->
+						<!-- PAGE CONTENT ENDS -->
 					</div>
-					<!-- /.row -->
+					<!-- /.col -->
 				</div>
-				<!-- /.page-content -->
+				<!-- /.row -->
 			</div>
+			<!-- /.page-content -->
 		</div>
-		<!-- /.main-content -->
+	</div>
+	<!-- /.main-content -->
 
-		<html:ad_foot headline="承利保險經紀人 後台管理" />
+	<html:ad_foot headline="承利保險經紀人 後台管理" />
 
-		<a href="#" id="btn-scroll-up"
-			class="btn-scroll-up btn btn-sm btn-inverse"> <i
-			class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-		</a>
+	<a href="#" id="btn-scroll-up"
+		class="btn-scroll-up btn btn-sm btn-inverse"> <i
+		class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+	</a>
 	</div>
 	<!-- /.main-container -->
 
@@ -952,7 +981,20 @@
 
 	<script>
 		var rootURL = "../api";
-
+		function getPhotoName(photoId) {
+			console.log('get photo : ' + photoId);
+			$.ajax({
+				type : 'GET',
+				url : rootURL + '/photo/id:' + photoId,
+				dataType : "json",
+				success : function(data) {
+					
+					//if (TYPEID == ACTIVITY)
+					//$('.photo-fn-desc').addClass("hide");
+				}
+			});
+		}
+		
 		function getAll() {
 			console.log('getAll news: ');
 			$.ajax({
@@ -1014,14 +1056,15 @@
 			var list = data == null ? [] : (data instanceof Array ? data
 					: [ data ]);
 			//alert(list[0].sid);
-			$('#passBlogId').val("Blog_"+list[0].id);
-			alert($('#passBlogId').val());
+			$('#passBlogId').val(list[0].id);
+			//alert($('#passBlogId').val());
 			$('.form-horizontal').attr("data-id", list[0].id);
 			//getiktList(list[0].ikt);
 			// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
 			$('#news_title').val(list[0].title);
 			$('#news_content').val(list[0].content);
 			$('#news_file').val(list[0].pic);
+			console.log(list[0]);
 			$('#news_date').val(list[0].date);
 			//$('#opt_ikt option:eq(2)').attr('selected',true);
 		}
@@ -1034,13 +1077,17 @@
 
 			$("#simple-table tbody").empty();
 
-			var dntBox = "";
+			var dntBox = "", imgUrl="";
 
 			$
 					.each(
 							list,
 							function(index, item) {
 								dntBox = '';
+								if(item.pic!="0.jpg")
+									imgUrl= "../album/blog/"+item.pic;
+								else
+									imgUrl="images/user.jpg";
 
 								var btns = '<td><div class="hidden-sm hidden-xs btn-group"><button class="btn btn-xs btn-info" data-id="'
 								+item.id
@@ -1057,7 +1104,7 @@
 								dntBox = '<td class="center" width="7%">' + (index+1)
 										+ '</td><td width="20%">' + item.title.substr(0,12)	//文章標題
 										+ '</td><td width="30%" class="hidden-xs">' + item.content.substr(0,100) + "..." 	//內文
-										+ '</td><td width="20%" class="center"><img src="images/user.jpg'+/* ' + item.file +' */'" height="100" />' 	//圖片
+										+ '</td><td width="20%" class="center"><img src="'+imgUrl+'" height="100" />' 	//圖片
 										+ '</td><td width="10%">' + item.date + '</td>>';	//日期
 
 								$("#simple-table tbody").append(
@@ -1065,7 +1112,6 @@
 
 							});
 
-			console.log('renderBeta : bye');
 		}
 
 		var validator = $('.form-horizontal').validate({
@@ -1170,6 +1216,63 @@
 			});
 		}
 
+		
+		/* 相片-上傳 */
+		$('#PhotoUpload').on(
+				'click',
+				'#photo-btn-success',
+				function(event) {
+					$("#photo-albumId").val('blog');
+					$("#new-photo-title").val($("#passBlogId").val());
+					if ($("#photo-albumId").val() == "blog")  {
+						$("#PhotoUpload").modal("toggle");
+						var delayMillis = 1000; //1 second
+						console.log("before delay:" + delayMillis);
+
+						setTimeout(function() {
+							//your code to be executed after 1 second
+
+							console.log("delay:" + delayMillis);
+							getNewsBySid($("#passBlogId").val());
+							//$("#news_file").val("true");
+						}, delayMillis);
+						console.log("after delay:" + delayMillis);
+
+					} else {
+						console.log("renderGallery:Error:"
+								+ $("#photo-albumId").val());
+					}
+					//$("#PhotoUpload").addClass('hide');
+					//$('#passAlbumId').val($(this).data('id'));
+
+				})
+		/* 相片-取消 */
+		$('#form-photo-upload').on(
+				'click',
+				'#photo-btn-cancel',
+				function(event) {
+					var tmp_formUpload='<div class="form-group has-info"><label for="inputInfo" class="col-xs-12 col-sm-2 control-label no-padding-right">相片</label>'
+					+'<div class="col-xs-12 col-sm-5 hide"><span class="block input-icon input-icon-right"> <input type="text" id="new-photo-title" name="textBox" placeholder="文章編號" class="width-100"></span></div>'
+						+'<div class="col-xs-12 col-sm-5 inline"><input type="file" id="up-photo-0" accept="image/png,image/jpg" name="file" value="" class="control-label width-100">'
+					+'</div></div>';
+					
+					$("#photo-albumId").val(-1);
+					$('#form-photo-upload .modal-body .center').empty()
+							.append(tmp_formUpload);
+
+				})
+
+		/* 編輯相簿-取消 */
+		$('#form-album-update').on('click', '#album-btn-cancel',
+				function(event) {
+					ListCtrl("clean");
+					ListCtrl("render");
+					//$("#form-album-update").validate().resetForm();
+					FormCtrl("update", "clean");
+					//$("#validation-form").trigger('reset')
+					SelectContent("List", "en");
+					SelectContent("Form", "dis");
+				})
 		/* init Page */
 		$('.form-horizontal').hide();
 		//$("#simple-table tbody").empty();

@@ -24,6 +24,20 @@ public class Album {
 
 	}
 
+	public Album(String name, String path, int opt) {
+
+		this.setTitle(name);
+		this.setPath(path);
+		
+		if (opt == 1)
+			this.setTitle("Activity");
+		else if (opt == 2)
+			this.setType("Blog");
+		else if (opt == 3)
+			this.setType("Champion");
+
+	}
+
 	public Album(int id, String path) {
 
 		this.setId(id);
@@ -103,4 +117,10 @@ public class Album {
 		this.cover_id = cover_id;
 	}
 
+	@Override
+	public String toString() {
+		return "Album [date=" + date + ", title=" + title + ", desc=" + desc
+				+ ", type=" + type + ", path=" + path + ", tag=" + tag
+				+ ", cover_id=" + cover_id + ", id=" + id + "]";
+	}
 }
